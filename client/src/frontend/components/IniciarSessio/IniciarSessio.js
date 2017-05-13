@@ -13,7 +13,8 @@ export default {
       nomUsuari : "",
       contrasenya : "",
       metode : "POST",
-      peticio : window.location.href
+      peticio : window.location.href,
+      urlIniciSessio : window.location.href + "autenticacio/intern"
     }
   },
 
@@ -38,7 +39,8 @@ export default {
 
     iniciarSessio(event)
     {
-      event.preventDefault();
+      //event.preventDefault();
+      this.peticio = this.urlIniciSessio;
       let formulari = event.target.form;
 
       if(this.validarDades())
@@ -63,19 +65,6 @@ export default {
           return false;
       }else
         return false;
-
-    },
-
-    //Si esta logge , si no esta return false
-    estaUsuari(form)
-    {
-      let url = (this.peticio + "iniciSessio");
-      let formulari = new FormData(form);
-
-      console.log(url);
-      this.$http.post(url , formulari)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
 
     },
 

@@ -8,10 +8,11 @@ let controladorProjecte = new Projecte();
 let controladorUsuari = new Usuari();
 
 /* peticio dades /peticio . */
-router.use('/peticio/projecte/:categoria/:quantitat/:filtrar/:ordenacio', controladorProjecte.obtenirProjectesSpecifiques);
+router.get('/peticio/projecte/:categoria/:quantitat/:filtrar/:ordenacio', controladorProjecte.obtenirProjectesSpecifiques);
 
-router.use('/peticio/buscar/projecte', controladorProjecte.buscarPerTitul);
+router.get('/peticio/buscar/projecte', controladorProjecte.buscarPerTitul);
 
-router.use('/peticio/usuari/:id' , controladorUsuari.obtenirUsuariID);
+router.get('/peticio/usuari/:id' , controladorUsuari.obtenirUsuariID);
+
 
 module.exports = router;

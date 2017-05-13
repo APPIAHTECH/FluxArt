@@ -1,6 +1,7 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
+const LocalStrategy = require('passport-local').Strategy;
 
 const credencials = require('./../config/credencials.js');
 const ModelUsuari = require('./../models/usuaris/ModelUsuari.js');
@@ -41,9 +42,35 @@ class Autenticacio{
 
   }
 
+  static intern()
+  {
+    Autenticacio.generarSessio(true);
+    passport.use(new LocalStrategy({
+      usernameField: 'nomUsuari',
+      passwordField: 'contrasenya'
+    } ,(nomUsuari , contrasenya , done)=>{
+
+      //Buscant usuari amb les credencials entrades
+      model.obtenirUsuaris({$and:[{"usuari.nom_usuari": nomUsuari},{"usuari.contrasenya": contrasenya}]})
+      .then((resultat)=> {
+
+        if(!resultat[0]) //Si no hi ha usuari
+          return done(null , false , {message : "Males credencials"});
+
+          return done(null , resultat);
+      })
+      .catch((err) =>{
+        console.error(err);
+        return done(err);
+      });
+
+    }));
+
+  }
+
   static resol(token, tokenSecret, profile, done , proveidor , condicio)
   {
-    Autenticacio.generarSessio();
+    Autenticacio.generarSessio(false);
     model.obtenirUsuaris(condicio)
     .then((usuari)=> {
 
@@ -99,11 +126,14 @@ class Autenticacio{
     return perfil;
   }
 
-  static generarSessio()
+  static generarSessio(intern = false)
   {
-
     passport.serializeUser((perfil, done) =>{ //Serialitza el sobrenom del usuari a sessio
-      done(null, perfil.usuari.nom_usuari);
+
+      if(intern) //Si l'autenticacio es de manera intern
+        return done(null , perfil[0].usuari.nom_usuari);
+      else
+        return done(null, perfil.usuari.nom_usuari); //autenticacio externa
     });
 
     //Si es fa una req.user recupera de la bd el les dades de l'usuari.
