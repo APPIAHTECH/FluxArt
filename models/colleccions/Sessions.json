@@ -1,0 +1,10 @@
+{
+  "sessio":
+  {
+    "usuari_id":"8080",
+    "data_entrada":"30/04/2017 17:48",
+    "data_sortida":"30/04/2017 17:50",
+    "IP": "192.168.1.1",
+    "dispositius":["andriod 5 " , "Google Chorme"]
+  }
+}

@@ -1,0 +1,92 @@
+div.contenidor
+{
+  width: 100%;
+  height: 660px;
+  background: #38BFE7;
+  box-sizing: content-box;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+div.presentacio,
+div.mobile
+{
+  width: auto;
+  height: auto;
+  position: relative;
+  top: -50px;
+  padding: 50px;
+  padding-right: 150px;
+  margin: auto;
+}
+div.imatge
+{
+  padding: 0;
+  width: 400px;
+  position: relative;
+  left: -290px;
+  background-image: url('');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+#expandeix
+{
+  color: #00749A;
+  margin-bottom: 10px;
+}
+
+#titul
+{
+  color: white;
+  letter-spacing: 2px;
+  margin: 10px;
+  margin-left: 0px;
+  margin-bottom: 25px;
+}
+
+.proces
+{
+  width: 100%;
+  height: auto;
+  background: #FFFFFF;
+  display: flex;
+  flex-flow: row nowrap;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.cap
+{
+  width: 33.33%;
+  height: 200px;
+  padding: 20px;
+  border-right: solid 1px #C1E7F5;
+  word-break: break-all;
+  text-align: center;
+  padding-top: 40px
+}
+.capituls
+{
+  color: #31AFE0;
+  margin-bottom: 15px;
+}
+#canvi
+{
+  color: #0B6F96;
+  display: inline-block;
+  margin-right: 10px;
+}
+.explicacio
+{
+  text-align: center;
+  opacity: .9;
+  color: #A1A1A1;
+  font-size: 15pt;
+}
+
+.text
+{
+  width: 90%;
+  margin: auto;
+}

@@ -1,0 +1,30 @@
+{
+  "projecte":
+  {
+    "usuari_id":"590f5db60d8fb3052cf2a5a8",
+    "titul":"KrodArt",
+    "descripcio":"Hey",
+    "imatge":
+    {
+      "nom":"originals",
+      "tipus":"jpg",
+      "mida":"10250",
+      "url":"https://s-media-cache-ak0.pinimg.com/originals/8b/58/e3/8b58e35fc4d0a472b4485baa312fe974.jpg"
+    },
+    "categoria":"",
+    "tags":[],
+    "comentaris":[
+      {
+        "usuari_id":"88888888888",
+        "missatge":"Hey",
+        "data":"20/04/2017"
+      }
+    ],
+    "visitas":5000,
+    "like":100,
+    "no_like":20,
+    "comentaris_total": 1000,
+    "data_creacio":"30/04/2017",
+    "te_donacio":false
+  }
+}

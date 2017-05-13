@@ -1,0 +1,10 @@
+{
+  "donacio":
+  {
+    "usuari_id":"50000000000",
+    "projecte_id":"500",
+    "donacio_id":"100",
+    "quantitat_donat":"1500",
+    "data" : "30/04/2017"
+  }
+}
