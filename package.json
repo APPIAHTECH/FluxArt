@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MonsterKrod/Flux.git"
+    "url": "git+https://github.com/MonsterKrod/FluxArt.git"
   },
   "keywords": [
     "art",
@@ -16,9 +16,9 @@
   "author": "Stephen Appiah",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/MonsterKrod/Flux/issues"
+    "url": "https://github.com/MonsterKrod/FluxArt/issues"
   },
-  "homepage": "https://github.com/MonsterKrod/Flux#readme",
+  "homepage": "https://github.com/MonsterKrod/FluxArt#readme",
   "dependencies": {
     "bcrypt": "^1.0.2",
     "body-parser": "~1.17.1",
