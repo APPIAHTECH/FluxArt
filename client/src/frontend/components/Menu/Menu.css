@@ -2,7 +2,7 @@
 {
   width: 100%;
   height: 150px;
-  background: transparent;
+  background: #38BFE7;
 }
 
 ul , li ,a
@@ -28,7 +28,7 @@ ul > ul
 {
   padding: 0;
   position: relative;
-  left: 60%;
+  left: 65%;
 }
 
 a{

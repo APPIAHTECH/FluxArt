@@ -43,10 +43,29 @@ a i{
   color: #522024;
 }
 
+a#oblidat
+{
+  position: relative;
+  left: 0px;
+  top: 0px;
+  margin: 0;
+  padding: 0;
+}
+
+a#oblidat:hover{
+  color: blue;
+}
+
 label
 {
   opacity: .5;
   padding: 20px;
+}
+
+label#info
+{
+  text-align: center;
+  font-size: 10pt;
 }
 
 div.letGo
@@ -175,6 +194,7 @@ i{
   margin: 10px;
   margin-left: 0px;
   margin-bottom: 2px;
-  opacity: .8;
+  opacity: .9;
   text-align: center;
+  transition: all ease-in-out 1s;
 }

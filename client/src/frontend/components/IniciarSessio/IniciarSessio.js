@@ -1,76 +1,67 @@
+import Noty from 'noty';
+
 export default {
-
-  props:{
-
-    url:{
-      type: String,
-      required:false
-    },
-  },
 
   data(){
     return{
       nomUsuari : "",
       contrasenya : "",
       metode : "POST",
-      peticio : window.location.href,
-      urlIniciSessio : window.location.href + "autenticacio/intern"
+      peticio : "http://" + window.location.hostname + ":"+window.location.port+"/",
+      urlIniciSessio : "autenticacio/intern",
+      redirecionar : "api/backend",
+      error :false,
+      missatge : "Alguna cosa no anat be"
     }
   },
 
   methods:{
 
     iniciarSessioGoogle()
-    {
-      this.login("GET" , "autenticacio/google");
-    },
+    {this.login("GET" , "autenticacio/google");},
 
     iniciarSessioFacebook()
-    {
-      this.login("GET" , "autenticacio/facebook");
-    },
+    {this.login("GET" , "autenticacio/facebook");},
 
     login(methods , url)
     {
+      let urlSortida = this.peticio + url;
       this.metode = methods;
-      this.peticio += url;
-      window.location.href = this.peticio;
+      window.location.href = urlSortida;
     },
 
     iniciarSessio(event)
     {
-      //event.preventDefault();
-      this.peticio = this.urlIniciSessio;
-      let formulari = event.target.form;
-
-      if(this.validarDades())
-      {
-        if(this.estaUsuari(formulari))
-        {
-          console.log("Donant acces ...");
+      event.preventDefault();
+      let urlSortida = this.peticio + this.urlIniciSessio;
+      
+      if(this.validarDades()){
+        let dades = {
+          nomUsuari : this.nomUsuari,
+          contrasenya : this.contrasenya
         }
-      }else {
-        alert("Les dades no son valides");
+
+        this.$http.post(urlSortida , dades).then((res)=>{
+
+          if(res.ok) //Pot login {200 - 299} resposta.status
+              this.login('GET' , this.redirecionar);
+
+        }).catch((resposta) => {
+
+          if (resposta.status === 401) //No te autoritzacio
+            this.notificar("Males credencials");
+        });
       }
 
     },
 
     validarDades()
+    {return this.nomUsuari != "undefined" && this.contrasenya.length != 0;},
+
+    notificar(msg , tipus)
     {
-      if(this.nomUsuari.length >= 3 && this.nomUsuari.length <= 150 && this.nomUsuari != "undefined")
-      {
-        if(this.contrasenya.length != 0 && this.nomUsuari != "undefined")
-            return true;
-        else
-          return false;
-      }else
-        return false;
-
-    },
-
-    notificar()
-    {
-
+      this.error = true;
+      this.missatge = msg;
     },
 
   }

@@ -90,3 +90,9 @@ div.imatge
   width: 90%;
   margin: auto;
 }
+
+a{
+  background: transparent;
+  text-decoration: none;
+  color: white;
+}

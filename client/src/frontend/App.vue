@@ -1,20 +1,15 @@
 <template>
   <div class="pagina">
-    <!-- <Flux></Flux> -->
-    <fluxIniciarSessio></fluxIniciarSessio>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Flux from './components/Flux/Flux.vue';
-import fluxIniciarSessio from './components/IniciarSessio/IniciarSessio.vue';
 
 export default {
-  components: {
-    // Flux
-    fluxIniciarSessio
-  }
+  components: {}
 }
+
 </script>
 
 <style>

@@ -1,10 +1,10 @@
 <template>
   <div class="contenidor">
-    <fluxMenu></fluxMenu>
+    <FluxMenu></FluxMenu>
     <div class="presentacio">
       <h4 id="expandeix">AMPLIAR LA TEVA MAGINACIÓ</h4>
       <h1 id="titul">L'ART DE COMPARTIR</h1>
-      <button type="button" class="btn">INICIAR SESSIÓ</button>
+      <button type="button" class="btn"><a href="/#/Registrar">REGISTRAT</a></button>
     </div>
     <div class="imatge"></div>
     <div class="proces">
@@ -29,8 +29,8 @@
         </div>
       </div>
     </div>
-    <fluxVisualitzar :url="url" :urlBusqueda="urlBusqueda" :urlUsuari="urlUsuari"></fluxVisualitzar>
-    <fluxFooter></fluxFooter>
+    <FluxVisualitzar :url="url" :urlBusqueda="urlBusqueda" :urlUsuari="urlUsuari"></FluxVisualitzar>
+    <FluxFooter></FluxFooter>
   </div>
 </template>
 

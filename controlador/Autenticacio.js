@@ -41,7 +41,7 @@ class Autenticacio{
     }));
 
   }
-
+  //NOTE : BYCRIPT PER DESENCRIPTAR I COMPROVAR
   static intern()
   {
     Autenticacio.generarSessio(true);
@@ -149,7 +149,7 @@ class Autenticacio{
     if(req.user) //Si te sessio
         next();
     else //Si no te sessio
-      res.send("Te has de validar <a href='/'>inici</a>");
+      res.send('Validar', 'Te has de validar <a href='/'>inici</a>');
   }
 
 }
