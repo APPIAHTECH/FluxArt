@@ -1,0 +1,111 @@
+div#menuLateral{
+  width: 20%;
+  height: 100%;
+  background: #1E1D2D;
+}
+
+div.capcelera
+{
+  width: 100%;
+  height: auto;
+  background: #323141;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+div.contenidor{
+  width: 97%;
+  height: 90%;
+  padding: 5px;
+  padding-top: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+}
+button.btn{
+  background: #4FC4D1;
+  width: 80%;
+  margin: auto;
+}
+div.seccions
+{
+  width: 100%;
+  height: 21%;
+  border-bottom: solid 1px #2B2A3A;
+  box-sizing: content-box;
+}
+
+div.linea{
+  width: 80%;
+
+}
+
+div.butoMenu{
+  width: auto;
+  height: auto;
+  color: white;
+  margin-left: 50%;
+  font-size: 15pt;
+}
+
+div.butoMenu:hover{
+  cursor: pointer;
+}
+
+#noms
+{
+  color: white;
+  letter-spacing: 2px;
+  margin: 10px;
+  margin-left: 20px;
+  margin-bottom: 5px;
+  font-weight: lighter;
+  font-size: 15pt;
+  opacity: .8;
+}
+
+h2#noms + i{
+  display: inline-block;
+  float: right;
+  color: white;
+  opacity: .8;
+  position: relative;
+  top: -25px;
+  left: 77%;
+}
+
+
+h5#titul{
+  color:white;
+  opacity: .5;
+  font-size: 15pt;
+}
+
+ul , li , a{
+  list-style: none;
+  text-decoration: none;
+  padding: 0;
+  margin:0;
+}
+
+ul#llistat{
+  width: auto;
+  height: auto;
+  padding-left: 20px;
+}
+li{
+  margin: 2px;
+
+}
+
+a:hover{
+  opacity: 1;
+  color: #4FC4D1;
+}
+
+a{
+  color: white;
+  opacity: .5;
+}

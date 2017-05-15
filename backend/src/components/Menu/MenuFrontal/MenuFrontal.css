@@ -1,0 +1,79 @@
+div#menuFrontal{
+  width: 100%;
+  height: 9%;
+  background: #1E1D2D;
+  box-sizing: content-box;
+}
+
+div.contenidor{
+  width: 98%;
+  height: auto;
+  padding: 20px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+}
+
+div.img,
+div.msg {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+div.msg > i{
+  color: white;
+  font-size: 20pt;
+  position: relative;
+  top: 12px;
+}
+
+div.img:hover{
+  cursor: pointer;
+}
+
+div.msg{border-radius: 0;}
+
+div.img:hover  > .opcions{
+  display: block;
+}
+div.opcions{
+  width: 150px;
+  height: auto;
+  position: relative;
+  top: 65px;
+  background: #323141;
+  display: none;
+  z-index: 888;
+}
+
+ul , li , a{
+  list-style: none;
+  text-decoration: none;
+  display: inline-block;
+}
+
+li{
+  margin-bottom: 5px;
+  padding: 2px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-left: 10px;
+  width: 100%;
+  transition: all ease-in-out 1s;
+}
+a{
+  color: white
+}
+
+li a:hover{
+  color: #4FC4D1;
+}
+div.perfilUrl{
+  background-image: url('https://vignette4.wikia.nocookie.net/leagueoflegends/images/5/58/Lucian_Poro.jpg/revision/latest?cb=20150220155137');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
