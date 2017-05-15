@@ -1,6 +1,7 @@
 <template>
   <div id="backend">
     <MenuFrontal></MenuFrontal>
+    <FluxVisualitzar :quantitatProjectes="quantitatProjectes"></FluxVisualitzar>
   </div>
 </template>
 

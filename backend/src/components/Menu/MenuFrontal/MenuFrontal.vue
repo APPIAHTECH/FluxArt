@@ -2,16 +2,23 @@
   <div id="menuFrontal">
 
     <div class="contenidor">
-      <div class="img perfilUrl">
-        <div class="opcions">
-          <ul id="llistat">
-            <li><a href="#">Perfil</a></li>
-            <li><a href="#">Configuracions</a></li>
-            <li><a href="#">Tancar Sessió</a></li>
-          </ul>
+      <button type="button" name="button" class="btn">Crear Projecte </button>
+
+      <div class="contenidorDeixar">
+        <div class="img perfilUrl"><i class="fa fa-angle-down" aria-hidden="true"></i></div>
+        <div class="baixar">
+          <a href="#">Perfil</a>
+          <a href="#">Configuració</a>
+          <a href="#">Tancar sessió</a>
+        </div>
+
+      </div>
+      <div class="notificacio">
+        <i class="fa fa-bell" aria-hidden="true"></i>
+        <div class="circle">
+          <p>2</p>
         </div>
       </div>
-      <div class="msg"><i class="fa fa-comments" aria-hidden="true"></i></div>
     </div>
   </div>
 </template>
