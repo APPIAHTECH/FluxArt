@@ -1,3 +1,4 @@
+//NOTE : EST FALTA FER OLBLIDAT PASSS i PODER DEMANAR UN ALTRE TOKEN PER VLIDAR COMPTE
 const express = require('express');
 const passport = require('passport');
 const router = express.Router();

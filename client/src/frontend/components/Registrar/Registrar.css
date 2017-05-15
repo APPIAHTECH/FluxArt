@@ -1,6 +1,6 @@
 div.contenidor{
   width: 100%;
-  height: 658px;
+  height: 100%;
   background: #FFFFFF;
   display: flex;
   flex-flow: row nowrap;
@@ -14,10 +14,10 @@ div.registrar
   height: 94%;
   padding: 20px;
   padding-top: 10px;
-  background:#F46E6D;
   background-image: url('http://cesarg.cl/wp/wp-content/uploads/2015/03/papers.co-af22-rc-plane-minimal-blue-art-illust-cute-1280x800.jpg');
   background-repeat: no-repeat;
   background-position: bottom;
+  background-size: cover;
 }
 
 div.registrar
@@ -38,7 +38,7 @@ div.text
   width: auto;
   height: auto;
   position: relative;
-  top: 350px;
+  top: 250px;
 }
 
 div.formulari
@@ -86,7 +86,7 @@ p#inici{
   font-size: 10pt;
   position: relative;
   top: -30px;
-  left: 160px;
+  left: 24%;
   width: 200px;
 
 }
@@ -122,7 +122,7 @@ a{
   font-size: 10pt;
   position: relative;
   top: -45px;
-  left: 285px;
+  left: 43%;
   width: 100px;
 }
 
@@ -173,7 +173,8 @@ div.facebook:hover{
 }
 
 #titul,
-#registrar
+#registrar,
+#error
 {
   color: white;
   letter-spacing: 2px;
@@ -191,4 +192,23 @@ div.facebook:hover{
   color: #0D0D0D;
   text-align: center;
   font-size: 12pt;
+}
+
+#error
+{
+  font-size: 10pt;
+  color: black;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  margin-left: 20px;
+  color: #00749A;
+}
+#posibleNom{
+  position: relative;
+  display: inline-block;
+  top: -17px;
+  left: 25%;
+  margin-left: 50px;
+  font-size: 10pt;
 }

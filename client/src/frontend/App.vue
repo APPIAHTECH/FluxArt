@@ -21,11 +21,16 @@ export default {
   font-family: 'Roboto', sans-serif;
 }
 
+body , html{
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
 body{background: #ffff;}
 div.pagina
 {
   width: 100%;
-  height: auto;
+  height: 100%;
   max-width: 100%;
   box-sizing: content-box;
 }

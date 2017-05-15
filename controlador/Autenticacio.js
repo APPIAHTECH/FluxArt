@@ -171,15 +171,46 @@ class Autenticacio{
     Autenticacio.comprovarNomUsuari(dadesUsuari.nomUsuari).then((usuari)=>{
 
       if(usuari[0])
-        res.status(202).send('Nom Usuari ja existeix');
+        res.status(202).send('NomExisteix');
       else {
 
         Autenticacio.comprovarCorreu(dadesUsuari.correu).then((usuariCorreu)=>{
 
           if(usuariCorreu[0])
-            res.status(202).send('Correu ja existeix');
+            res.status(202).send('CorreuExisteix');
           else
-            res.send("Valid");
+          {
+            Utilitats.encriptarContrasenya(dadesUsuari.contrasenya).then((contrasenya)=>{
+
+              estructura.usuari.nom_usuari = dadesUsuari.nomUsuari;
+              estructura.usuari.correu = dadesUsuari.correu;
+              estructura.usuari.contrasenya = contrasenya;
+              estructura.usuari.tipus_registracio = ['intern'];
+              estructura.usuari.data_creacio = new Date();
+              estructura.usuari.estat_activacio = "pendent";
+              estructura.per_validar.encriptacio = Utilitats.generarStringEncriptat(dadesUsuari.correu);
+              estructura.per_validar.dataCaducitat = Utilitats.generarDataCaducitat();
+
+              //NOTE: opcionsCorreu Canviar html pasar plantilla crear const from eunisae...
+              model.inserirUsuari(estructura).then((resultat)=>{
+
+                let link = Utilitats.location(req) + "/autenticacio/intern/registrar/verificar/"+estructura.per_validar.encriptacio;
+                let opcionsCorreu = {
+                    from: '"eunisae" <eunisaesea@gmail.com>', // sender address
+                    to: dadesUsuari.correu, // list of receivers
+                    subject: 'Hello ✔ confirmar registracio', // Subject line
+                    text: 'Hello confirmar registracio a Flux '+link, // plain text body
+                    html: '<b>Hello confirmar registracio a Flux</b>'+link // html body
+                };
+
+                Utilitats.enviarCorreu(opcionsCorreu);
+                res.send("confirmar correu");
+              }).catch((err)=> console.error(err));
+
+            });
+
+
+          }
 
         }).catch((err)=> console.error(err));
       }
@@ -187,34 +218,11 @@ class Autenticacio{
     }).catch((err)=> console.error(err));
 
 
-    Utilitats.encriptarContrasenya(dadesUsuari.contrasenya).then((contrasenya)=>{
 
-      estructura.usuari.nom_usuari = dadesUsuari.nomUsuari;
-      estructura.usuari.correu = dadesUsuari.correu;
-      estructura.usuari.contrasenya = contrasenya;
-      estructura.usuari.tipus_registracio = ['intern'];
-      estructura.usuari.data_creacio = new Date();
-      estructura.usuari.estat_activacio = "pendent";
-      estructura.per_validar.encriptacio = Utilitats.generarStringEncriptat(dadesUsuari.correu);
-      estructura.per_validar.dataCaducitat = Utilitats.generarDataCaducitat();
+  }
 
-      //NOTE: opcionsCorreu Canviar html pasar plantilla crear const from eunisae...
-      model.inserirUsuari(estructura).then((resultat)=>{
-
-        let link = Utilitats.location(req) + "/autenticacio/intern/registrar/verificar/"+estructura.per_validar.encriptacio;
-        let opcionsCorreu = {
-            from: '"eunisae" <eunisaesea@gmail.com>', // sender address
-            to: dadesUsuari.correu, // list of receivers
-            subject: 'Hello ✔ confirmar registracio', // Subject line
-            text: 'Hello confirmar registracio a Flux '+link, // plain text body
-            html: '<b>Hello confirmar registracio a Flux</b>'+link // html body
-        };
-
-        Utilitats.enviarCorreu(opcionsCorreu);
-        res.send("confirmar correu");
-      }).catch((err)=> console.error(err));
-
-    });
+  static operar()
+  {
 
   }
   static verificar(req , res , next){
@@ -240,7 +248,7 @@ class Autenticacio{
         modelUsuari.inserirUsuari(perfil)
         .then((resultat)=> {
           model.borarUsuari(usuariTemporal[0]._id).catch((err)=> console.error(err));
-          res.send("Verificat");
+          res.redirect('/#/iniciarSessio'); //El client
         }).catch((err)=> console.error(err));
 
     }).catch((err) => console.error(err));
