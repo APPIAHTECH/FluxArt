@@ -4,7 +4,7 @@
     <div class="presentacio">
       <h4 id="expandeix">AMPLIAR LA TEVA MAGINACIÓ</h4>
       <h1 id="titul">L'ART DE COMPARTIR</h1>
-      <button type="button" class="btn"><a href="/#/Registrar">REGISTRAT</a></button>
+      <button type="button" class="btn"><a href="/#/registrar">REGISTRAT</a></button>
     </div>
     <div class="imatge"></div>
     <div class="proces">

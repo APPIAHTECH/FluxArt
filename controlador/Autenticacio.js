@@ -3,8 +3,10 @@ const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const LocalStrategy = require('passport-local').Strategy;
 
+const Utilitats = require('./Utilitats.js');
 const credencials = require('./../config/credencials.js');
 const ModelUsuari = require('./../models/usuaris/ModelUsuari.js');
+const UsuarisTemporal = require('./../models/usuaris/UsuarisTemporal.js');
 const colleccio = "PerfilUsuari";
 
 let model = new ModelUsuari(colleccio);
@@ -41,7 +43,7 @@ class Autenticacio{
     }));
 
   }
-  //NOTE : BYCRIPT PER DESENCRIPTAR I COMPROVAR
+
   static intern()
   {
     Autenticacio.generarSessio(true);
@@ -49,17 +51,29 @@ class Autenticacio{
       usernameField: 'nomUsuari',
       passwordField: 'contrasenya'
     } ,(nomUsuari , contrasenya , done)=>{
-
       //Buscant usuari amb les credencials entrades
-      model.obtenirUsuaris({$and:[{"usuari.nom_usuari": nomUsuari},{"usuari.contrasenya": contrasenya}]})
+      model.obtenirUsuaris({"usuari.nom_usuari": nomUsuari})
       .then((resultat)=> {
 
         if(!resultat[0]) //Si no hi ha usuari
-          return done(null , false , {message : "Males credencials"});
+          return done(null , false);
 
-          return done(null , resultat);
-      })
-      .catch((err) =>{
+          Utilitats.compararContrasenyaEncriptat(contrasenya, resultat[0].usuari.contrasenya)
+          .then((sonIguals)=>{
+
+            console.log("Resultat de comparacio -> ", sonIguals);
+            if(sonIguals)
+              return done(null , resultat);
+            else
+              return done(null , false);
+
+          }).catch((err) =>{
+            console.error(err);
+            return done(err);
+          });
+
+
+      }).catch((err) =>{
         console.error(err);
         return done(err);
       });
@@ -144,6 +158,95 @@ class Autenticacio{
     });
   }
 
+  static registrar(req , res , next){
+    let model = new UsuarisTemporal();
+    let estructura = model.getModel();
+
+    let dadesUsuari = {
+      nomUsuari : req.body.nomUsuari,
+      contrasenya : req.body.contrasenya,
+      correu : req.body.correu
+    }
+
+    Autenticacio.comprovarNomUsuari(dadesUsuari.nomUsuari).then((usuari)=>{
+
+      if(usuari[0])
+        res.status(202).send('Nom Usuari ja existeix');
+      else {
+
+        Autenticacio.comprovarCorreu(dadesUsuari.correu).then((usuariCorreu)=>{
+
+          if(usuariCorreu[0])
+            res.status(202).send('Correu ja existeix');
+          else
+            res.send("Valid");
+
+        }).catch((err)=> console.error(err));
+      }
+
+    }).catch((err)=> console.error(err));
+
+
+    Utilitats.encriptarContrasenya(dadesUsuari.contrasenya).then((contrasenya)=>{
+
+      estructura.usuari.nom_usuari = dadesUsuari.nomUsuari;
+      estructura.usuari.correu = dadesUsuari.correu;
+      estructura.usuari.contrasenya = contrasenya;
+      estructura.usuari.tipus_registracio = ['intern'];
+      estructura.usuari.data_creacio = new Date();
+      estructura.usuari.estat_activacio = "pendent";
+      estructura.per_validar.encriptacio = Utilitats.generarStringEncriptat(dadesUsuari.correu);
+      estructura.per_validar.dataCaducitat = Utilitats.generarDataCaducitat();
+
+      //NOTE: opcionsCorreu Canviar html pasar plantilla crear const from eunisae...
+      model.inserirUsuari(estructura).then((resultat)=>{
+
+        let link = Utilitats.location(req) + "/autenticacio/intern/registrar/verificar/"+estructura.per_validar.encriptacio;
+        let opcionsCorreu = {
+            from: '"eunisae" <eunisaesea@gmail.com>', // sender address
+            to: dadesUsuari.correu, // list of receivers
+            subject: 'Hello ✔ confirmar registracio', // Subject line
+            text: 'Hello confirmar registracio a Flux '+link, // plain text body
+            html: '<b>Hello confirmar registracio a Flux</b>'+link // html body
+        };
+
+        Utilitats.enviarCorreu(opcionsCorreu);
+        res.send("confirmar correu");
+      }).catch((err)=> console.error(err));
+
+    });
+
+  }
+  static verificar(req , res , next){
+
+    let model = new UsuarisTemporal();
+    let modelUsuari = new ModelUsuari(colleccio);
+    let perfil = modelUsuari.getModel();
+    let encriptacio = req.params.encriptacio;
+
+    model.obtenirUsuaris({"per_validar.encriptacio" : encriptacio}).then((usuariTemporal)=>{
+
+      if(!usuariTemporal[0]) //Si no hi ha cap usuari amb l'encriptacio correspondent o ha set validat
+        res.redirect('/');
+
+        usuariTemporal[0].usuari.estat_activacio = true
+        perfil.usuari.nom_usuari = usuariTemporal[0].usuari.nom_usuari;
+        perfil.usuari.correu = usuariTemporal[0].usuari.correu;
+        perfil.usuari.contrasenya = usuariTemporal[0].usuari.contrasenya;
+        perfil.usuari.tipus_registracio = usuariTemporal[0].usuari.tipus_registracio;
+        perfil.usuari.estat_activacio = usuariTemporal[0].usuari.estat_activacio;
+        perfil.usuari.data_validacio = new Date();
+
+        modelUsuari.inserirUsuari(perfil)
+        .then((resultat)=> {
+          model.borarUsuari(usuariTemporal[0]._id).catch((err)=> console.error(err));
+          res.send("Verificat");
+        }).catch((err)=> console.error(err));
+
+    }).catch((err) => console.error(err));
+
+  }
+
   static esAutentificat(req , res , next)
   {
     if(req.user) //Si te sessio
@@ -152,6 +255,23 @@ class Autenticacio{
       res.send('Validar', 'Te has de validar <a href='/'>inici</a>');
   }
 
+  static comprovarCorreu(correu)
+  {
+    return new Promise((resolve , reject) =>{
+      model.obtenirUsuaris({"usuari.correu" : correu})
+      .then((usuari)=> resolve(usuari))
+      .catch((err)=> reject(err));
+    });
+  }
+
+  static comprovarNomUsuari(nomUsuari)
+  {
+    return new Promise((resolve , reject) =>{
+      model.obtenirUsuaris({"usuari.nom_usuari" : nomUsuari})
+      .then((usuari)=> resolve(usuari))
+      .catch((err)=> reject(err));
+    });
+  }
 }
 
 module.exports = Autenticacio;

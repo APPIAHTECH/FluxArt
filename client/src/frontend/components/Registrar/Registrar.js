@@ -4,9 +4,10 @@ export default {
     return{
       nomUsuari : "",
       contrasenya : "",
+      correu : "",
       metode : "POST",
       peticio : "http://" + window.location.hostname + ":"+window.location.port+"/",
-      urlIniciSessio : "autenticacio/intern",
+      urlIniciSessio : "autenticacio/intern/registrar",
       redirecionar : "api/backend",
       error :false,
       missatge : "Alguna cosa no anat be"
@@ -15,52 +16,45 @@ export default {
 
   methods:{
 
-    iniciarSessioGoogle()
-    {this.login("GET" , "autenticacio/google");},
+    RegistrarGoogle()
+    {this.registrarExtern("GET" , "autenticacio/google");},
 
-    iniciarSessioFacebook()
-    {this.login("GET" , "autenticacio/facebook");},
+    RegistrarFacebook()
+    {this.registrarExtern("GET" , "autenticacio/facebook");},
 
-    login(methods , url)
+    registrarExtern(methods , url)
     {
       let urlSortida = this.peticio + url;
       this.metode = methods;
       window.location.href = urlSortida;
     },
 
-    iniciarSessio(event)
+    registrar(event)
     {
       event.preventDefault();
       let urlSortida = this.peticio + this.urlIniciSessio;
+      console.log(urlSortida);
 
       if(this.validarDades()){
+
         let dades = {
           nomUsuari : this.nomUsuari,
-          contrasenya : this.contrasenya
+          contrasenya : this.contrasenya,
+          correu : this.correu
         }
 
         this.$http.post(urlSortida , dades).then((res)=>{
-
-          if(res.ok) //Pot login {200 - 299} resposta.status
-              this.login('GET' , this.redirecionar);
-
-        }).catch((resposta) => {
-
-          if (resposta.status === 401) //No te autoritzacio
-            this.notificar("Males credencials");
-        });
+          console.log(res);
+        }).catch((resposta) => console.error(resposta));
       }
 
     },
 
     validarDades()
-    {return this.nomUsuari != "undefined" && this.contrasenya.length != 0;},
-
-    notificar(msg , tipus)
     {
-      this.error = true;
-      this.missatge = msg;
-    },
+      //Validar les dades
+      return true;
+    }
 
   }
 }

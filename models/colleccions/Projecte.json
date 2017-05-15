@@ -25,6 +25,7 @@
     "no_like":20,
     "comentaris_total": 1000,
     "data_creacio":"30/04/2017",
-    "te_donacio":false
+    "te_donacio":false,
+    "confirmat" : false
   }
 }
