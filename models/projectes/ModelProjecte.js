@@ -1,13 +1,13 @@
 const Query = require('./../Query');
+const colleccio = "Projecte";
 
 class ModelProjecte{
 
-  constructor(colleccio){
+  constructor(){
     this.setColleccio(colleccio);
   }
   setColleccio(colleccio){this.colleccio = colleccio;}
-  getColleccio()
-  {return this.colleccio;}
+  getColleccio(){return this.colleccio;}
 
   inserirProjecte(projecte){
 
@@ -32,6 +32,18 @@ class ModelProjecte{
       .then((res)=> {
         resolve(res);
       })
+      .catch((err)=> {
+        console.error(err);
+        reject(err);
+      });
+    });
+  }
+
+  obtenirProjectesLimit(id , quantitat){
+
+    return new Promise((resolve , reject) =>{
+      Query.querySeleccioLimit(this.getColleccio(), {"projecte.usuari_id" : `${id}`}  , quantitat)
+      .then((res)=>  resolve(res))
       .catch((err)=> {
         console.error(err);
         reject(err);

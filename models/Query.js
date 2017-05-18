@@ -38,6 +38,21 @@ class Query extends ConnexioDB {
     })
   }
 
+  static querySeleccioLimit(nom_colleccio , condicio , quantitat)
+  {
+    return new Promise((resolve , reject) =>{
+
+      super.obtenirConnexio()
+      .then((db)=> {
+
+          let colleccio = db.collection(nom_colleccio);
+          colleccio.find(condicio).limit(quantitat).toArray((err, docs) => {
+            Query.resoldrePeticio(db , resolve , reject , err , docs);
+          });
+        }).catch((err)=> console.log(err));
+    })
+  }
+
   static queryInsercio(nom_colleccio , document)
   {
     return new Promise((resolve , reject) =>{

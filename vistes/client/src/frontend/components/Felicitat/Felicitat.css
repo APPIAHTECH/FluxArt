@@ -1,0 +1,66 @@
+div#Felicitat{
+  width: 100%;
+  height: 100%;
+  background: #EBEEF3;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
+
+div.contenidor{
+  width: 50%;
+  height: 80%;
+  margin: 1% auto;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  background: #FFFFFF;
+  box-shadow: 10px 10px 10px #E7E7E7;
+  border-radius: 8px;
+}
+
+div.img{
+  width: 150px;
+  height: 150px;
+  background-image: url('http://www.pinnacleprocurement.com/wp-content/uploads/2014/07/iconmonstr-paper-plane-7-icon-256.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: auto;
+}
+
+h4{
+  font-size: 20pt;
+  opacity: .7;
+  margin-bottom: 5px;
+}
+button#btn{
+  background:#3694FF;
+  margin: auto;
+}
+div.felicitar{
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+a{
+  background: transparent;
+  text-decoration: none;
+  color: white;
+}
+
+a#flux{
+  color: #38BFE7;
+  font-weight: bold;;
+}
+p{
+  font-size: 15pt;
+
+}

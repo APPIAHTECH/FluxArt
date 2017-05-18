@@ -5,11 +5,14 @@ const LocalStrategy = require('passport-local').Strategy;
 
 const Utilitats = require('./Utilitats.js');
 const credencials = require('./../config/credencials.js');
+
 const ModelUsuari = require('./../models/usuaris/ModelUsuari.js');
 const UsuarisTemporal = require('./../models/usuaris/UsuarisTemporal.js');
-const colleccio = "PerfilUsuari";
 
-let model = new ModelUsuari(colleccio);
+
+const correAdmin = '"eunisae" <eunisaesea@gmail.com>';
+
+let model = new ModelUsuari();
 let estructura = model.getModel(); //Retorna l'estructura del model usuari
 let perfil = {};
 
@@ -61,7 +64,6 @@ class Autenticacio{
           Utilitats.compararContrasenyaEncriptat(contrasenya, resultat[0].usuari.contrasenya)
           .then((sonIguals)=>{
 
-            console.log("Resultat de comparacio -> ", sonIguals);
             if(sonIguals)
               return done(null , resultat);
             else
@@ -196,11 +198,10 @@ class Autenticacio{
 
                 let link = Utilitats.location(req) + "/autenticacio/intern/registrar/verificar/"+estructura.per_validar.encriptacio;
                 let opcionsCorreu = {
-                    from: '"eunisae" <eunisaesea@gmail.com>', // sender address
+                    from: correAdmin, // sender address
                     to: dadesUsuari.correu, // list of receivers
-                    subject: 'Hello ✔ confirmar registracio', // Subject line
-                    text: 'Hello confirmar registracio a Flux '+link, // plain text body
-                    html: '<b>Hello confirmar registracio a Flux</b>'+link // html body
+                    subject: 'Confirmacio Correu Flux', // Subject line
+                    html: '<b>Hola confirma la teva validacio a Flux amb el seguint link , </b>'+link // html body
                 };
 
                 Utilitats.enviarCorreu(opcionsCorreu);
@@ -216,19 +217,12 @@ class Autenticacio{
       }
 
     }).catch((err)=> console.error(err));
-
-
-
   }
 
-  static operar()
-  {
-
-  }
   static verificar(req , res , next){
 
     let model = new UsuarisTemporal();
-    let modelUsuari = new ModelUsuari(colleccio);
+    let modelUsuari = new ModelUsuari();
     let perfil = modelUsuari.getModel();
     let encriptacio = req.params.encriptacio;
 
@@ -243,12 +237,13 @@ class Autenticacio{
         perfil.usuari.contrasenya = usuariTemporal[0].usuari.contrasenya;
         perfil.usuari.tipus_registracio = usuariTemporal[0].usuari.tipus_registracio;
         perfil.usuari.estat_activacio = usuariTemporal[0].usuari.estat_activacio;
+        perfil.usuari.primerCop = true;
         perfil.usuari.data_validacio = new Date();
 
         modelUsuari.inserirUsuari(perfil)
         .then((resultat)=> {
           model.borarUsuari(usuariTemporal[0]._id).catch((err)=> console.error(err));
-          res.redirect('/#/iniciarSessio'); //El client
+          res.redirect('/#/autenticacio/felicitar');
         }).catch((err)=> console.error(err));
 
     }).catch((err) => console.error(err));
@@ -258,9 +253,13 @@ class Autenticacio{
   static esAutentificat(req , res , next)
   {
     if(req.user) //Si te sessio
+    {
+      // if(req.user[0].usuari.primerCop)
+      //   res.redirect('/#/configurar/compte/primercop');
+      // else
         next();
-    else //Si no te sessio
-      res.send('Validar', 'Te has de validar <a href='/'>inici</a>');
+    }else //Si no te sessio
+      res.status(401).redirect('/#/iniciarSessio'); //401 no autoritzacio
   }
 
   static comprovarCorreu(correu)
@@ -280,6 +279,39 @@ class Autenticacio{
       .catch((err)=> reject(err));
     });
   }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = Autenticacio;

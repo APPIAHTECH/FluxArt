@@ -1,0 +1,220 @@
+div#menuFrontal{
+  width: 100%;
+  height: 88px;
+  background: #FFFFFF;
+  box-sizing: content-box;
+  box-shadow: 0px 5px 0px #E7E7E7;
+  margin-bottom: 1%;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+div.capcelera
+{
+  width: 20%;
+  height: auto;
+  background: #4FC4D1;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  position: absolute;
+}
+
+
+div.butoMenu{
+  width: auto;
+  height: auto;
+  color: white;
+  margin-left: 50%;
+  font-size: 15pt;
+}
+
+div.butoMenu:hover{
+  cursor: pointer;
+}
+
+#noms
+{
+  color: white;
+  letter-spacing: 2px;
+  margin: 10px;
+  margin-left: 20px;
+  margin-bottom: 5px;
+  font-weight: lighter;
+  font-size: 12pt;
+  opacity: .8;
+}
+
+h2#noms + i{
+  display: inline-block;
+  float: right;
+  color: white;
+  opacity: .8;
+  position: relative;
+  top: -25px;
+  left: 80%;
+}
+
+
+h5#titul{
+  color:white;
+  opacity: .8;
+  font-size: 17pt;
+}
+
+ul , li , a{
+  list-style: none;
+  text-decoration: none;
+  padding: 0;
+  margin:0;
+}
+
+li{
+  margin: 2px;
+  margin-bottom: 15px;
+}
+
+li a:hover{
+  margin-left: 15px;
+  transition: all ease-in-out .5s;
+}
+
+li a:not(hover){
+  margin-left: 0;
+  transition: all ease-in-out .5s;
+}
+
+a:hover{
+  opacity: 1;
+  color: #4FC4D1;
+}
+
+a{
+  color: white;
+  opacity: .5;
+}
+
+.capcelera{
+  transition: all .2s;
+  box-shadow: 0px 15px 0px #292929;
+}
+
+
+button.btn{
+  background: #4FC4D1;
+  width: 20%;
+  margin: auto;
+  border-radius: 10px;
+  outline: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+div.contenidor{
+  width: 97.50%;
+  height: auto;
+  padding-top: 0px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+div.img{
+  width: 25pt;
+  height: 25pt;
+  border-radius: 50%;
+}
+
+.baixar {
+    display:  none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    margin-top: -5px;
+}
+
+.baixar a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.contenidorDeixar{
+  width: 50px;
+  position: relative;
+  left: -140px;
+  top: 5px;
+}
+.baixar a:hover {background-color: #f1f1f1}
+
+.contenidorDeixar:hover .baixar {
+    display: block;
+}
+
+div.img > i{
+  display: none;
+}
+div.img{
+  background: #eeeeee;
+  box-shadow: 2px 5px 2px #E7E7E7;
+  padding-top: 0px;
+  position: relative;
+  top: -10px;
+}
+
+.contenidorDeixar:hover div.img > i{
+  color: #292929;
+  position: absolute;
+  margin-left: 40px;
+  margin-top: 5px;
+  transition: all .5s  , margin 0s;
+}
+
+div.img:hover{cursor: pointer;}
+
+div.notificacio{
+  position: relative;
+  left: -125px;
+  margin-top: -5px;
+}
+
+div.notificacio > i{
+  color: black;
+  font-size: 15pt;
+  opacity: .5;
+}
+
+div.notificacio > .circle{
+  width: 12pt;
+  height: 12pt;
+  background: #F36D60;
+  border-radius: 50%;
+  padding: 2px;
+  position: absolute;
+  margin-top: -25px;
+  margin-left: 10px;
+}
+
+div.circle p{
+  font-size: 10pt;
+  color: white;
+  text-align: center;
+  margin: 1% auto;
+}
+
+div.circle:hover{
+  cursor: pointer;
+  transition: all ease-in .5s;
+}
+
+div.perfilUrl{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

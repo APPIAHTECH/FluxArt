@@ -1,0 +1,116 @@
+div#menuLateral{
+  width: 20%;
+  height: auto;
+  background: #292929;
+  transition: all ease-in-out .5s;
+}
+
+div.contenidor{
+  width: 97%;
+  height: 90%;
+  padding: 5px;
+  padding-top: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+div.seccions
+{
+  width: 100%;
+  height: 21%;
+  border-bottom: solid 1px #424544;
+  box-sizing: content-box;
+  transition: all ease .4s;
+}
+
+div.butoMenu{
+  width: auto;
+  height: auto;
+  color: white;
+  margin-left: 50%;
+  font-size: 15pt;
+}
+
+div.butoMenu:hover{
+  cursor: pointer;
+}
+
+#noms
+{
+  color: white;
+  letter-spacing: 2px;
+  margin: 10px;
+  margin-left: 20px;
+  margin-bottom: 5px;
+  font-weight: lighter;
+  font-size: 12pt;
+  opacity: .8;
+}
+
+h2#noms + i{
+  display: inline-block;
+  float: right;
+  color: white;
+  opacity: .8;
+  position: relative;
+  top: -25px;
+  left: 80%;
+}
+
+
+h5#titul{
+  color:white;
+  opacity: .8;
+  font-size: 17pt;
+}
+
+ul , li , a{
+  list-style: none;
+  text-decoration: none;
+  padding: 0;
+  margin:0;
+}
+
+ul#llistat{
+  width: auto;
+  height: auto;
+  padding-left: 20px;
+}
+
+li{
+  margin: 2px;
+  margin-bottom: 15px;
+}
+
+li a:hover{
+  margin-left: 15px;
+  transition: all ease-in-out .5s;
+}
+
+li a:not(hover){
+  margin-left: 0;
+  transition: all ease-in-out .5s;
+}
+
+a:hover{
+  opacity: 1;
+  color: #4FC4D1;
+}
+
+a{
+  color: white;
+  opacity: .5;
+}
+
+.activat{
+  transition: all ease-in-out .8s;
+  height: 0% !important;
+}
+.activat > .seccions{
+opacity: 0 !important;
+transition: all ease .4s;
+}
+.activat > .capcelera{
+  transition: all .2s;
+  box-shadow: 0px 5px 0px #007499;
+}

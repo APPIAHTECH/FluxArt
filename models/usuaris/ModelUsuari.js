@@ -1,7 +1,6 @@
 const Query = require('./../Query');
 const document = {
-  "usuari":
-  {
+  "usuari":{
     "nom":"",
     "nom_usuari":"",
     "correu":"",
@@ -15,13 +14,16 @@ const document = {
     "compte_paypal":"",
     "estat_activacio": false,
     "data_validacio":"",
-    "usuari_proveidor_id":""
+    "usuari_proveidor_id":"",
+    "primerCop":false
   }
 }
 
+const colleccio = "PerfilUsuari";
+
 class ModelUsuari{
 
-  constructor(colleccio){
+  constructor(){
     this.setColleccio(colleccio);
     this.setModel(document);
   }
@@ -125,6 +127,15 @@ class ModelUsuari{
 
   // deshabilitar
   donarBaixa(id ){}
+
+  formattarCamp(perfil , callback){
+    delete perfil.usuari['contrasenya'];
+    delete perfil.usuari['estat_activacio'];
+    delete perfil.usuari['data_validacio'];
+    delete perfil.usuari['usuari_proveidor_id'];
+    delete perfil.usuari['tipus_registracio'];
+    callback(perfil);
+  }
 
 }
 

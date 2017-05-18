@@ -1,0 +1,88 @@
+div.contenidor
+{
+  width: 100%;
+  height: 100%;
+  background: #EBEEF3;
+  display: flex;
+  justify-content: center;
+}
+
+div.img{
+
+  background-image: url('https://lh3.googleusercontent.com/nQgdFMATyWOL7Nms1jK3c7u97KAdQ67LL42cJnYkqldlTGsaNERf72q6dMQIENs3-g=w300');
+  width: 150px;
+  height: 150px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin:auto;
+  margin-bottom: 30px;
+}
+div.correu{
+  width: 50%;
+  height: 70%;
+  margin: 5% auto;
+  background: #FFFFFF;
+  padding: 20px;
+  padding-top: 30px;
+  border-radius: 15px;
+  display: inline-block;
+}
+div.tituls
+{
+  width: 300px;
+  height: auto;
+  margin: auto;
+  text-align: center;
+}
+
+div.confirmar{
+  width: auto;
+  height: auto;
+  margin: auto;
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 85px;
+}
+
+
+#titul
+{
+  color: black;
+  letter-spacing: 2px;
+  margin: 10px;
+  margin-left: 0px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 15pt;
+}
+
+p#text,
+p#noRebut
+{
+  font-size: 12pt;
+  color: black;
+  text-align: center;
+  width: 85%;
+  word-break: break-all;
+  margin: auto;
+}
+
+p#noRebut{
+  width: 100%;
+  font-size: 10pt;
+  text-align: left;
+  opacity: .7;
+  margin-left:75px;
+  margin-top: 20px;
+}
+
+#reenviar{
+  color: #1295CD;
+}
+hr{
+  width: 85%;
+  margin: auto;
+  background: #E1E1E1;
+  opacity: .6;
+}
