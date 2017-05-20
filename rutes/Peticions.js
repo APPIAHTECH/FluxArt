@@ -19,6 +19,10 @@ router.get('/peticio/usuari/:id' , controladorUsuari.obtenirUsuariID);
 
 router.get('/peticio/dades', Autenticacio.esAutentificat , controladorUsuari.recuperarTotDades);
 
+router.post('/peticio/actualitzar', Autenticacio.esAutentificat , controladorUsuari.actualitzarDades);
+
+router.post('/peticio/eliminar', Autenticacio.esAutentificat , controladorUsuari.eliminarDades);
+
 router.get('/peticio/tancarSessio', (req , res)=>{
 
   if(req.user)

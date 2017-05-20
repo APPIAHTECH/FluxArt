@@ -49,7 +49,7 @@ class Autenticacio{
 
   static intern()
   {
-    Autenticacio.generarSessio(true);
+    Autenticacio.generarSessio();
     passport.use(new LocalStrategy({
       usernameField: 'nomUsuari',
       passwordField: 'contrasenya'
@@ -65,7 +65,7 @@ class Autenticacio{
           .then((sonIguals)=>{
 
             if(sonIguals)
-              return done(null , resultat);
+              return done(null , resultat[0]);
             else
               return done(null , false);
 
@@ -86,7 +86,7 @@ class Autenticacio{
 
   static resol(token, tokenSecret, profile, done , proveidor , condicio)
   {
-    Autenticacio.generarSessio(false);
+    Autenticacio.generarSessio();
     model.obtenirUsuaris(condicio)
     .then((usuari)=> {
 
@@ -101,7 +101,7 @@ class Autenticacio{
 
         done(null , perfil);//done(err , user , info) iniquem el modul passport que ja em operat amb el usuari.
       }else
-        done(null, false , { message: 'Usuari ja esta en db.' });
+        done(null, profile , { message: 'iniciant sessio' });
 
     }).catch((err)=> {
       console.log(err);
@@ -142,14 +142,14 @@ class Autenticacio{
     return perfil;
   }
 
-  static generarSessio(intern = false)
+  static generarSessio()
   {
-    passport.serializeUser((perfil, done) =>{ //Serialitza el sobrenom del usuari a sessio
-
-      if(intern) //Si l'autenticacio es de manera intern
-        return done(null , perfil[0].usuari.nom_usuari);
-      else
-        return done(null, perfil.usuari.nom_usuari); //autenticacio externa
+    passport.serializeUser((perfil, done) =>{ //Serialitza el nom del usuari a sessio
+      console.log();
+      if(!perfil.hasOwnProperty('displayName'))
+          return done(null , perfil.usuari.nom_usuari);
+        else
+          return done(null , perfil.displayName);
     });
 
     //Si es fa una req.user recupera de la bd el les dades de l'usuari.
@@ -187,7 +187,7 @@ class Autenticacio{
               estructura.usuari.nom_usuari = dadesUsuari.nomUsuari;
               estructura.usuari.correu = dadesUsuari.correu;
               estructura.usuari.contrasenya = contrasenya;
-              estructura.usuari.tipus_registracio = ['intern'];
+              estructura.usuari.tipus_registracio = "intern";
               estructura.usuari.data_creacio = new Date();
               estructura.usuari.estat_activacio = "pendent";
               estructura.per_validar.encriptacio = Utilitats.generarStringEncriptat(dadesUsuari.correu);

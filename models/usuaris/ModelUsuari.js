@@ -6,7 +6,6 @@ const document = {
     "correu":"",
     "url_img":"",
     "contrasenya":"",
-    "localitat":"",
     "lloc_web":"",
     "descripcio":"",
     "compte_soccials":[],
@@ -15,16 +14,17 @@ const document = {
     "estat_activacio": false,
     "data_validacio":"",
     "usuari_proveidor_id":"",
-    "primerCop":false
+    "primerCop":false,
+    "rebreNotificacions":false,
+    "pais":"españa",
+    "provincia":"barcelona"
   }
 }
 
-const colleccio = "PerfilUsuari";
-
 class ModelUsuari{
 
-  constructor(){
-    this.setColleccio(colleccio);
+  constructor(colleccioEntrada = "PerfilUsuari"){
+    this.setColleccio(colleccioEntrada);
     this.setModel(document);
   }
 

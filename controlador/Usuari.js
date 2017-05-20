@@ -48,6 +48,38 @@ class Usuari{
     });
 
   }
+
+  actualitzarDades(req , res , next){
+
+    //Si hi ha contrasenya nova  encriptar i guarda la nova,
+    let dades = req.body;
+    let comptes = [];;
+
+    comptes.push(dades.compteGoogle);
+    comptes.push(dades.compteFacebook);
+
+    model.actualitzarPerfil(dades.id , {
+      "usuari.nom" : dades.nom,
+      "usuari.nom_usuari" : dades.nomUsuari,
+      "usuari.correu" : dades.correu,
+      "usuari.pais" : dades.pais,
+      "usuari.provincia" : dades.provincia,
+      "usuari.rebreNotificacions" : dades.rebreNotificacions,
+      "usuari.compte_paypal" : dades.comptePaypal,
+      "usuari.lloc_web" : dades.llocWeb,
+      "usuari.compte_soccials" : comptes
+
+    }).then(resultat => res.send({actualizat : true})).catch(err => {actualizat : false});
+  }
+
+  eliminarDades(req , res , next){
+    let id = req.body.IDUsuari;
+    if(req.user){
+      req.session.destroy(()=>{ res.send({tancatSessio : true}) });
+      if (id) model.borarUsuari(id).then(resultat => res.send({borrat : true})).catch(err => res.send({borrat : false , error : err}));
+    }
+
+  }
 }
 
 module.exports = Usuari;

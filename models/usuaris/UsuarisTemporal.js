@@ -6,7 +6,7 @@ const document = {
     "nom_usuari":"",
     "correu":"",
     "contrasenya":"",
-    "tipus_registracio" : ['intern'],
+    "tipus_registracio" : "intern",
     "data_creacio":"",
     "estat_activacio": false,
   },
