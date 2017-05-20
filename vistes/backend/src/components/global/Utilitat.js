@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueResource from 'vue-resource';
 Vue.use(VueResource);
 
-const temps = 1000;//1s
+const temps = 100;//1s
 class Utilitat {
   constructor() {}
 
@@ -10,6 +10,11 @@ class Utilitat {
   static redirecionar(url){
     window.location.href = url;
   }
+
+  static validarFormulari(){
+
+  }
+
   static esperar(callback){
 
     setTimeout(() => {
@@ -30,8 +35,6 @@ class Utilitat {
       Vue.http.get(url)
         .then((resposta) => {
             if(resposta && resposta.status === 200){
-
-              console.log(resposta);
               resposta.json().then((resultat) => resolve(resultat)).catch((err)=>{
                 reject(err);
                 console.error(err);
@@ -43,6 +46,29 @@ class Utilitat {
         });
     });
 
+  }
+
+  static peticioPost(url , cos){
+    if(!url)
+      new Error("No has definit url");
+
+    return new Promise((resolve , reject) =>{
+
+      Vue.http.post(url , cos)
+        .then((resposta) => {
+
+          if(resposta && resposta.status === 200){
+            resposta.json().then((resultat) => resolve(resultat)).catch((err)=>{
+              reject(err);
+              console.error(err);
+            });
+          }
+
+        }).catch((err)=> {
+          console.error(err);
+          reject(err);
+        });
+    });
   }
 }
 

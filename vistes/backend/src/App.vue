@@ -11,7 +11,6 @@
 import MenuFrontal from  './components/Menu/MenuFrontal/MenuFrontal.vue';
 import MenuLateral from  './components/Menu/MenuLateral/MenuLateral.vue';
 import FluxFooter from './components/Footer/Footer.vue';
-import Utilitat from './components/global/Utilitat.js';
 
 export default {
 
@@ -19,13 +18,7 @@ export default {
     MenuFrontal,
     MenuLateral,
     FluxFooter
-  },
-
-  mounted() {
-    let url = Utilitat.rutaUrl() + "frontend/peticio/dades";
-    Utilitat.peticioGet(url).then(dades => this.$store.dispatch('carregarDades' , dades));
   }
-
 }
 
 </script>
