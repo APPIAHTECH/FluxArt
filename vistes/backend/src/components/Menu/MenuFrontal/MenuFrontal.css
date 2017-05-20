@@ -1,10 +1,10 @@
 div#menuFrontal{
   width: 100%;
-  height: 88px;
+  height: 70px;
   background: #FFFFFF;
   box-sizing: content-box;
-  box-shadow: 0px 5px 0px #E7E7E7;
-  margin-bottom: 1%;
+  box-shadow: 0px 3px 0px #E7E7E7;
+  margin-bottom: .2%;
   display: flex;
   flex-flow: row nowrap;
 }
@@ -12,16 +12,22 @@ div#menuFrontal{
 div.capcelera
 {
   width: 20%;
-  height: auto;
+  height: 78px;
   background: #4FC4D1;
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
-  padding-top: 30px;
+  padding-top: 25px;
   padding-bottom: 30px;
   position: absolute;
+  transition: all ease-in-out .2s;
+  max-height: 70px;
+  box-sizing: border-box;
 }
 
+div.cambiar{
+  box-shadow: 0px 3px 0px #00749A !important;
+}
 
 div.butoMenu{
   width: auto;
@@ -97,8 +103,7 @@ a{
 }
 
 .capcelera{
-  transition: all .2s;
-  box-shadow: 0px 15px 0px #292929;
+  box-shadow: 0px 3px 0px #00749A !important;
 }
 
 
@@ -109,7 +114,7 @@ button.btn{
   border-radius: 10px;
   outline: none;
   position: absolute;
-  left: 0;
+  left: 4%;
   right: 0;
 }
 
@@ -152,6 +157,8 @@ div.img{
   top: 5px;
 }
 .baixar a:hover {background-color: #f1f1f1}
+
+h5 a:hover {color: white;}
 
 .contenidorDeixar:hover .baixar {
     display: block;
@@ -218,3 +225,5 @@ div.perfilUrl{
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+a#tancar:hover{cursor: pointer;}

@@ -1,16 +1,31 @@
 <template>
   <div class="pagina">
-    <router-view></router-view>
+    <MenuFrontal></MenuFrontal>
+    <MenuLateral></MenuLateral>
+      <router-view></router-view>
     <FluxFooter></FluxFooter>
   </div>
 </template>
 
 <script>
+import MenuFrontal from  './components/Menu/MenuFrontal/MenuFrontal.vue';
+import MenuLateral from  './components/Menu/MenuLateral/MenuLateral.vue';
 import FluxFooter from './components/Footer/Footer.vue';
+import Utilitat from './components/global/Utilitat.js';
+
 export default {
+
   components: {
+    MenuFrontal,
+    MenuLateral,
     FluxFooter
+  },
+
+  mounted() {
+    let url = Utilitat.rutaUrl() + "frontend/peticio/dades";
+    Utilitat.peticioGet(url).then(dades => this.$store.dispatch('carregarDades' , dades));
   }
+
 }
 
 </script>
@@ -30,10 +45,7 @@ body , html{
   padding: 0;
   margin: 0;
 }
-body{
-  height: auto;
-  background: #292929;
-}
+
 div.pagina
 {
   width: 100%;

@@ -1,0 +1,124 @@
+div#compte{
+  width: 100%;
+  height: 100%;
+  background: #F6F7FB;
+}
+
+div.contenidorCompte{
+  width: auto;
+  height: auto;
+  display: inline-block;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+div.contenidor{
+  box-shadow: 5px 10px 5px #DEDEDE;
+  width: 80%;
+  height: auto;
+  padding: 20px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  background: #FFFFFF;
+  margin: auto;
+  border-radius: 8px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+}
+
+div.seccio{
+  width: auto;
+  height: 100%;
+  border-right: solid 1px #F0F0F0;
+}
+
+div#noBorder{
+  border: none;
+  width: 30%;
+}
+div#dades{
+  width: 54%;
+}
+
+div.apartats{
+  width: auto;
+  height: auto;
+  padding: 20px;
+  border-bottom: solid 1px #F0F0F0;
+}
+
+h1#titul{
+  color: #B2B9C4;
+  text-align: justify;
+  font-size: 13pt;
+  font-weight: lighter;
+}
+
+label{
+  color: #444446;
+  font-size: 10pt;
+}
+
+input[type="text"], input[type="email"]{
+-webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  width: 100%;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  padding: 10px;
+  box-sizing: border-box;
+  border: solid 1px #EAECEF;
+  outline: none;
+  text-align: justify;
+}
+select {
+  display: block;
+  border-radius: 8px;
+  background-color:#FFFFFF;
+  border: solid 1px #EAECEF;
+  appearance:none;
+  outline:none;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 100%;
+}
+
+
+.row{
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+div.pais{
+  width: 50%;
+  height: auto;
+  margin-right: 20px;
+
+}
+
+button.btn{
+  background: #35BCE6;
+  color:white;
+  text-align: center;
+  margin: auto;
+}
+
+div.row > p{
+  margin-left: 10px;
+  font-size: 8pt;
+  color: #9CA8B4;
+}
+
+div.centrar{
+  margin: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
+
+div#abaix{
+  margin-top: 35px;
+}

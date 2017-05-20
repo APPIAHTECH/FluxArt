@@ -1,17 +1,9 @@
 <template>
-  <div id="Perfil">
-    <h1>Hola ? </h1>
+  <div id="Hey">
+    <h1>Hey</h1>
   </div>
 </template>
-<script>
-export default {
-  name: "Perfil",
-  data: function data() {
-    return {
 
-    }
-  }
-}
-</script>
-<style>
-</style>
+
+<script src="./Perfil.js"></script>
+<style src="./Perfil.css" scoped></style>

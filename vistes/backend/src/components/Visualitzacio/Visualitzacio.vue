@@ -1,5 +1,5 @@
 <template><!--v-infinite-scroll="carregarMes" infinite-scroll-disabled="ocupat" :infinite-scroll-distance="distancia"-->
-  <section class="visualitzar" >
+  <section class="visualitzar" id="visual">
     <nav class="nav">
       <div class="pos">
         <ul>

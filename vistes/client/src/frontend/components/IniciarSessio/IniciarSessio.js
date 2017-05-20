@@ -42,7 +42,8 @@ export default {
         this.$http.post(urlSortida , dades).then((res)=>{
 
           if(res.ok) //Pot login {200 - 299} resposta.status
-              this.login('GET' , this.redirecionar);
+              this.$destroy();
+
 
         }).catch((resposta) => {
 
@@ -61,6 +62,9 @@ export default {
       this.error = true;
       this.missatge = msg;
     },
+  },
 
+  beforeDestroy(){
+    this.login('GET' , this.redirecionar);
   }
 }

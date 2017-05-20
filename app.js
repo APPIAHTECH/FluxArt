@@ -37,6 +37,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', express.static(path.join(__dirname, 'vistes/client')));
+
+
 app.use('/frontend' , peticio);
 app.use('/autenticacio' , autenticacio);
 app.use('/api' ,api);

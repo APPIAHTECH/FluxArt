@@ -8,8 +8,8 @@ import App from './App.vue';
 Vue.use(VueResource); //Peticions ajax
 Vue.use(infiniteScroll);
 
-new Vue({
+let instanciaVue = new Vue({
   el: '#app',
   router:Rutas,
   render: (h) => h(App)
-})
+});

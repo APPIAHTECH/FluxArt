@@ -1,16 +1,17 @@
 .visualitzar
 {
-  width: 80%;
-  height: auto;;/*750px*/
+  width: 100%;
+  height: auto;
+  min-height: 350px;
   background: #F5F5F5;
+  margin-bottom: 250px;
 }
 
 .contenidor_imatges
 {
-  width: 92%;
-  height: 100%;
-  padding: 50px;
-  padding-right: 0px;
+  width: 100%;
+  height: auto;
+  padding-top: 20px;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
@@ -27,7 +28,7 @@
   border-bottom: solid 50px;
   border-bottom-color: #FFFFFF;
   margin: 10px;
-  margin-bottom: 0px;
+  margin-bottom: 20px;
 
 }
 

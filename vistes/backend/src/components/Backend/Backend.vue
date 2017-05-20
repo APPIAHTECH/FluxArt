@@ -1,8 +1,6 @@
 <template>
   <div class="backend">
-    <MenuFrontal :imatgePerfil="getImatgePerfil()"></MenuFrontal>
     <div class="contenidor">
-      <MenuLateral></MenuLateral>
       <FluxVisualitzar :quantitatProjectes="quantitatProjectes" :quantitatPermes="quantitatPermes"></FluxVisualitzar>
     </div>
     </div>

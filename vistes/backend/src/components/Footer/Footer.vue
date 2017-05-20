@@ -3,7 +3,8 @@
     <div class="contenidor">
       <div class="cap">
         <h1 id="titul">En que estas treballta?</h1>
-        <h4 id="expandeix">(Explicar que es dedica el pagina)Soc una petitat , molt petita empresa localitzat a casa Eli 26</h4>
+        <h4 id="expandeix">Mostrar i explicar per als dissenyadors <br>
+          Flux és una comunitat de dissenyadors que comparteixen imatges del seu treball, els processos i projectes.</h4>
       </div>
 
       <div class="cap">

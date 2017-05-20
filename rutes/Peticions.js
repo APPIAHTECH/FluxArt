@@ -17,7 +17,15 @@ router.get('/peticio/buscar', controladorProjecte.buscarPerTitul);
 
 router.get('/peticio/usuari/:id' , controladorUsuari.obtenirUsuariID);
 
-router.get('/peticio/usuari', Autenticacio.esAutentificat , controladorUsuari.recuperarTotDades);
+router.get('/peticio/dades', Autenticacio.esAutentificat , controladorUsuari.recuperarTotDades);
+
+router.get('/peticio/tancarSessio', (req , res)=>{
+
+  if(req.user)
+    req.session.destroy(()=>{ res.send({tancatSessio : true}) });
+  else
+    res.status(202).send({tancatSessio : false});
+});
 
 
 module.exports = router;

@@ -1,8 +1,24 @@
-div#menuLateral{
+div.menuLateral{
   width: 20%;
-  height: auto;
+  height: 90.2%;
   background: #292929;
-  transition: all ease-in-out .5s;
+  transition: all .5s;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 73px;
+}
+
+div.amagar{
+  position: absolute;
+  right: 0;
+  left: -500px;
+  top: 73px;
+  height: 90.2%;
+  width: 20%;
+  overflow: hidden;
+  transition: all .5s;
 }
 
 div.contenidor{
@@ -21,6 +37,7 @@ div.seccions
   border-bottom: solid 1px #424544;
   box-sizing: content-box;
   transition: all ease .4s;
+  overflow: hidden;
 }
 
 div.butoMenu{
@@ -100,17 +117,4 @@ a:hover{
 a{
   color: white;
   opacity: .5;
-}
-
-.activat{
-  transition: all ease-in-out .8s;
-  height: 0% !important;
-}
-.activat > .seccions{
-opacity: 0 !important;
-transition: all ease .4s;
-}
-.activat > .capcelera{
-  transition: all .2s;
-  box-shadow: 0px 5px 0px #007499;
 }
