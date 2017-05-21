@@ -28,21 +28,25 @@ export default {
     actualitzar(event){
 
       event.preventDefault();
-      // Comprovar si vol cambiar de contrasenyaActual
-      Utilitat.peticioPost(this.url , this.$data).then(resultat => {
 
-        if(resultat.actualizat)
-        {
-          let url = Utilitat.rutaUrl() + "frontend/peticio/dades";
-          Utilitat.peticioGet(url).then(dades => {
-            this.$store.dispatch('carregarDades' , dades);
-            alert('Dades actualitzat');
-          });
+      if(this.cambiarContrasenya()){
+        
+        Utilitat.peticioPost(this.url , this.$data).then(resultat => {
 
-        }
-        else
-          alert('dades no actualitzat');
-      });
+          if(resultat.actualizat)
+          {
+            let url = Utilitat.rutaUrl() + "frontend/peticio/dades";
+            Utilitat.peticioGet(url).then(dades => {
+              this.$store.dispatch('carregarDades' , dades);
+              alert('Dades actualitzat');
+            });
+
+          }
+          else
+            alert('dades no actualitzat');
+        });
+      }
+
     },
 
     eliminar(){
@@ -59,6 +63,14 @@ export default {
 
     cambiarContrasenya(){
 
+      if(this.contrasenyaActual != "" && this.contrasenyaNova != ""){
+        if(this.contrasenyaActual === this.contrasenyaNova)
+          return false;
+        else
+          return true;
+      }else {
+        return true;
+      }
     }
 
   },

@@ -1,6 +1,6 @@
 <template>
   <div id="Hey">
-    <h1>Hey</h1>
+    <PerfilLateral></PerfilLateral>
   </div>
 </template>
 

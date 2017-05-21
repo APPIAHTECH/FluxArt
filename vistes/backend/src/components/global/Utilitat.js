@@ -11,8 +11,7 @@ class Utilitat {
     window.location.href = url;
   }
 
-  static validarFormulari(){
-
+  static validarFormulari(dades){
   }
 
   static esperar(callback){
