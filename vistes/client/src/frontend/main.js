@@ -4,7 +4,6 @@ import infiniteScroll from 'vue-infinite-scroll';
 import Rutas from './Rutas.js'
 import App from './App.vue';
 
-
 Vue.use(VueResource); //Peticions ajax
 Vue.use(infiniteScroll);
 

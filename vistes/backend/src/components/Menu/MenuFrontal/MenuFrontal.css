@@ -160,6 +160,14 @@ div.img{
 
 h5 a:hover {color: white;}
 
+#crear{
+  color: white;
+  opacity: 1;
+
+}
+
+a#crear:hover {color: white;}
+
 .contenidorDeixar:hover .baixar {
     display: block;
 }

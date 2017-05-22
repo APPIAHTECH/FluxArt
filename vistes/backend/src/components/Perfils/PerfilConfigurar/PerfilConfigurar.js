@@ -1,7 +1,10 @@
 import Utilitat from './../../global/Utilitat.js';
-
+import PerfilLateral from './../PerfilLateral/PerfilLateral.vue';
 export default {
 
+  components: {
+    PerfilLateral
+  },
   data(){
     return {
       url : Utilitat.rutaUrl() + 'frontend/peticio/actualitzar',
@@ -9,7 +12,7 @@ export default {
       redireccionar : Utilitat.rutaUrl() + '#/iniciarSessio',
       id : "",
       nom:"",
-      nomUsuari:"Stephen safjka",
+      nomUsuari:"",
       correu: "",
       pais:"",
       provincia : "",
@@ -19,7 +22,9 @@ export default {
       comptePaypal : "",
       llocWeb : "",
       compteGoogle : "",
-      compteFacebook: ""
+      compteFacebook: "",
+      imatgePerfilNou : "",
+      descripcio :""
     }
   },
 
@@ -28,9 +33,14 @@ export default {
     actualitzar(event){
 
       event.preventDefault();
+      this.descripcio = this.$store.getters.getDescripcioFlux;
+      Utilitat.esperar(()=> {
+        this.imatgePerfilNou = this.$store.getters.getNouImatge;
+      });
 
+      //Si es cambiarImatge per una nova
       if(this.cambiarContrasenya()){
-        
+
         Utilitat.peticioPost(this.url , this.$data).then(resultat => {
 
           if(resultat.actualizat)
@@ -45,6 +55,7 @@ export default {
           else
             alert('dades no actualitzat');
         });
+
       }
 
     },

@@ -60,7 +60,7 @@ label{
   font-size: 10pt;
 }
 
-input[type="text"], input[type="email"] , input[type="password"]{
+input[type="text"], input[type="password"]{
 -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   border-radius: 8px;
@@ -72,6 +72,20 @@ input[type="text"], input[type="email"] , input[type="password"]{
   border: solid 1px #EAECEF;
   outline: none;
   text-align: justify;
+}
+
+input[type="email"]{
+  -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: solid 1px #EAECEF;
+    outline: none;
+    text-align: justify;
 }
 select {
   display: block;

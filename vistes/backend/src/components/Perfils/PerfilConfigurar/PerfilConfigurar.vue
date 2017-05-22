@@ -3,6 +3,12 @@
     <div class="contenidorCompte">
       <form @submit="actualitzar">
         <div class="contenidor">
+
+          <div class="seccio">
+            <div class="apartats">
+              <PerfilLateral></PerfilLateral>
+            </div>
+          </div>
           <div class="seccio" id="dades">
 
             <div class="apartats">
@@ -15,7 +21,7 @@
               <label>Nom Usuari</label>
               <input type="text" v-model="nomUsuari" required disabled>
               <label>Correu</label>
-              <input type="email" name="" v-model="correu">
+              <input type="email" name="" v-model="correu" class="mail">
             </div>
 
             <div class="apartats row">

@@ -1,13 +1,44 @@
 const Query = require('./../Query');
-const colleccio = "Projecte";
+const document = {
+
+  "projecte":{
+    "usuari_id":"",
+    "titul":"",
+    "descripcio":"",
+    "imatges":[],
+    "categoria":"",
+    "tags":[],
+    "comentaris":[
+      {
+        "usuari_id":"",
+        "missatge":"",
+        "data":""
+      }
+    ],
+    "visitas":0,
+    "like":0,
+    "no_like":0,
+    "data_creacio":"",
+    "te_donacio":false,
+    "confirmat" : false
+  }
+}
 
 class ModelProjecte{
 
-  constructor(){
-    this.setColleccio(colleccio);
+  constructor(colleccioEntrada = "Projecte"){
+    this.setColleccio(colleccioEntrada);
+    this.setModel(document);
   }
+
   setColleccio(colleccio){this.colleccio = colleccio;}
   getColleccio(){return this.colleccio;}
+
+  setModel(model)
+  {this.model = model;}
+
+  getModel()
+  {return this.model}
 
   inserirProjecte(projecte){
 

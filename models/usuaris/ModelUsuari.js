@@ -1,4 +1,5 @@
 const Query = require('./../Query');
+const colleccio = "PerfilUsuari";
 const document = {
   "usuari":{
     "nom":"",
@@ -23,7 +24,7 @@ const document = {
 
 class ModelUsuari{
 
-  constructor(colleccioEntrada = "PerfilUsuari"){
+  constructor(colleccioEntrada = colleccio){
     this.setColleccio(colleccioEntrada);
     this.setModel(document);
   }

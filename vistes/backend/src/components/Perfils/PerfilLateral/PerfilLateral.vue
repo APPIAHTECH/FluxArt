@@ -3,7 +3,12 @@
 
     <div class="contenidor-perfil">
       <div class="contenidor">
-        <div class="imatgePerfil imatge"></div>
+        <div class="imatgePerfil imatge" :style="{ 'background-image': 'url(' + imatgePerfil + ')' }"></div>
+
+        <div  v-if="iniciatSessio && mostrarEditar" style="text-align:center">
+          <label for="inputFixer" id="seleccio" >Editar</label>
+          <input id="inputFixer" type="file" @change="obtenirImatges" hidden accept="image/*">
+        </div>
         <h1>{{nomUsuari}}</h1>
         <h4>{{nom}}</h4>
       </div>
@@ -33,7 +38,7 @@
 
             <div class="descripcio">
               <label> Descripció</label>
-              <input type="text" v-model="descripcio" placeholder="Escriu aquí la teva bio ">
+              <input type="text" v-model="descripcio" placeholder="Escriu aquí la teva bio " @keyup="setejarDescripcio">
             </div>
           </div>
         </div>
@@ -47,13 +52,11 @@
 
         <div class="contenidor" id="noBorder">
           <div v-if="!iniciatSessio && !mostrarEditar">
-            <button type="button" class="btn">Seguir</button>
+            <div class="centrar">
+              <button type="button" class="btn" @click="seguirUsuari">Seguir</button>
+            </div>
           </div>
 
-          <div v-else class="centrar">
-            <button type="button" class="btn">Pujar imatge perfil</button>
-            <button type="button" class="btn" id="eliminar">Eliminar imatge</button>
-          </div>
         </div>
     </div>
   </div>

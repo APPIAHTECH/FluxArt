@@ -1,5 +1,6 @@
 const ModelUsuari = require('./../models/usuaris/ModelUsuari.js');
 const ModelProjecte = require('./../models/projectes/ModelProjecte.js');
+const Utilitat = require('./Utilitats.js')
 
 let model = new ModelUsuari();
 
@@ -17,6 +18,29 @@ class Usuari{
       console.error(err);
       res.status(500).send("Alguna cosa no anat be");
     });
+  }
+
+  obtenirUsuariNomUsuari(req , res)
+  {
+
+    if(req.user)
+      res.send({iniciatSessio : true});
+    else {
+
+      model.obtenirUsuaris({"usuari.nom_usuari" : req.params.nomUsuari})
+      .then((perfil)=> {
+
+        res.send({
+          iniciatSessio : false,
+          perfil : perfil[0].usuari
+        });
+
+      }).catch((err)=> {
+        console.error(err);
+        res.status(500).send("Alguna cosa no anat be");
+      });
+    }
+
   }
 
   recuperarTotDades(req, res , next){
@@ -51,25 +75,86 @@ class Usuari{
 
   actualitzarDades(req , res , next){
 
-    //Si hi ha contrasenya nova  encriptar i guarda la nova,
+    //NOTE: BUSCAR UNA MILLOR MANERA DE FER AIXO!
     let dades = req.body;
     let comptes = [];;
 
     comptes.push(dades.compteGoogle);
     comptes.push(dades.compteFacebook);
 
-    model.actualitzarPerfil(dades.id , {
-      "usuari.nom" : dades.nom,
-      "usuari.nom_usuari" : dades.nomUsuari,
-      "usuari.correu" : dades.correu,
-      "usuari.pais" : dades.pais,
-      "usuari.provincia" : dades.provincia,
-      "usuari.rebreNotificacions" : dades.rebreNotificacions,
-      "usuari.compte_paypal" : dades.comptePaypal,
-      "usuari.lloc_web" : dades.llocWeb,
-      "usuari.compte_soccials" : comptes
+    if(dades.imatgePerfilNou && dades.contrasenyaNova){
+      console.log("cambiar contrasenya i imatgePerfil");
+      Utilitat.encriptarContrasenya(dades.contrasenyaNova).then((contrasenya)=>{
+        model.actualitzarPerfil(dades.id , {
+          "usuari.nom" : dades.nom,
+          "usuari.nom_usuari" : dades.nomUsuari,
+          "usuari.correu" : dades.correu,
+          "usuari.pais" : dades.pais,
+          "usuari.provincia" : dades.provincia,
+          "usuari.rebreNotificacions" : dades.rebreNotificacions,
+          "usuari.compte_paypal" : dades.comptePaypal,
+          "usuari.lloc_web" : dades.llocWeb,
+          "usuari.compte_soccials" : comptes,
+          "usuari.contrasenya": contrasenya,
+          "usuari.url_img": dades.imatgePerfilNou,
+          "usuari.descripcio" : dades.descripcio
 
-    }).then(resultat => res.send({actualizat : true})).catch(err => {actualizat : false});
+        }).then(resultat => res.send({actualizat : true})).catch(err => {actualizat : false});
+      });
+
+    }else if(dades.contrasenyaNova){
+
+      Utilitat.encriptarContrasenya(dades.contrasenyaNova).then((contrasenya)=>{
+        model.actualitzarPerfil(dades.id , {
+          "usuari.nom" : dades.nom,
+          "usuari.nom_usuari" : dades.nomUsuari,
+          "usuari.correu" : dades.correu,
+          "usuari.pais" : dades.pais,
+          "usuari.provincia" : dades.provincia,
+          "usuari.rebreNotificacions" : dades.rebreNotificacions,
+          "usuari.compte_paypal" : dades.comptePaypal,
+          "usuari.lloc_web" : dades.llocWeb,
+          "usuari.compte_soccials" : comptes,
+          "usuari.contrasenya": contrasenya,
+          "usuari.descripcio" : dades.descripcio
+
+        }).then(resultat => res.send({actualizat : true})).catch(err => {actualizat : false});
+      });
+
+    }else if(dades.imatgePerfilNou){
+
+      model.actualitzarPerfil(dades.id , {
+        "usuari.nom" : dades.nom,
+        "usuari.nom_usuari" : dades.nomUsuari,
+        "usuari.correu" : dades.correu,
+        "usuari.pais" : dades.pais,
+        "usuari.provincia" : dades.provincia,
+        "usuari.rebreNotificacions" : dades.rebreNotificacions,
+        "usuari.compte_paypal" : dades.comptePaypal,
+        "usuari.lloc_web" : dades.llocWeb,
+        "usuari.compte_soccials" : comptes,
+        "usuari.url_img": dades.imatgePerfilNou,
+        "usuari.descripcio" : dades.descripcio
+
+      }).then(resultat => res.send({actualizat : true})).catch(err => {actualizat : false});
+
+    }else {
+
+      model.actualitzarPerfil(dades.id , {
+        "usuari.nom" : dades.nom,
+        "usuari.nom_usuari" : dades.nomUsuari,
+        "usuari.correu" : dades.correu,
+        "usuari.pais" : dades.pais,
+        "usuari.provincia" : dades.provincia,
+        "usuari.rebreNotificacions" : dades.rebreNotificacions,
+        "usuari.compte_paypal" : dades.comptePaypal,
+        "usuari.lloc_web" : dades.llocWeb,
+        "usuari.compte_soccials" : comptes,
+        "usuari.descripcio" : dades.descripcio
+
+      }).then(resultat => res.send({actualizat : true})).catch(err => {actualizat : false});
+
+    }
   }
 
   eliminarDades(req , res , next){

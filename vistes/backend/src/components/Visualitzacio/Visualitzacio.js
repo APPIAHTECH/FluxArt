@@ -17,10 +17,9 @@ export default {
   data(){
     return{
       host : Utilitat.rutaUrl(),
-      categories:['illustracio' , 'fan art'],
-      categoria : "illustracio",
-      popular:['Més Vist' , 'Més Comentades'],
-      tags:[],
+      categories:[],
+      popular:[],
+      categoria : "illustració",
       filtrar : "data_creacio", //filtrar per visitas
       ordenacio : -1, //1 DEC -1 ASC
       llistatProjectes : [],
@@ -185,6 +184,8 @@ created(){
     this.url = this.host + "frontend/peticio/projecte/";
     this.urlBusqueda = this.host + "frontend/peticio/buscar";
     this.urlUsuari = this.host + "frontend/peticio/usuari/";
+    this.categories = this.$store.getters.getCategories;
+    this.popular = this.$store.getters.getPopular;
     this.obtenirProjectesLimitat() ; // Carregant els projectes ...
   }
 }

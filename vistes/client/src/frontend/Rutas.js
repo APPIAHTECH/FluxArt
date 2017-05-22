@@ -5,6 +5,7 @@ import IniciarSessio from "./components/iniciarSessio/iniciarSessio.vue";
 import Registrar from "./components/Registrar/Registrar.vue";
 import Confirmar from "./components/Confirmar/Confirmar.vue";
 import Felicitat from "./components/Felicitat/Felicitat.vue";
+import Perfil from './../../../backend/src/components/Perfils/PerfilLateral/PerfilLateral.vue';
 
 Vue.use(VueRouter);
 
@@ -17,6 +18,7 @@ const router = new VueRouter({
     {path:"/registrar" , component : Registrar},
     {path:"/autenticacio/confirmar/:correu" , component : Confirmar},
     {path:"/autenticacio/felicitar" , component : Felicitat},
+    {path:"/perfil/:nomUsuari" , component: Perfil},
     {path:"*" , component: rutaNoDefinit}
   ]
 });

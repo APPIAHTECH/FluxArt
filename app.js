@@ -4,7 +4,6 @@ const favicon          = require('serve-favicon');
 const logger           = require('morgan');
 const cookieParser     = require('cookie-parser');
 const bodyParser       = require('body-parser');
-const multer           = require('multer');
 const helmet           = require('helmet');
 const passport         = require('passport');
 const paypalRestSdk    = require('paypal-rest-sdk');
@@ -15,14 +14,11 @@ let peticio = require(path.resolve('./rutes/Peticions.js'));
 let autenticacio = require(path.resolve('./rutes/Autenticacio.js'));
 let api = require(path.resolve('./rutes/API.js'));
 
-//Ruta de emmagatzematge
-let emmagatzematge = multer({ dest: 'emmagatzematge/' });
-
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({ extended: false  , limit: '50mb'}));
 app.use(cookieParser());
 
 //Sessions

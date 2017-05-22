@@ -6,7 +6,8 @@ export default {
       esActivat : false ,
       imatgePerfil: "",
       url : Utilitat.rutaUrl() + 'frontend/peticio/tancarSessio',
-      redireccionar : Utilitat.rutaUrl() + '#/iniciarSessio'
+      redireccionar : Utilitat.rutaUrl() + '#/iniciarSessio',
+      nomPeril : "#/perfil/"
     }
   },
 
@@ -36,6 +37,9 @@ export default {
   },
 
   created(){
-    Utilitat.esperar(()=> this.imatgePerfil = this.$store.getters.obtenirImatgePerfil);
+    Utilitat.esperar(()=> {
+      this.imatgePerfil = this.$store.getters.obtenirImatgePerfil;
+      this.nomPeril += this.$store.getters.getNomUsuari;
+    });
   }
 }

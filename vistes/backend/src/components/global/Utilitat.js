@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueResource from 'vue-resource';
 Vue.use(VueResource);
 
-const temps = 100;//1s
+const temps = 1000;//1s
 class Utilitat {
   constructor() {}
 
