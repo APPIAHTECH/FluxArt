@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>#{titul}</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+
+    <div class="contenidorDash">
+
+      <div class="menuLateral">
+        <div class="cap">
+          <div class="perfil" style="background-image: url('#{administrador.usuari.url_img}')"></div>
+          <h1 id="admin">#{administrador.usuari.nom_usuari}</h1>
+        </div>
+
+        <div class="llistes">
+          <ul>
+            <div class="perEfecte">
+              <li><i class="fa fa-dashcube" aria-hidden="true" id="creix"></i> <a href="/admin/administracio">Panell</a></li>
+            </div>
+
+            <div class="perEfecte">
+              <li><i class="fa fa-product-hunt" aria-hidden="true" id="creix"></i><a href="/admin/administracio/projectes">Projectes</a></li>
+            </div>
+
+            <div class="perEfecte">
+              <li><i class="fa fa-users" aria-hidden="true" id="creix"></i><a href="/admin/administracio">Usuaris</a></li>
+            </div>
+
+            <div class="perEfecte">
+              <li><i class="fa fa-sign-out" aria-hidden="true" id="creix"></i><a href="/admin/administracio">Tancar Sessió</a></li>
+            </div>
+          </ul>
+        </div>
+      </div>
+
+      <div class="menuFrontal">
+        <div class="frontal">
+          <h1>Panell <i class="fa fa-tachometer" aria-hidden="true"></i></h1>
+        </div>
+      </div>
+
+      <div class="dashboard">
+      </div>
+
+    </div>
+  </body>
+</html>

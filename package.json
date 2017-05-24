@@ -38,6 +38,7 @@
     "passport-google-oauth": "^1.0.0",
     "passport-local": "^1.0.0",
     "paypal-rest-sdk": "^1.7.1",
-    "serve-favicon": "~2.4.2"
+    "serve-favicon": "~2.4.2",
+    "toffee": "^0.1.13"
   }
 }

@@ -19,7 +19,7 @@ export default {
       host : Utilitat.rutaUrl(),
       categories:[],
       popular:[],
-      categoria : "illustració",
+      categoria : "Illustracio",
       filtrar : "data_creacio", //filtrar per visitas
       ordenacio : -1, //1 DEC -1 ASC
       llistatProjectes : [],
@@ -77,8 +77,7 @@ export default {
             let idUsuari = projecte.projecte.usuari_id;
             let peticio = `${this.urlUsuari}${idUsuari}`;
 
-            Utilitat.peticioGet(peticio)
-            .then((usuari) => {
+            Utilitat.peticioGet(peticio).then((usuari) => {
 
               if(usuari.length !== 0){
                 projecte['info'] = usuari[0]; //Afegint les dades del propietari del projecte.
@@ -181,11 +180,13 @@ export default {
   },
 
 created(){
-    this.url = this.host + "frontend/peticio/projecte/";
-    this.urlBusqueda = this.host + "frontend/peticio/buscar";
-    this.urlUsuari = this.host + "frontend/peticio/usuari/";
-    this.categories = this.$store.getters.getCategories;
-    this.popular = this.$store.getters.getPopular;
-    this.obtenirProjectesLimitat() ; // Carregant els projectes ...
+    Utilitat.esperar(()=>{
+      this.url = this.host + "frontend/peticio/projecte/";
+      this.urlBusqueda = this.host + "frontend/peticio/buscar";
+      this.urlUsuari = this.host + "frontend/peticio/usuari/";
+      this.categories = this.$store.getters.getCategories;
+      this.popular = this.$store.getters.getPopular;
+      this.obtenirProjectesLimitat() ; // Carregant els projectes ...
+    })
   }
 }

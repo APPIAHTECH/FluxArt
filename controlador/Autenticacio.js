@@ -262,6 +262,19 @@ class Autenticacio{
       res.status(401).redirect('/#/iniciarSessio'); //401 no autoritzacio
   }
 
+  static esAutentificatAdmin(req , res , next)
+  {
+    if(typeof(req.user) !== 'undefined') //Si te sessio
+        if(req.user[0].usuari.nom_usuari === 'admin')
+            next();
+        else
+          res.status(401).redirect('/admin/administracio/iniciarSessio'); //401 no autoritzacio
+          
+    else //Si no te sessio
+      res.status(401).redirect('/admin/administracio/iniciarSessio'); //401 no autoritzacio
+  }
+
+
   static comprovarCorreu(correu)
   {
     return new Promise((resolve , reject) =>{

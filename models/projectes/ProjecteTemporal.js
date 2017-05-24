@@ -10,6 +10,7 @@ const document = {
       "categoria":"",
       "tags":[],
       "te_donacio":false,
+      "correu" : ""
 
     },
 

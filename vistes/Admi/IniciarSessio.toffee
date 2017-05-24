@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>#{titul}</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+
+    <div class="contenidorIniciSessio">
+      <div class="presentacio">
+        <h1>Hey , benvulgut a Flux administració , controlar el teu progrés :D</h1>
+      </div>
+
+      <div class="iniciSessio">
+
+        <form class="form" action="/admin/administracio/intern" method="post">
+          <label>Nom Usuari</label>
+          <input type="text" name="nomUsuari" placeholder="Escriu aqui el teu nom" required>
+
+          <label>Contrassenya</label>
+          <input type="password" name="contrasenya" placeholder="Escriu aqui la contrassenya" required>
+
+          <input type="submit" name="" value="IniciarSessió">
+        </form>
+
+      </div>
+    </div>
+  </body>
+</html>

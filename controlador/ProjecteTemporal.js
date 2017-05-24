@@ -10,7 +10,7 @@ class ProjecteTemporal{
   afegirProjecteTemporal(req ,res , next){
 
     let estructura = model.getModel();
-
+    
     estructura.projecteTemporal.usuari_id = req.body.dadesUsuari._id;
     estructura.projecteTemporal.titul = req.body.dadesProjecte.nomProjecte
     estructura.projecteTemporal.descripcio = req.body.dadesProjecte.descripcio;
@@ -18,6 +18,7 @@ class ProjecteTemporal{
     estructura.projecteTemporal.tags = req.body.dadesProjecte.tags;
     estructura.projecteTemporal.te_donacio = req.body.dadesProjecte.poderDonar;
     estructura.projecteTemporal.imatges = req.body.llistatImatges;
+    estructura.projecteTemporal.correu = req.body.dadesUsuari.usuari.correu;
     estructura.per_validar.confirmat = false;
     estructura.per_validar.dataCaducitat = Utilitat.generarDataCaducitat();
 
@@ -27,7 +28,7 @@ class ProjecteTemporal{
         res.send({faltaPerConfirmar : true});
       else
         res.send({faltaPerConfirmar : false});
-        
+
     }).catch(err => res.status(501).send('alguna cosa no anat be afegirProjecteTemporal'))
   }
 }

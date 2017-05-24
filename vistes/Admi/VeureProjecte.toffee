@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>#{titul}</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      let dades = #{projecte};
+    </script>
+  </head>
+  <body>
+
+    <div class="contenidorDash">
+
+      <div class="menuLateral">
+        <div class="cap">
+          <div class="perfil" style="background-image: url('#{administrador.usuari.url_img}')"></div>
+          <h1 id="admin">#{administrador.usuari.nom_usuari}</h1>
+        </div>
+
+        <div class="llistes">
+          <ul>
+            <div class="perEfecte">
+              <li><i class="fa fa-dashcube" aria-hidden="true" id="creix"></i> <a href="/admin/administracio">Panell</a></li>
+            </div>
+
+            <div class="perEfecte">
+              <li><i class="fa fa-product-hunt" aria-hidden="true" id="creix"></i><a href="/admin/administracio/projectes">Projectes</a></li>
+            </div>
+
+            <div class="perEfecte">
+              <li><i class="fa fa-users" aria-hidden="true" id="creix"></i><a href="/admin/administracio">Usuaris</a></li>
+            </div>
+
+            <div class="perEfecte">
+              <li><i class="fa fa-sign-out" aria-hidden="true" id="creix"></i><a href="/admin/administracio">Tancar Sessió</a></li>
+            </div>
+          </ul>
+        </div>
+      </div>
+
+      <div class="menuFrontal">
+        <div class="frontal">
+          <h1>Detall <i class="fa fa-tachometer" aria-hidden="true"></i></h1>
+        </div>
+      </div>
+
+      <div class="dashboard">
+
+        <div class="contenidorDetall">
+
+          <div class="contenidorImatge">
+            <div class="imatge" style="background-image: url('#{projecte.projecteTemporal.imatges[0]}')"></div>
+            {# for imatge in projecte.projecteTemporal.imatges
+                {:<div class="imatges" style="background-image: url('#{imatge}')"></div>:}
+            #}
+          </div>
+
+          <div class="informacio">
+            <h1> #{projecte.projecteTemporal.titul}</h1>
+            <hr class="special">
+            <p id="desc">#{projecte.projecteTemporal.descripcio}</p>
+            <div class="mes">
+              <p class="espeficica"><p>Categoría</p><h4 id="pro"> #{projecte.projecteTemporal.categoria}</h4></p>
+              <p class="espeficica"><p>Tags</p> <h4 id="pro">#{projecte.projecteTemporal.tags}</h4></p>
+              <p class="espeficica"><p>Correu</p> <h4 id="pro">#{projecte.projecteTemporal.correu}</h4></p>
+              <p class="espeficica"><p>Donació</p> <h4 id="pro">#{projecte.projecteTemporal.te_donacio}</h4></p>
+            </div>
+
+            <div class="centrarBTN">
+              <button type="button" name="button" class="btn" onclick="confirmar(event)">Confirmar</button>
+              <button type="button" name="button" class="btn" id="denegar" onclick="denegar(event)">Denegar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    <script src="./main.js"></script>
+  </body>
+</html>

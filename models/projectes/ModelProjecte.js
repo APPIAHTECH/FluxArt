@@ -82,6 +82,36 @@ class ModelProjecte{
     });
   }
 
+  obtenirProjecte(id){
+    console.log(id);
+    return new Promise((resolve , reject) =>{
+      Query.querySeleccio(this.getColleccio() , {"_id": Query.convertirAObjecteID(id)})
+      .then((res)=> {
+        resolve(res);
+      })
+      .catch((err)=> {
+        console.log(err);
+        reject(err);
+      });
+
+    });
+  }
+
+  borrarProjecte(id){
+    return new Promise((resolve , reject) =>{
+      Query.queryEliminacio(this.getColleccio() , {"_id": Query.convertirAObjecteID(id)})
+      .then((res)=> {
+        resolve(res);
+      })
+      .catch((err)=> {
+        reject(err);
+        console.log(err);
+      });
+
+    });
+
+  }
+
   obtenirProjectes(condicio){
 
     return new Promise((resolve , reject) =>{
