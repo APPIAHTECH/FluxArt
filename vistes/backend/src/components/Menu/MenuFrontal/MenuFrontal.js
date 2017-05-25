@@ -6,8 +6,13 @@ export default {
       esActivat : false ,
       imatgePerfil: "",
       url : Utilitat.rutaUrl() + 'frontend/peticio/tancarSessio',
+      urlNotificacio : Utilitat.rutaUrl() + 'frontend/peticio/notificacio/llegit',
       redireccionar : Utilitat.rutaUrl() + '#/iniciarSessio',
-      nomPeril : "#/perfil/"
+      nomPeril : "#/perfil/",
+      notificacionNoLegit : 0,
+      notificacions : [],
+      mostrarNotificacio : false
+
     }
   },
 
@@ -33,6 +38,37 @@ export default {
           Utilitat.redirecionar(this.redireccionar);
 
       });
+    },
+
+    mostarNoti(){
+      if(this.mostrarNotificacio)
+        this.mostrarNotificacio = false;
+      else
+        this.mostrarNotificacio = true;
+    },
+
+    llegit(event){
+
+      this.notificacionNoLegit--;
+      if(this.notificacionNoLegit < 0)
+        this.notificacionNoLegit = 0;
+
+      console.log(event.target.dataset.idnorificacio);
+      let idNoti = event.target.dataset.idnorificacio;
+      let index = 0;
+      for (var i = 0; i < this.notificacions.length; i++) {
+        if(this.notificacions[i]._id == idNoti)
+          {
+            index = i;
+            break;
+          }
+      }
+
+      Utilitat.peticioPost(this.urlNotificacio , {idNotificacio : idNoti})
+      .then((resultat) => {
+        if(resultat.llegit) this.notificacions.splice(index, 1);
+      });
+
     }
   },
 
@@ -40,6 +76,8 @@ export default {
     Utilitat.esperar(()=> {
       this.imatgePerfil = this.$store.getters.obtenirImatgePerfil;
       this.nomPeril += this.$store.getters.getNomUsuari;
+      this.notificacions = this.$store.getters.getNotificacionNoLegit;
+      this.notificacionNoLegit = this.notificacions.length;
     });
   }
 }

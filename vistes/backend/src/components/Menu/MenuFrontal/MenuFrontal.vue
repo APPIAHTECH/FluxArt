@@ -18,10 +18,17 @@
         </div>
       </div>
 
-      <div class="notificacio">
+      <div class="notificacio" @click="mostarNoti">
         <i class="fa fa-bell" aria-hidden="true"></i>
-        <div class="circle">
-          <p>2</p>
+        <div class="circle" v-if="notificacions.length > 0">
+          <p>{{notificacionNoLegit}}</p>
+        </div>
+
+        <div class="notifica" v-if="mostrarNotificacio">
+          <div class="msg" v-for="notificacio in notificacions" @click="llegit" :data-idNorificacio="notificacio._id">
+            <i class="fa fa-commenting" aria-hidden="true"></i><p :data-idNorificacio="notificacio._id">{{notificacio.notificacio.nom_usuari}}</p>
+            <p :data-idNorificacio="notificacio._id">{{notificacio.notificacio.missatge}}</p>
+          </div>
         </div>
       </div>
     </div>

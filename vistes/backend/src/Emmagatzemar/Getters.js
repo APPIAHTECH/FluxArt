@@ -40,6 +40,8 @@ export default {
 
   getQuantitatSeguidors(state){return state.dades.quantitatSeguidors} ,
 
-  getQuantitatProjectes(state){return state.dades.quantitatProjectes}
+  getQuantitatProjectes(state){return state.dades.quantitatProjectes} ,
+
+  getNotificacionNoLegit(state){return state.dades.notificacions}
 
 }

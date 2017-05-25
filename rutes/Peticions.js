@@ -7,20 +7,18 @@ const ProjecteTemporal = require('./../controlador/ProjecteTemporal.js');
 const Usuari = require('./../controlador/Usuari.js');
 const Autenticacio = require('./../controlador/Autenticacio.js');
 const Seguir =  require('./../controlador/Seguir.js');
+const Notificacio = require('./../controlador/Notificacio.js');
 
 let controladorProjecte = new Projecte();
 let controladorProjecteTemporal = new ProjecteTemporal()
 let controladorUsuari = new Usuari();
 let controladorSeguir = new Seguir();
+let controladorNotificacio = new Notificacio();
 
 /* peticio dades /peticio . */
 router.get('/peticio/projecte/:categoria/:quantitat/:filtrar/:ordenacio', controladorProjecte.obtenirProjectesSpecifiques);
 
 router.get('/peticio/projecte/:categoria/:quantitat/:filtrar/:ordenacio/:data', controladorProjecte.obtenirMesProjectes);
-
-// router.get('/peticio/projecte/quantitat/:idUsuari', controladorProjecte.quantitatProjectes);
-//
-// router.get('/peticio/seguidors/quantitat/:idUsuari', controladorSeguir.quantitatSeguidors);
 
 router.get('/peticio/buscar', controladorProjecte.buscarPerTitul);
 
@@ -51,6 +49,8 @@ router.get('/peticio/teSessio', (req , res)=>{
 });
 
 router.post('/peticio/seguir', controladorSeguir.seguirDissenyador);
+
+router.post('/peticio/notificacio/llegit', controladorNotificacio.llegit);
 
 router.post('/peticio/actualitzar', Autenticacio.esAutentificat , controladorUsuari.actualitzarDades);
 

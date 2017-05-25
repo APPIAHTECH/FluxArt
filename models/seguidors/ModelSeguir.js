@@ -52,7 +52,7 @@ quantitatSeguidors(idUsuari){
 
   return new Promise((resolve , reject)=>{
 
-    Query.queryContar(this.getColleccio() , {"seguir.usuari_id" : idUsuari})
+    Query.queryContar(this.getColleccio() , {"seguir.dades.id_usuaris_seguint" : idUsuari})
     .then(res => resolve(res))
     .catch(err => reject(err));
 

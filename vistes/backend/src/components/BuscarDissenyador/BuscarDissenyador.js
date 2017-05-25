@@ -20,8 +20,7 @@ export default {
     seguirUsuari(event){
 
       let idUsuariASeguir = event.target.dataset.usuari;
-      let nomUsuari = event.target.dataset.nom;
-
+      let nomUsuari = this.$store.getters.getNomUsuari;
       event.target.disabled = true;
       event.target.className = 'btn jaSeguint';
 
@@ -31,7 +30,8 @@ export default {
 
           let dades = {
             idUsuari : this.IDUsuari,
-            idUsuariASeguir : idUsuariASeguir
+            idUsuariASeguir : idUsuariASeguir,
+            nomUsuari : nomUsuari
           }
 
 

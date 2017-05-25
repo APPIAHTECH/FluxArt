@@ -254,9 +254,13 @@ class Autenticacio{
   {
     if(req.user) //Si te sessio
     {
-      // if(req.user[0].usuari.primerCop)
-      //   res.redirect('/#/configurar/compte/primercop');
-      // else
+      if(req.user[0].usuari.primerCop){
+        model.actualitzarPerfil(req.user[0]._id , {"usuari.primerCop" : false})
+        .then((resultatOperacio)=>{
+          res.redirect('/api/backend/#/compte');
+        });
+
+      }else
         next();
     }else //Si no te sessio
       res.status(401).redirect('/#/iniciarSessio'); //401 no autoritzacio
@@ -269,7 +273,7 @@ class Autenticacio{
             next();
         else
           res.status(401).redirect('/admin/administracio/iniciarSessio'); //401 no autoritzacio
-          
+
     else //Si no te sessio
       res.status(401).redirect('/admin/administracio/iniciarSessio'); //401 no autoritzacio
   }

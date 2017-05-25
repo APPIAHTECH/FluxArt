@@ -1,6 +1,7 @@
 const ModelUsuari = require('./../models/usuaris/ModelUsuari.js');
 const ModelProjecte = require('./../models/projectes/ModelProjecte.js');
 const ModelSeguiment = require('./../models/seguidors/ModelSeguir.js');
+const ModelNotificacio = require('./../models/Notificacions/ModelNotificacio.js');
 
 const Utilitat = require('./Utilitats.js');
 const Query = require('./../models/Query.js');
@@ -69,9 +70,12 @@ class Usuari{
     let IDusuari = req.user[0]._id.toString();
     let modelProject = new ModelProjecte();
     let modelSeguir = new ModelSeguiment();
+    let modelNotificacio = new ModelNotificacio();
+
     let dades = {
       perfil : {},
       treballs : [],
+      notificacions : [],
       quantitatSeguidors : 0,
       quantitatProjectes : 0
     }
@@ -80,14 +84,17 @@ class Usuari{
     let perfil = model.obtenirPerfil(IDusuari , excloureCamps);
     let projectes = modelProject.obtenirProjectesLimit(IDusuari , 50); //50 projectes
     let quantitatProjectes = modelProject.quantitatProjectes(IDusuari);
+    let notificacions = modelNotificacio.obtenirNotificacionsNoLegit(IDusuari);
 
 
-    Promise.all([perfil , projectes , seguint , quantitatProjectes]).then((valors)=>{
+    Promise.all([perfil , projectes , seguint , quantitatProjectes , notificacions]).then((valors)=>{
 
       dades.perfil = valors[0][0];
       dades.treballs = valors[1];
       dades.quantitatSeguidors = valors[2];
       dades.quantitatProjectes = valors[3];
+      dades.notificacions = valors[4];
+
       res.send(dades);
       next();
     });
