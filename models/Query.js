@@ -5,7 +5,7 @@ class Query extends ConnexioDB {
 
   constructor(){}
 
-  static querySeleccio(nom_colleccio , condicio)
+  static querySeleccio(nom_colleccio , condicio , excloureCamps)
   {
     return new Promise((resolve , reject) =>{
 
@@ -13,7 +13,7 @@ class Query extends ConnexioDB {
       .then((db)=> {
 
           let colleccio = db.collection(nom_colleccio);
-          colleccio.find(condicio).toArray((err, docs) => {
+          colleccio.find(condicio , excloureCamps).toArray((err, docs) => {
             Query.resoldrePeticio(db , resolve , reject , err , docs);
           });
           //colleccio.find(condicio) retorna un cursor , guardar els documents en array en memoria i alliberant el recurs BD
@@ -22,7 +22,7 @@ class Query extends ConnexioDB {
     })
   }
 
-  static querySeleccioLimitat(nom_colleccio , condicio , quantitat , filtrar)
+  static querySeleccioLimitat(nom_colleccio , condicio  , quantitat , filtrar , excloureCamps)
   {
     return new Promise((resolve , reject) =>{
 
@@ -30,7 +30,7 @@ class Query extends ConnexioDB {
       .then((db)=> {
 
           let colleccio = db.collection(nom_colleccio);
-          colleccio.find(condicio).sort(filtrar).limit(quantitat).toArray((err, docs) => {
+          colleccio.find(condicio , excloureCamps).sort(filtrar).limit(quantitat).toArray((err, docs) => {
             Query.resoldrePeticio(db , resolve , reject , err , docs);
           });
         })
@@ -38,7 +38,7 @@ class Query extends ConnexioDB {
     })
   }
 
-  static querySeleccioLimit(nom_colleccio , condicio , quantitat)
+  static querySeleccioLimit(nom_colleccio , condicio , quantitat , excloureCamps)
   {
     return new Promise((resolve , reject) =>{
 
@@ -46,8 +46,27 @@ class Query extends ConnexioDB {
       .then((db)=> {
 
           let colleccio = db.collection(nom_colleccio);
-          colleccio.find(condicio).limit(quantitat).toArray((err, docs) => {
+          colleccio.find(condicio , excloureCamps).limit(quantitat).toArray((err, docs) => {
             Query.resoldrePeticio(db , resolve , reject , err , docs);
+          });
+        }).catch((err)=> console.log(err));
+    })
+  }
+
+  static queryContar(nom_colleccio  , condicio)
+  {
+    return new Promise((resolve , reject) =>{
+
+      super.obtenirConnexio()
+      .then((db)=> {
+
+          let colleccio = db.collection(nom_colleccio);
+          colleccio.count(condicio , (err , count)=>{
+
+            if(err)
+              reject(err);
+              
+            resolve(count);
           });
         }).catch((err)=> console.log(err));
     })

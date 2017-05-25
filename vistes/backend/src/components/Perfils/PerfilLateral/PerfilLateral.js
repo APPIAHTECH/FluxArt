@@ -1,6 +1,14 @@
 import Utilitat from "./../../global/Utilitat.js";
 
 export default {
+
+  props: {
+    configurar:{
+      type:Boolean,
+      require : false
+    }
+  },
+
 data(){
   return {
     nomUsuari : "",
@@ -11,12 +19,13 @@ data(){
     fitxersAcceptats : "image/*",
     midaMaxima : 2, //MB
     compteGoogle : "",
-    iniciatSessio : true,
-    mostrarEditar : true,
+    iniciatSessio : false,
+    mostrarEditar : false,
     descripcio : "",
     imatgePerfil :"http://orig01.deviantart.net/d243/f/2013/126/4/0/profile_picture_by_goku_hd-d64dk5d.png",
     url : Utilitat.rutaUrl() + 'frontend/peticio/perfil/',
-    urlSessio : Utilitat.rutaUrl() + 'frontend/peticio/teSessio'
+    urlSessio : Utilitat.rutaUrl() + 'frontend/peticio/teSessio',
+    redirecionar : "#/iniciarSessio"
   }
 },
 
@@ -79,31 +88,42 @@ methods: {
 
   },
 
-  seguirUsuari(){
+  //NOTE desarollar
+  seguirUsuari(event){
 
-    Utilitat.peticioGet(this.urlSessio).then((resultat)=>{
-
-      if(resultat.sessio){
-        //TODO: seguir usuari.,...
-      }else
-        Utilitat.redirecionar();
-
-    });
+    console.log("id usuari -> " , event);
+    // Utilitat.peticioGet(this.urlSessio).then((resultat)=>{
+    //
+    //   if(resultat.sessio){
+    //
+    //     let dades = {
+    //       idUsuari : this.$store.getters.obtenirID,
+    //       idUsuariASeguir : ''
+    //     }
+    //   }else
+    //     Utilitat.redirecionar(this.redirecionar);
+    //
+    // });
   }
 
 },
 
 created(){
 
+  Utilitat.esperar(()=>{
     Utilitat.peticioGet(this.urlSessio).then((resultat)=>{
 
       if(resultat.sessio){//Si te sessio
         this.iniciatSessio = true;
-        this.mostrarEditar = true;
+
+        if(this.configurar)
+          this.mostrarEditar = true;
+        else
+          this.mostrarEditar = false;
 
         this.nomUsuari = this.$store.getters.getNomUsuari;
-        this.seguidors = "Per el moment no esta definit"; //Calcular total seguidors
-        this.projectes = "Per el moment no esta definit"; //Calcular el total de projectes
+        this.seguidors = this.$store.getters.getQuantitatSeguidors;
+        this.projectes = this.$store.getters.getQuantitatProjectes;
         this.descripcio = this.$store.getters.getDescripcio;
         this.nom = this.$store.getters.getNom;
         this.compteFace = this.$store.getters.getEnllasFacebook;
@@ -113,28 +133,37 @@ created(){
       }else{
 
         this.iniciatSessio = false;
-        this.mostrarEditar = false;
+
+        if(this.configurar)
+          this.mostrarEditar = true;
+        else
+          this.mostrarEditar = false;
 
         this.nomUsuari = this.obtenirParams();
         this.url += this.nomUsuari;
 
         if(this.nomUsuari){
 
+
           Utilitat.peticioGet(this.url).then(resultat =>{
 
             let perfil = resultat.perfil;
             this.nomUsuari = perfil.nomUsuari;
-            this.seguidors = "Per el moment no esta definit";
-            this.projectes = "Per el moment no esta definit";
+            this.seguidors = resultat.quantitatSeguidors;
+            this.projectes = resultat.quantitatProjectes;
             this.descripcio = perfil.descripcio;
             this.nom = perfil.nom;
+            this.nomUsuari = perfil.nom_usuari;
+            this.imatgePerfil = perfil.url_img;
             this.compteFace = perfil.compte_soccials[0];
             this.compteGoogle = perfil.compte_soccials[1];
 
+            console.log("resultat -> " , resultat);
           });
         }
       }
 
     });
+  });
   }
 }

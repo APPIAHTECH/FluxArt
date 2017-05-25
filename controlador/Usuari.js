@@ -1,6 +1,11 @@
 const ModelUsuari = require('./../models/usuaris/ModelUsuari.js');
 const ModelProjecte = require('./../models/projectes/ModelProjecte.js');
-const Utilitat = require('./Utilitats.js')
+const ModelSeguiment = require('./../models/seguidors/ModelSeguir.js');
+
+const Utilitat = require('./Utilitats.js');
+const Query = require('./../models/Query.js');
+
+const excloureCamps = {"usuari.contrasenya" : 0 , "usuari.estat_activacio" : 0 , "usuari.data_validacio" : 0 , "usuari.usuari_proveidor_id" : 0 , "usuari.tipus_registracio": 0};
 
 let model = new ModelUsuari();
 
@@ -27,13 +32,29 @@ class Usuari{
       res.send({iniciatSessio : true});
     else {
 
-      model.obtenirUsuaris({"usuari.nom_usuari" : req.params.nomUsuari})
+      let modelProject = new ModelProjecte();
+      let modelSeguir = new ModelSeguiment();
+      let IDusuari = "";
+
+      model.obtenirUsuaris({"usuari.nom_usuari" : req.params.nomUsuari} , excloureCamps)
       .then((perfil)=> {
 
-        res.send({
-          iniciatSessio : false,
-          perfil : perfil[0].usuari
+        IDusuari = perfil[0]._id.toString();
+        let seguint = modelSeguir.quantitatSeguidors(IDusuari);
+        let quantitatProjectes = modelProject.quantitatProjectes(IDusuari);
+
+        Promise.all([seguint , quantitatProjectes]).then((valors)=>{
+
+          res.send({
+            iniciatSessio : false,
+            perfil : perfil[0].usuari,
+            quantitatSeguidors : valors[0],
+            quantitatProjectes : valors[1]
+          });
+
         });
+
+
 
       }).catch((err)=> {
         console.error(err);
@@ -45,30 +66,30 @@ class Usuari{
 
   recuperarTotDades(req, res , next){
 
-    let IDusuari = req.user[0]._id;
+    let IDusuari = req.user[0]._id.toString();
     let modelProject = new ModelProjecte();
+    let modelSeguir = new ModelSeguiment();
     let dades = {
       perfil : {},
-      treballs : []
+      treballs : [],
+      quantitatSeguidors : 0,
+      quantitatProjectes : 0
     }
-    let perfil = model.obtenirPerfil(IDusuari);
+
+    let seguint = modelSeguir.quantitatSeguidors(IDusuari);
+    let perfil = model.obtenirPerfil(IDusuari , excloureCamps);
     let projectes = modelProject.obtenirProjectesLimit(IDusuari , 50); //50 projectes
+    let quantitatProjectes = modelProject.quantitatProjectes(IDusuari);
 
-    //Donacions //https://images5.alphacoders.com/612/thumb-1920-612672.jpg
 
-    //Seguint
+    Promise.all([perfil , projectes , seguint , quantitatProjectes]).then((valors)=>{
 
-    //Sessions
-
-    Promise.all([perfil , projectes]).then((valors)=>{
-
-      model.formattarCamp(valors[0][0] , (perfil)=>{
-        dades.perfil = perfil;
-        dades.treballs = valors[1];
-        res.send(dades);
-        next();
-      });
-
+      dades.perfil = valors[0][0];
+      dades.treballs = valors[1];
+      dades.quantitatSeguidors = valors[2];
+      dades.quantitatProjectes = valors[3];
+      res.send(dades);
+      next();
     });
 
   }
@@ -155,6 +176,19 @@ class Usuari{
       }).then(resultat => res.send({actualizat : true})).catch(err => {actualizat : false});
 
     }
+  }
+
+  obtenirUsuariDissenyadors(req , res , next){
+    let quantitat = parseInt(req.params.quantitat);
+    let filtrar = req.params.filtrar.toString();
+    let ordenacio = parseInt(req.params.ordenacio);
+    let idUsuari = req.params.id.toString();
+
+    console.log("id entrada -> " , idUsuari);
+
+    model.obtenirUsuarisLimitat({$and : [{"usuari.nom_usuari" : {$ne : "admin"}} , {"_id" : {$ne : Query.convertirAObjecteID(idUsuari)}} ] }, quantitat , {filtrar : ordenacio} , {"_id" : 1 , "usuari.nom_usuari" : 1 , "usuari.url_img" : 1})
+    .then((resultat)=> res.send(resultat))
+    .catch(err => res.status(500).send('alguna cosa no anat be'));
   }
 
   eliminarDades(req , res , next){

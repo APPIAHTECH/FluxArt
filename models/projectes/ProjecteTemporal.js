@@ -6,7 +6,7 @@ const document = {
       "usuari_id":"",
       "titul":"",
       "descripcio":"",
-      "imatges":[{ "nom":"", "tipus":"", "mida":"", "url":""}],
+      "imatges":[],
       "categoria":"",
       "tags":[],
       "te_donacio":false,

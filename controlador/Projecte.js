@@ -1,8 +1,8 @@
 const path = require('path');
 const ModelProjecte = require(path.resolve('./models/projectes/ModelProjecte.js'));
-const colleccio = "Projecte";
 
-let model = new ModelProjecte(colleccio);
+let model = new ModelProjecte();
+
 class Projecte{
 
   constructor(){}

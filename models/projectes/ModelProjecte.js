@@ -1,4 +1,7 @@
 const Query = require('./../Query');
+const ModelBase = require('./../ModelBase');
+
+const colleccio = "Projecte";
 const document = {
 
   "projecte":{
@@ -20,25 +23,16 @@ const document = {
     "no_like":0,
     "data_creacio":"",
     "te_donacio":false,
-    "confirmat" : false
+    "confirmat" : false,
+    "comentaris_total" : 0
   }
 }
 
-class ModelProjecte{
+class ModelProjecte extends ModelBase{
 
-  constructor(colleccioEntrada = "Projecte"){
-    this.setColleccio(colleccioEntrada);
-    this.setModel(document);
+  constructor(){
+    super(colleccio , document);
   }
-
-  setColleccio(colleccio){this.colleccio = colleccio;}
-  getColleccio(){return this.colleccio;}
-
-  setModel(model)
-  {this.model = model;}
-
-  getModel()
-  {return this.model}
 
   inserirProjecte(projecte){
 
@@ -125,6 +119,32 @@ class ModelProjecte{
       });
     });
   }
+
+  obtenirQuantitatProjecteUsuari(camps){
+
+    return new Promise((resolve , reject) =>{
+      Query.queryAgrupacio(this.getColleccio(), camps)
+      .then((res)=> {
+        resolve(res);
+      })
+      .catch((err)=> {
+        console.error(err);
+        reject(err);
+      });
+    });
+
+  }
+
+  quantitatProjectes(idUsuari){
+    return new Promise((resolve , reject)=>{
+
+      Query.queryContar(this.getColleccio() , {"projecte.usuari_id" : idUsuari})
+      .then(res => resolve(res))
+      .catch(err => reject(err));
+
+    });
+  }
+
 }
 
 module.exports = ModelProjecte;

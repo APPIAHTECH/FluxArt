@@ -102,7 +102,7 @@ export default {
       this.ocupat = true;
       this.buidarProjectes();
       let valorBusqueda = event.target.value;
-      if(valorBusqueda.length >= 3 || valorBusqueda.length === 0) //NOTE pensar en treura valorBusqueda.length === 0 ja que recupera tots el projectes de db!!
+      if(valorBusqueda.length >= 3)
       {
         let url = `${this.urlBusqueda}?projecte=${valorBusqueda}`;
         this.resoldrePeticio(url);
@@ -128,35 +128,19 @@ export default {
 
     categoriesProjecte(event)
     {
-      //categories:['illustracio' , 'fan art']
-
-      let butto = event.target.innerHTML;
+      //categories : ['Illustracio' , 'Logotips' , "UX Experiencia de usuari" , "UI Interfície d'usuari" , 'Icones' , 'Disseny Web' , 'Aplicacions mobils'],
+      let opcioEscollida = event.target.innerHTML;
       this.buidarProjectes();
-      switch(butto) {
-          case this.categories[0]:
-              this.recuperarProjectes(this.categories[0]);
-              break;
-          case this.categories[1]:
-              this.recuperarProjectes(this.categories[1]);
-              break;
-          default:
-              console.log("Opcio no valida :O");
-      }
+      this.recuperarProjectes(opcioEscollida);
     },
 
     //resoldre(buidar , filtrar , ordenacio)
     //Buidant array de projectes (llistatProjectes) , ja que s'ha pogut filtrar i recoperar els projectes
     mesVist()
-    {
-
-      console.log(this.projecteRecent);
-      this.resoldre("visitas" , -1);
-    },
+    {this.resoldre("visitas" , -1);},
 
     mesComentades()
-    {
-      this.resoldre("comentaris_total" , -1);
-    },
+    {this.resoldre("comentaris_total" , -1);},
 
     recuperarProjectes(categoria)
     {
@@ -166,7 +150,6 @@ export default {
 
     resoldre(filtrar , ordenacio)
     {
-        // this.projecteRecent = new Date(9017, 5, 24);
         this.filtrar = filtrar;
         this.ordenacio = ordenacio;
         this.obtenirProjectesLimitat();

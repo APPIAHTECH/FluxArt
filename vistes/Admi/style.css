@@ -11,6 +11,7 @@ body , html{
   min-height: 100% !important;
   padding: 0;
   margin: 0;
+  background: #F6F6F6;
 }
 
 
@@ -32,12 +33,16 @@ th, td {
     padding: 8px;
     text-align: center;
     border-bottom: 1px solid #ddd;
-    font-size: 11pt;
+    font-size: 10pt;
     font-weight: lighter;
 }
 
+tr:first-child:hover{
+  background: #F6F6F6;
+}
+
 img{
-  width: 40%;
+  width: 100%;
   height: 40%;
 }
 tr:hover{background-color:#DADADA}
@@ -80,8 +85,9 @@ td a{
 td a:hover{
   color: black;
 }
-/*iniciSessio*/
 
+
+/*iniciSessio*/
 div.contenidorIniciSessio{
 
   width: 100%;
@@ -168,6 +174,7 @@ div.menuLateral{
   width: 20%;
   height: 100%;
   background: #313443;
+  position: fixed;
 }
 
 div.menuFrontal{
@@ -181,12 +188,14 @@ div.menuFrontal{
 
 div.dashboard{
   width: 80%;
-  height: 91%;
+  height: auto;
+  padding-bottom: 20px;
   background: #F6F6F6;
   float: right;
   position: absolute;
   top: 55px;
   right: 0;
+
 }
 
 div.cap{
@@ -216,7 +225,7 @@ h1#admin{
 }
 
 div.llistes{
-  width: 80%;
+  width: 100%;
   height: auto;
 }
 
@@ -229,6 +238,7 @@ ul , li ,a{
 div.llistes ul li{
   padding: 5px;
   padding-top: 20px;
+  padding-left: 20px;
 }
 
 div.llistes ul li > a{
@@ -245,14 +255,15 @@ i#creix{
 div.perEfecte{
   width: 100%;
   height: auto;
-  padding: 20px;
-  padding-right: 34px;
+  padding-top: 20;
+  padding-bottom: 20px;
 }
 
 div.perEfecte:hover{
   background: #1E202C;
   transition: all ease-in-out .4s;
   cursor: pointer;
+  width: 100%;
 }
 
 div.frontal{
@@ -300,6 +311,13 @@ div.imatge , div.imatges{
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+div.contenidorImatgesAbaix{
+  display: flex;
+  width: auto;
+  height: auto;
+  flex-flow: row wrap;
 }
 
 div.imatges{

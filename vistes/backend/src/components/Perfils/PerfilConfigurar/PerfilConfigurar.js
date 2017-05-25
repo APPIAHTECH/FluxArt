@@ -10,6 +10,7 @@ export default {
       url : Utilitat.rutaUrl() + 'frontend/peticio/actualitzar',
       utlDel : Utilitat.rutaUrl() + 'frontend/peticio/eliminar',
       redireccionar : Utilitat.rutaUrl() + '#/iniciarSessio',
+      configurar : true,
       id : "",
       nom:"",
       nomUsuari:"",
@@ -33,30 +34,33 @@ export default {
     actualitzar(event){
 
       event.preventDefault();
-      this.descripcio = this.$store.getters.getDescripcioFlux;
+
       Utilitat.esperar(()=> {
+        
+        this.descripcio = this.$store.getters.getDescripcioFlux;
         this.imatgePerfilNou = this.$store.getters.getNouImatge;
+
+        //Si es cambiarImatge per una nova
+        if(this.cambiarContrasenya()){
+
+          Utilitat.peticioPost(this.url , this.$data).then(resultat => {
+
+            if(resultat.actualizat)
+            {
+              let url = Utilitat.rutaUrl() + "frontend/peticio/dades";
+              Utilitat.peticioGet(url).then(dades => {
+                this.$store.dispatch('carregarDades' , dades);
+                alert('Dades actualitzat');
+              });
+
+            }
+            else
+              alert('dades no actualitzat');
+          });
+
+        }
+
       });
-
-      //Si es cambiarImatge per una nova
-      if(this.cambiarContrasenya()){
-
-        Utilitat.peticioPost(this.url , this.$data).then(resultat => {
-
-          if(resultat.actualizat)
-          {
-            let url = Utilitat.rutaUrl() + "frontend/peticio/dades";
-            Utilitat.peticioGet(url).then(dades => {
-              this.$store.dispatch('carregarDades' , dades);
-              alert('Dades actualitzat');
-            });
-
-          }
-          else
-            alert('dades no actualitzat');
-        });
-
-      }
 
     },
 

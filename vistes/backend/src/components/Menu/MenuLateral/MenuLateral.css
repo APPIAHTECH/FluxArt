@@ -118,3 +118,5 @@ a{
   color: white;
   opacity: .5;
 }
+
+a#tancarSessio{cursor: pointer;}

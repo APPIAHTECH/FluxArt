@@ -1,5 +1,6 @@
 const path = require('path');
 const Utilitat = require('./Utilitats.js');
+const Query = require('./../models/Query.js');
 
 const ProjecteTemporal = require(path.resolve('./models/projectes/ProjecteTemporal.js'));
 const Projecte = require(path.resolve('./models/projectes/ModelProjecte.js'));
@@ -47,6 +48,7 @@ class Administracio{
           html: '<b>Hola , el teu projecte a sigut confirmat , per veure el projecte iniciarSessio i busca en el buscador de projectes el teu projecte per el seu nom , Sort! </b>' // html body
       };
 
+      estructura._id = Query.generarID();
       estructura.projecte = nouProjecte.projecteTemporal;
       estructura.projecte.data_creacio = new Date();
       estructura.projecte.confirmat = true;
@@ -55,6 +57,7 @@ class Administracio{
       estructura.projecte.like = 0;
       estructura.projecte.no_like = 0;
       estructura.projecte.comentaris = [];
+      estructura.projecte.comentaris_total = 0;
 
       modelProjecte.inserirProjecte(estructura).then(resultat => {
         if(resultat)

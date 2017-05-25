@@ -1,4 +1,6 @@
 const Query = require('./../Query');
+const ModelBase = require('./../ModelBase');
+
 const colleccio = "PerfilUsuari";
 const document = {
   "usuari":{
@@ -22,30 +24,17 @@ const document = {
   }
 }
 
-class ModelUsuari{
+class ModelUsuari extends ModelBase{
 
-  constructor(colleccioEntrada = colleccio){
-    this.setColleccio(colleccioEntrada);
-    this.setModel(document);
+  constructor(){
+    super(colleccio , document);
   }
 
-  setColleccio(colleccio)
-  {this.colleccio = colleccio;}
-
-  getColleccio()
-  {return this.colleccio;}
-
-  setModel(model)
-  {this.model = model;}
-
-  getModel()
-  {return this.model}
-
   //Obtencio de dades
-  obtenirPerfil(id){
+  obtenirPerfil(id , excloureCamps){
 
     return new Promise((resolve , reject) =>{
-      Query.querySeleccio(this.getColleccio() , {"_id": Query.convertirAObjecteID(id)})
+      Query.querySeleccio(this.getColleccio() , {"_id": Query.convertirAObjecteID(id)} , excloureCamps)
       .then((res)=> {
         resolve(res);
       })
@@ -57,10 +46,25 @@ class ModelUsuari{
     });
   }
 
-  obtenirUsuaris(condicio)
+  obtenirUsuaris(condicio , excloureCamps)
   {
     return new Promise((resolve , reject) =>{
-      Query.querySeleccio(this.getColleccio() , condicio)
+      Query.querySeleccio(this.getColleccio() , condicio , excloureCamps)
+      .then((res)=> {
+        resolve(res);
+      })
+      .catch((err)=> {
+        console.log(err);
+        reject(err);
+      });
+
+    });
+  }
+
+  obtenirUsuarisLimitat(condicio , quantitat , filtrar , excloureCamps)
+  {
+    return new Promise((resolve , reject) =>{
+      Query.querySeleccioLimitat(this.getColleccio() , condicio , quantitat , filtrar , excloureCamps)
       .then((res)=> {
         resolve(res);
       })
@@ -125,18 +129,6 @@ class ModelUsuari{
 
 
   } //Danger! //Eliminara tot les dades
-
-  // deshabilitar
-  donarBaixa(id ){}
-
-  formattarCamp(perfil , callback){
-    delete perfil.usuari['contrasenya'];
-    delete perfil.usuari['estat_activacio'];
-    delete perfil.usuari['data_validacio'];
-    delete perfil.usuari['usuari_proveidor_id'];
-    delete perfil.usuari['tipus_registracio'];
-    callback(perfil);
-  }
 
 }
 

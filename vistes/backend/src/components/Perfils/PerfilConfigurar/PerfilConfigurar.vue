@@ -6,7 +6,7 @@
 
           <div class="seccio">
             <div class="apartats">
-              <PerfilLateral></PerfilLateral>
+              <PerfilLateral :configurar="configurar"></PerfilLateral>
             </div>
           </div>
           <div class="seccio" id="dades">

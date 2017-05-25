@@ -36,6 +36,10 @@ export default {
 
   getDescripcioFlux(state){return state.flux.descripcio},
 
-  getVolsSeguir(state){return state.flux.volSeguir}
+  getVolsSeguir(state){return state.flux.volSeguir},
+
+  getQuantitatSeguidors(state){return state.dades.quantitatSeguidors} ,
+
+  getQuantitatProjectes(state){return state.dades.quantitatProjectes}
 
 }

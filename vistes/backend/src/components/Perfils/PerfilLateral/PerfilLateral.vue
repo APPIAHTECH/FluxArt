@@ -5,7 +5,7 @@
       <div class="contenidor">
         <div class="imatgePerfil imatge" :style="{ 'background-image': 'url(' + imatgePerfil + ')' }"></div>
 
-        <div  v-if="iniciatSessio && mostrarEditar" style="text-align:center">
+        <div  v-if="mostrarEditar" style="text-align:center">
           <label for="inputFixer" id="seleccio" >Editar</label>
           <input id="inputFixer" type="file" @change="obtenirImatges" hidden accept="image/*">
         </div>
@@ -30,7 +30,7 @@
         </div>
 
         <div class="contenidor">
-          <div  v-if="!iniciatSessio && !mostrarEditar">
+          <div  v-if="!mostrarEditar">
             <div class="descripcio">{{descripcio}}</div>
           </div>
 

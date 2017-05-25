@@ -36,6 +36,10 @@ class ConnexioDB{
   static convertirAObjecteID(id) //Converteix un string ID a un ObjectID valid per a mongodb
   {return new mongodb.ObjectID(id);}
 
+  static generarID(){
+    {return new mongodb.ObjectID();}
+  }
+
 }
 
 module.exports = ConnexioDB;

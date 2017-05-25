@@ -18,12 +18,10 @@ function enviarPeticio(url , cos){
      });
 }
 
-
 function confirmar(event) {
 
   let urlConfirmar = url + '/admin/administracio/confirmat';
   let projecte = {projecConfirmat : dades};
-
   enviarPeticio(urlConfirmar , projecte);
 }
 

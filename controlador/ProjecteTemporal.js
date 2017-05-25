@@ -1,4 +1,6 @@
 const path = require('path');
+const Query = require('./../models/Query.js');
+
 const ModelProjecteTemporal = require(path.resolve('./models/projectes/ProjecteTemporal.js'));
 const Utilitat = require(path.resolve('./controlador/Utilitats.js'));
 
@@ -9,8 +11,10 @@ class ProjecteTemporal{
 
   afegirProjecteTemporal(req ,res , next){
 
-    let estructura = model.getModel();
-    
+    let estructura = {};
+    estructura = model.getModel();
+
+    estructura._id = Query.generarID();
     estructura.projecteTemporal.usuari_id = req.body.dadesUsuari._id;
     estructura.projecteTemporal.titul = req.body.dadesProjecte.nomProjecte
     estructura.projecteTemporal.descripcio = req.body.dadesProjecte.descripcio;
@@ -22,14 +26,11 @@ class ProjecteTemporal{
     estructura.per_validar.confirmat = false;
     estructura.per_validar.dataCaducitat = Utilitat.generarDataCaducitat();
 
-    model.inserirProjecte(estructura).then(result => {
-
-      if(result)
-        res.send({faltaPerConfirmar : true});
-      else
-        res.send({faltaPerConfirmar : false});
-
-    }).catch(err => res.status(501).send('alguna cosa no anat be afegirProjecteTemporal'))
+    model.inserirProjecte(estructura).then(result =>  res.send({faltaPerConfirmar : true}) )
+                                      .catch(err => {
+                                        console.log('errror -> ' , err);
+                                        res.status(501).send('alguna cosa no anat be afegirProjecteTemporal');
+                                      });
   }
 }
 

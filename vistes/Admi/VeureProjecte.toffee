@@ -54,10 +54,18 @@
         <div class="contenidorDetall">
 
           <div class="contenidorImatge">
-            <div class="imatge" style="background-image: url('#{projecte.projecteTemporal.imatges[0]}')"></div>
-            {# for imatge in projecte.projecteTemporal.imatges
-                {:<div class="imatges" style="background-image: url('#{imatge}')"></div>:}
-            #}
+
+
+            <div class="imatge">
+                <img src="#{projecte.projecteTemporal.imatges[0]}">
+            </div>
+
+            <div class="contenidorImatgesAbaix">
+              {# for imatge in projecte.projecteTemporal.imatges
+                  {:<div class="imatges"><img src="#{imatge}"></div>:}
+              #}
+            </div>
+
           </div>
 
           <div class="informacio">

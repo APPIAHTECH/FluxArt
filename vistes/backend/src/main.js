@@ -15,7 +15,10 @@ new Vue({
 
   created() {
     let url = Utilitat.rutaUrl() + "frontend/peticio/dades";
-    Utilitat.peticioGet(url).then(dades => this.$store.dispatch('carregarDades' , dades));
+    Utilitat.peticioGet(url).then(dades => {
+      console.log("dades ->" , dades);
+      this.$store.dispatch('carregarDades' , dades);
+    });
   }
 
 });

@@ -1,0 +1,123 @@
+div#BuscarDisenyador{
+  width: 100%;
+  height: auto;
+  background: #F9F9F9;
+}
+
+div.capcelera{
+  width: 100%;
+  height: auto;
+  padding-bottom: 20px;
+  box-shadow: 0px 3px 0px #EEEEEE;
+  display: flex;
+  flex-flow: row nowrap;
+  margin-bottom: 10px;
+}
+
+div.contenidorDissenyadors{
+  width: 100%;
+  height: auto;
+}
+
+h1{
+  opacity: .8;
+  font-size: 15pt;
+  padding: 20px;
+  padding-left: 50px;
+  margin-right: 10px;
+  margin-top: 20px;
+}
+
+
+.contenidor_imatges
+{
+  width: auto;
+  height: auto;
+  padding-top: 20px;
+  display: flex;
+  flex-flow: row wrap;
+  margin: auto;
+  margin-left: 50px;
+  margin-bottom: 50px;
+}
+
+.marc
+{
+  width: 22.33%;
+  height: 300px;
+  padding: 10px;
+  box-sizing: content-box;
+  background: #FFFFFF;
+  border-bottom: solid 90px;
+  border-bottom-color: #FFFFFF;
+  margin: 10px;
+  margin-bottom: 20px;
+  box-shadow: 5px 10px 5px #E7E7E7;
+
+}
+
+.imatge
+{
+  width: 100%;
+  height: 100%;
+  background-image: url('http://i.imgur.com/X8yAgvS.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.capceleraBaix
+{
+  width: 95%;
+  height: auto;
+  padding: 10px;
+  display: flex;
+  flex-flow:column nowrap;
+}
+
+h4{
+  text-align: left;
+  opacity: .9;
+  letter-spacing: 2px;
+  font-size: 10pt;
+  font-weight: 400px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+h4#seguidors{
+  font-size: 7pt;
+  font-weight: bolder;
+}
+
+i{
+  display: inline-block;
+  font-size: 8pt !important;
+  padding-right: 5px;
+  opacity: .5;
+}
+
+button.seguir{
+  background-color: #FF5855;
+}
+
+h4 > p{
+  display: inline-block;
+  opacity: .8;
+}
+
+p#es{
+  color: black;
+  opacity: 1;
+  font-size: 9pt;
+  font-weight: bolder;
+
+}
+button.seguir:hover{
+  background: #00749A;
+}
+
+button.jaSeguint{
+  background: gray;
+  opacity: .5;
+}
