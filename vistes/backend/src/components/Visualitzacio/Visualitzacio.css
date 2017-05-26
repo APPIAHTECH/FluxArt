@@ -41,6 +41,10 @@
   background-repeat: no-repeat;
 }
 
+.imatge:hover{
+  cursor: pointer;
+}
+
 .capcalera
 {
   width: 95%;

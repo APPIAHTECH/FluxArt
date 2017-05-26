@@ -54,8 +54,7 @@ class Administracio{
       estructura.projecte.confirmat = true;
 
       estructura.projecte.visitas = 0;
-      estructura.projecte.like = 0;
-      estructura.projecte.no_like = 0;
+      estructura.projecte.like = [];
       estructura.projecte.comentaris = [];
       estructura.projecte.comentaris_total = 0;
 

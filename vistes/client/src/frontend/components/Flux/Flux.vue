@@ -18,18 +18,18 @@
       <div class="cap">
         <h3 class="capituls"><h3 id="canvi">2</h3>Pujar</h3>
         <div class="text">
-          <p class="explicacio">Puja el teu disseny faavorit</p>
+          <p class="explicacio">Puja el teu disseny favorit</p>
         </div>
       </div>
 
       <div class="cap">
         <h3 class="capituls"><h3 id="canvi">3</h3>Comparteix</h3>
         <div class="text">
-          <p class="explicacio">Comparteix amb la comunitat de <br>dissenyadors els teus treball, els processos i projectes. :D</p>
+          <p class="explicacio">Mostrar i explicar per als dissenyadors</p>
         </div>
       </div>
     </div>
-    <FluxVisualitzar :quantitatProjectes="quantitatProjectes" :quantitatPermes="quantitatPermes"></FluxVisualitzar>
+    <!-- <FluxVisualitzar :quantitatProjectes="quantitatProjectes" :quantitatPermes="quantitatPermes"></FluxVisualitzar> -->
     <FluxFooter></FluxFooter>
   </div>
 </template>

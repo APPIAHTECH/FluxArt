@@ -31,13 +31,13 @@
 
     <div class="contenidor_imatges">
       <div class="marc" v-for="llista in llistatProjectes">
-        <div class="imatge" :style="{ 'background-image': 'url(' + llista.projecte.imatges[0] + ')' }"></div>
+        <div class="imatge" :style="{ 'background-image': 'url(' + llista.projecte.imatges[0] + ')' }" :data-idProjecte="llista._id" @click="detail"></div>
         <div class="capcalera">
           <div class="pefil" :style="{ 'background-image': 'url(' + llista.info.usuari.url_img + ')' }"></div>
           <div class="nom"><h4 class="nomPerfil">{{llista.projecte.titul}}</h4></div>
           <div class="rand">
             <i class="fa fa-eye" aria-hidden="true">{{llista.projecte.visitas}}</i>
-            <i class="fa fa-heart" aria-hidden="true">{{llista.projecte.like}}</i>
+            <i class="fa fa-heart" aria-hidden="true">{{llista.projecte.like.length}}</i>
             <i class="fa fa-comment" aria-hidden="true">{{llista.projecte.comentaris.length}}</i>
           </div>
         </div>

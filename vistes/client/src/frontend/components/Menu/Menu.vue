@@ -3,8 +3,8 @@
     <ul>
       <li><a href="/">FLUX</a></li>
        <ul>
-         <li><a href="/#/empresa">EMPRESA</a></li>
-         <li><a href="/#/contactar">CONTACTAR</a></li>
+         <li><a href="/#/sobre">SOBRE FLUX</a></li>
+         <li><a href="/#/suport">SUPORT</a></li>
          <li><a href="/#/iniciarSessio">INICIAR SESSIÓ</a></li>
        </ul>
     </ul>

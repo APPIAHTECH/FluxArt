@@ -6,7 +6,8 @@ export default{
     popular : ['Més Vist' , 'Més Comentades'],
     nouImatgePerfil : "",
     descripcio : "",
-    volSeguir : ""
+    volSeguir : "",
+    projecteTemporal : {}
   }
 
 }

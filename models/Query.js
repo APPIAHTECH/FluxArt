@@ -65,7 +65,7 @@ class Query extends ConnexioDB {
 
             if(err)
               reject(err);
-              
+
             resolve(count);
           });
         }).catch((err)=> console.log(err));
@@ -113,6 +113,38 @@ class Query extends ConnexioDB {
 
           let colleccio = db.collection(nom_colleccio);
           colleccio.updateOne(condicio , valorNou , (err, resultat) => {
+            Query.resoldrePeticio(db , resolve , reject , err , resultat);
+          });
+        })
+        .catch((err)=> console.log(err));
+    })
+  }
+
+  static queryActualitzacioPush(nom_colleccio , condicio , push)
+  {
+    return new Promise((resolve , reject) =>{
+
+      super.obtenirConnexio()
+      .then((db)=> {
+
+          let colleccio = db.collection(nom_colleccio);
+          colleccio.update(condicio , push , (err, resultat) => {
+            Query.resoldrePeticio(db , resolve , reject , err , resultat);
+          });
+        })
+        .catch((err)=> console.log(err));
+    })
+  }
+
+  static queryActualitzacioLliure(nom_colleccio , condicio , condicioDos)
+  {
+    return new Promise((resolve , reject) =>{
+
+      super.obtenirConnexio()
+      .then((db)=> {
+
+          let colleccio = db.collection(nom_colleccio);
+          colleccio.update({condicio , condicioDos} , (err, resultat) => {
             Query.resoldrePeticio(db , resolve , reject , err , resultat);
           });
         })

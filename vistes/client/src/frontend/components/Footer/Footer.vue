@@ -17,7 +17,7 @@
         <h4 id="copyText"> (C)Compyright Flux.com 2017-2018</h4>
       </div>
       <div class="copy" id="unir">
-        <button type="button" class="btn">UNIRSE!</button>
+        <button type="button" class="btn"><a href="/#/registrar">UNIRSE!</a></button>
       </div>
     </div>
   </footer>

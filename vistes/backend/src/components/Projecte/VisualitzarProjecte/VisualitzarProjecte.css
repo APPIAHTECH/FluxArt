@@ -1,1 +1,303 @@
+div.contenidor{
+  width: 100%;
+  height: 100%;
+  background: #F5F5F5;
+}
+div.visualitzarProjecte {
+  width: 80%;
+  height: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  margin: 20px auto;
+  margin-bottom: 20px;
+  background: #FFFFFF;
+  border-radius: 10px;
+  box-shadow: 5px 10px 5px #E7E7E7;
+}
 
+div.cont{
+  width: 100%;
+  height: auto;
+}
+
+#like:hover{
+cursor: pointer;
+}
+div.contenidorPrimer{
+
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  box-sizing: border-box;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+div.contenidorSegon{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  box-sizing: border-box;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+div.capcelera{
+  width: 97%;
+  padding: 20px;
+  padding-right: 0px;
+  display: flex;
+  flex-flow: row nowrap;
+  margin-bottom: 15px;
+
+}
+
+div.capcelera > p {
+  font-size: 9pt;
+  margin-top: 12px;
+  margin-left: 10px;
+  opacity: .8;
+}
+
+div.donar{
+  width: auto;
+  height: auto;
+  margin-left: 50%;
+  position: relative;
+  top: 10px;
+}
+
+img#pay{
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
+
+
+div.img{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+div.contenidorImatge{
+  width: 100%;
+  height: 300px;
+}
+
+div.contenidorImatge:hover{
+  cursor: pointer;
+  transition: all ease 1s;
+  opacity: .8;
+}
+
+div.llistatImatges{
+  width: 98.6%;
+  height: auto;
+  display: flex;
+  flex-flow: row wrap;
+  padding: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+}
+
+div.imatges{
+  width: 25%;
+  height: 100px;
+  margin: 5px;
+}
+
+div.imatges:hover{
+  cursor: pointer;
+  transition: all ease 1s;
+  opacity: .8;
+}
+div.perfilUrl{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('http://conceptartempire.com/images/wparchive/medieval-concept-art/33-journey-painting-jordan-grimmer-concept-art.jpg');
+}
+
+
+div.info{
+
+  width: 97%;
+  padding: 20px;
+  padding-right: 0px;
+  display: flex;
+  flex-flow: column nowrap;
+  margin-bottom: 3px;
+
+}
+
+div.info > h2{
+  font-weight: bold;
+  font-size: 12pt;
+  opacity: .8;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+}
+
+div.info > p{
+  width: auto;
+  font-size: 12pt;
+  opacity: .8;
+  text-align: justify;
+  text-transform: capitalize;
+}
+
+div.tipusCat{
+  padding: 20px;
+  padding-right: 0px;
+  display: flex;
+  flex-flow: row nowrap;
+}
+div.cate{
+  display: flex;
+  flex-flow: column nowrap;
+  width: auto;
+  height: auto;
+  margin-right: 50%;
+}
+
+div.cate > p {
+  font-size: 8pt;
+  opacity: .8;
+  font-weight: lighter;
+
+}
+
+div.cate > h4{
+  font-weight: bold;
+  padding: 10px;
+  margin: 5px;
+  padding-left: 0px;
+}
+
+div.puntuacio{
+  width: 97%;
+  padding: 20px;
+  padding-right: 0px;
+  display: flex;
+  flex-flow: column nowrap;
+  margin-bottom: 3px;
+}
+
+div.tags{
+  padding: 10px;
+  padding-left: 0;
+  padding-right: 0px;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.rand > i
+{
+  color: black;
+  font-size: 12pt;
+  margin: 20px;
+  margin-right: 0;
+  opacity: .5;
+}
+
+i  + p{
+  display: inline-block;
+  font-size: 10pt;
+  margin-left: 50%;
+  text-align: justify;
+  padding: 0;
+}
+p#pos{
+  margin-left: 51%;
+}
+p#poss{margin-left: 43.5%;}
+hr{
+  border: 0;
+  height: 1px;
+  background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+}
+
+div.comentaris{
+  width: 97%;
+  padding: 20px;
+  padding-right: 0px;
+  display: flex;
+  flex-flow: column nowrap;
+  margin-bottom: 3px;
+  overflow: auto;
+}
+
+div.coments{
+  width: 100%;
+  height: auto;
+  padding-bottom: 10px;
+}
+h2#nom{
+  display: inline-block;
+  margin-left: 10px;
+  margin-right: 20px;
+  margin-top: 12px;
+  font-size: 12pt;
+}
+
+div#in{
+  display: flex;
+  flex-flow: row wrap;
+}
+h6{
+  margin: 10px;
+  margin-top: 15px;
+  margin-left: 0px;
+  opacity: .7;
+}
+
+#com{
+  padding: 20px;
+  font-weight: lighter;
+  font-size: 10pt;
+  text-align: justify;
+}
+
+div.ferComentari{
+  width: 100%;
+  height: auto;
+}
+
+input[type="text"]
+{
+  width: 80%;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 5px solid #FF5855;
+  padding: 20px 20px 12px 10px;
+  background: #FFFF;
+  opacity: .8;
+  font-size: 12pt;
+  outline: none;
+}
+
+button.perso{
+  width: 20%;
+  box-sizing: border-box;
+  border: 1px solid #C4C4C4;
+  font-size: 12pt;
+  text-align: center;
+  position: relative;
+  background: #4AC9EC;
+}
+
+hr#special{
+  border: 0;
+  height: 1px;
+  background: #333;
+  background-image: linear-gradient(to right, #ccc, #333, #ccc);
+  width: 40%;
+  margin-left: 20px;
+}

@@ -70,3 +70,9 @@
 {
   padding-top: 30px;
 }
+
+a{
+  background: transparent;
+  text-decoration: none;
+  color: white;
+}

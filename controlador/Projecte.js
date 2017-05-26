@@ -22,6 +22,20 @@ class Projecte{
 
   }
 
+  obtenidrProjecteID(req , res){
+    let IDProjecte = req.params.id;
+
+    if(IDProjecte){
+      model.obtenirProjecte(IDProjecte)
+      .then((resultat) =>  {
+        res.send({ projecte : resultat[0] , exsisteix : true});
+      } ).catch(err => console.error(err));
+
+      }else{
+        res.send({exsisteix : false});
+      }
+  }
+
   static dadesEntrada(req , res , callback){
 
     let peticio = {
@@ -71,6 +85,60 @@ class Projecte{
       console.error(err);
       res.status(500).send("Alguna cosa no anat be");
     });
+
+  }
+
+  actualitzarVisitas(req , res , nex){
+    let idProjecte = req.body.idProjecte;
+    model.actualitzacioIncremental(idProjecte , {"projecte.visitas" : 1})
+    .then(resultat => {
+      res.send({visitat : true});
+    }).catch((err)=> console.error(err));
+  }
+
+  inserirComentari(req , res , nex){
+
+    let idProjecte = req.body.idProjecte;
+    let comentar = {
+      idProjecte : req.body.idProjecte,
+      url_img : req.body.url_img,
+      IDUsuari : req.body.IDUsuari,
+      missatge: req.body.missatge,
+      nomUsuari : req.body.nomUsuari,
+      data : req.body.data,
+      comentari : req.body.comentari
+    }
+
+    model.actualitzarProjectPushArray(idProjecte , { $push: { "projecte.comentaris": comentar } })
+    .then((resultat) => {
+
+      model.actualitzarProjecte(idProjecte , {"projecte.comentaris_total" : comentar.comentari + 1})
+      .then(resultat => {
+        res.send({inserit : true});
+      }).catch((err)=> console.error(err));
+
+    })
+    .catch((err) => {
+      console.error(err);
+      res.send({inserit : false});
+    });
+
+  }
+
+  actualitzarLikes(req , res , next){
+
+    let likes = {
+      idProjecte : req.body.idProjecte,
+      IDUsuari : req.body.IDUsuari
+    }
+
+    model.actualitzarProjectPushArray(likes.idProjecte , { $push: { "projecte.like": likes } })
+    .then((resultat) => res.send({inserit : true}))
+    .catch((err) => {
+      console.error(err);
+      res.send({inserit : false});
+    });
+
 
   }
 

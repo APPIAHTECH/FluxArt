@@ -7,5 +7,10 @@ export default{
 
   setImatgePerfil(context , imatge){
       context.commit('setImatgePerfil' , imatge);
+  },
+
+  setProjecteTemporal(context , dades){
+      context.commit('setProjecteTemporal' , dades);
   }
+
 }

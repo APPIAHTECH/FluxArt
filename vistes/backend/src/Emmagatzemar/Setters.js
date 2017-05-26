@@ -14,5 +14,9 @@ export default {
 
   setVolseguir(state , url){
     state.flux.volSeguir = url;
+  },
+
+  setProjecteTemporal(state , dades){
+    state.flux.projecteTemporal = dades;
   }
 }

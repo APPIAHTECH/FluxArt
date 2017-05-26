@@ -42,6 +42,8 @@ export default {
 
   getQuantitatProjectes(state){return state.dades.quantitatProjectes} ,
 
-  getNotificacionNoLegit(state){return state.dades.notificacions}
+  getNotificacionNoLegit(state){return state.dades.notificacions} ,
+
+  getProjecteTemporal(state){return state.flux.projecteTemporal}
 
 }

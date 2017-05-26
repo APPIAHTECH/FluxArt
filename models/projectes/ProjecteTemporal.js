@@ -23,8 +23,7 @@ const document = {
 class ProjecteTemporal extends ModelProjecte{
 
   constructor(colleccioEntrada = colleccio){
-    super(colleccioEntrada);
-    this.setModel(document);
+    super(colleccioEntrada , document);
   }
 
 

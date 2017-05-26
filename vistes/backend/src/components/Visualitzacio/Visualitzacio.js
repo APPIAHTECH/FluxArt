@@ -26,6 +26,7 @@ export default {
       ocupat: false,
       distancia : 20,
       projecteRecent : "",
+      urlVisitas : Utilitat.rutaUrl() + 'frontend/peticio/projecte/actualitzar/visitas',
       url : "",
       urlUsuari: "",
       urlBusqueda:"",
@@ -159,7 +160,13 @@ export default {
     {
       //TODO CAMBIAR PER UNA NOTIFICAIO MILLOR :D
       alert("No hi ha resultat de busqueda ...");
-    }
+    },
+
+    detail(event){
+      let id = event.target.dataset.idprojecte;
+      Utilitat.peticioPost(this.urlVisitas , {idProjecte : id, visitas : 1});
+      Utilitat.redirecionar(Utilitat.rutaUrl() + 'api/backend/#/visualitzar/projecte/'+id);
+    },
   },
 
 created(){

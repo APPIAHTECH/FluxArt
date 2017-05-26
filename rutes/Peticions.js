@@ -20,6 +20,8 @@ router.get('/peticio/projecte/:categoria/:quantitat/:filtrar/:ordenacio', contro
 
 router.get('/peticio/projecte/:categoria/:quantitat/:filtrar/:ordenacio/:data', controladorProjecte.obtenirMesProjectes);
 
+router.get('/peticio/projecte/amb/:id', controladorProjecte.obtenidrProjecteID);
+
 router.get('/peticio/buscar', controladorProjecte.buscarPerTitul);
 
 router.get('/peticio/usuari/:id' , controladorUsuari.obtenirUsuariID);
@@ -53,6 +55,12 @@ router.post('/peticio/seguir', controladorSeguir.seguirDissenyador);
 router.post('/peticio/notificacio/llegit', controladorNotificacio.llegit);
 
 router.post('/peticio/actualitzar', Autenticacio.esAutentificat , controladorUsuari.actualitzarDades);
+
+router.post('/peticio/projecte/actualitzar/visitas', Autenticacio.esAutentificat , controladorProjecte.actualitzarVisitas);
+
+router.post('/peticio/projecte/inserir/comentaris', Autenticacio.esAutentificat , controladorProjecte.inserirComentari);
+
+router.post('/peticio/projecte/actualitzar/likes', Autenticacio.esAutentificat , controladorProjecte.actualitzarLikes);
 
 router.post('/peticio/eliminar', Autenticacio.esAutentificat , controladorUsuari.eliminarDades);
 

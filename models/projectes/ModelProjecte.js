@@ -13,14 +13,17 @@ const document = {
     "tags":[],
     "comentaris":[
       {
-        "usuari_id":"",
-        "missatge":"",
-        "data":""
+        "idProjecte" : "",
+        "url_img" : "",
+        "IDUsuari" : "",
+        "missatge"  : "",
+        "nomUsuari" : "",
+        "data" : new Date(),
+        "comentari" : 0
       }
     ],
     "visitas":0,
-    "like":0,
-    "no_like":0,
+    "like":[],
     "data_creacio":"",
     "te_donacio":false,
     "confirmat" : false,
@@ -30,8 +33,13 @@ const document = {
 
 class ModelProjecte extends ModelBase{
 
-  constructor(){
-    super(colleccio , document);
+  constructor(colleccioEntrada , documentEntrada){
+
+    if(colleccioEntrada && documentEntrada)
+      super(colleccioEntrada , documentEntrada);
+    else
+      super(colleccio , document);
+
   }
 
   inserirProjecte(projecte){
@@ -77,7 +85,6 @@ class ModelProjecte extends ModelBase{
   }
 
   obtenirProjecte(id){
-    console.log(id);
     return new Promise((resolve , reject) =>{
       Query.querySeleccio(this.getColleccio() , {"_id": Query.convertirAObjecteID(id)})
       .then((res)=> {
@@ -143,6 +150,47 @@ class ModelProjecte extends ModelBase{
       .catch(err => reject(err));
 
     });
+  }
+
+  actualitzarProjecte(id , cambis){
+
+    return new Promise((resolve , reject) =>{
+      Query.queryActualitzacio(this.getColleccio() , {"_id": Query.convertirAObjecteID(id)} , {
+        $set:cambis
+      }).then((res)=> {
+        resolve(res);
+      })
+      .catch((err)=> {
+        console.log(err);
+        reject(err);
+      });
+    });
+
+  }
+
+  actualitzarProjectPushArray(id , push){
+
+    return new Promise((resolve , reject) =>{
+      Query.queryActualitzacioPush(this.getColleccio() ,{"_id": Query.convertirAObjecteID(id)} , push)
+      .then((res)=> resolve(res))
+      .catch((err)=> {
+        console.log(err);
+        reject(err);
+      });
+    });
+  }
+
+  actualitzacioIncremental(id , camp){
+
+    return new Promise((resolve , reject) =>{
+      Query.queryActualitzacioPush(this.getColleccio() , {"_id": Query.convertirAObjecteID(id)} , {$inc : camp} )
+      .then((res)=> resolve(res))
+      .catch((err)=> {
+        console.log(err);
+        reject(err);
+      });
+    });
+
   }
 
 }

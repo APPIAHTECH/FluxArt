@@ -17,7 +17,7 @@ const rutas = new VueRouter({
     {path:"/compte", component: FluxCompte},
     {path:"/crear/projecte", component: CrearProjecte},
     {path:"/perfil/:nomUsuari", component: PerfilComplet},
-    {path:"/visualitzar/projecte", component: VisualitzarProjecte},
+    {path:"/visualitzar/projecte/:IDProjecte", component: VisualitzarProjecte},
     {path:"/buscar/artistes", component: BuscarDissenyador},
     {path:"*" , component: rutaNoDefinit}
   ]

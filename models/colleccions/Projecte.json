@@ -1,23 +1,28 @@
 {
+
   "projecte":{
     "usuari_id":"",
     "titul":"",
     "descripcio":"",
-    "imatges":[{ "nom":"", "tipus":"", "mida":"", "url":""}],
+    "imatges":[],
     "categoria":"",
     "tags":[],
     "comentaris":[
       {
-        "usuari_id":"",
-        "missatge":"",
-        "data":""
+        "idProjecte" : "",
+        "url_img" : "",
+        "IDUsuari" : "",
+        "missatge"  : "",
+        "nomUsuari" : "",
+        "data" : "",
+        "comentari" : 0
       }
     ],
     "visitas":0,
-    "like":0,
-    "no_like":0,
+    "like":[],
     "data_creacio":"",
     "te_donacio":false,
-    "confirmat" : false
+    "confirmat" : false,
+    "comentaris_total" : 0
   }
 }
