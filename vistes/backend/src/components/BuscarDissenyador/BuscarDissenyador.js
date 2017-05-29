@@ -38,9 +38,9 @@ export default {
           Utilitat.peticioPost(this.urlSeguir , dades).then((resultat)=>{
 
             if(resultat.seguint)
-              alert('Ehnorabona estas seguin al usuari ');
+              Utilitat.notificar('Seguint' , "Ehnorabona estas seguin al usuari");
             else if(resultat.jaEstaSeguint){
-              alert("ja l'estats segunt");
+              Utilitat.notificar('Estas Seguint' , "Ja estas seguint el usuari");
             }
 
 
@@ -57,7 +57,6 @@ export default {
     Utilitat.esperar(()=>{
       this.IDUsuari = this.$store.getters.obtenirID;
       this.urlPeticio = Utilitat.rutaUrl() + `frontend/peticio/dissenyadors/${this.quantitat}/${this.filtrar}/${this.ordenat}/${this.IDUsuari}`;
-      console.log(this.urlPeticio);
       Utilitat.peticioGet(this.urlPeticio)
       .then(usuaris => this.llistatUsuaris = usuaris)
       .catch(err => console.log(err));

@@ -63,6 +63,15 @@ class Seguir{
     });
   }
 
+  recuperarSeguidors(req , res , nex){
+    let idUsuari = req.params.id;
+
+    console.log("id entrada askfm-> ", idUsuari);
+    model.obtenirSeguidors(idUsuari)
+    .then(resultat => res.send(resultat))
+    .catch(err => console.error(err))
+  }
+
 }
 
 module.exports = Seguir;

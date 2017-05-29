@@ -1,8 +1,10 @@
 export default {
 
-  getCategories(state){return  state.flux.categories;},
+  getCategories(state){return  state.flux.categories},
 
-  getPopular(state){return  state.flux.popular;},
+  getPopular(state){return  state.flux.popular},
+
+  getTreballs(state){return  state.dades.treballs},
 
   obtenirImatgePerfil(state){return state.dades.perfil.usuari.url_img},
 
@@ -44,6 +46,8 @@ export default {
 
   getNotificacionNoLegit(state){return state.dades.notificacions} ,
 
-  getProjecteTemporal(state){return state.flux.projecteTemporal}
+  getProjecteTemporal(state){return state.flux.projecteTemporal},
+
+  getImatgeTemporal(state){return state.flux.imatgeTemporal}
 
 }

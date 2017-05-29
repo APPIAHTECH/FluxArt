@@ -56,13 +56,13 @@
           <div class="contenidorImatge">
 
 
-            <div class="imatge">
-                <img src="#{projecte.projecteTemporal.imatges[0]}">
+            <div class="imatge" >
+                <img src="#{projecte.projecteTemporal.imatges[0]}" id="imatgeGran" onclick="mesGran(event)">
             </div>
 
             <div class="contenidorImatgesAbaix">
               {# for imatge in projecte.projecteTemporal.imatges
-                  {:<div class="imatges"><img src="#{imatge}"></div>:}
+                  {:<div class="imatges"><img src="#{imatge}"  onclick="cambiar(event)"></div>:}
               #}
             </div>
 

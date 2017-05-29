@@ -53,7 +53,6 @@ export default {
       if(this.notificacionNoLegit < 0)
         this.notificacionNoLegit = 0;
 
-      console.log(event.target.dataset.idnorificacio);
       let idNoti = event.target.dataset.idnorificacio;
       let index = 0;
       for (var i = 0; i < this.notificacions.length; i++) {
@@ -69,6 +68,10 @@ export default {
         if(resultat.llegit) this.notificacions.splice(index, 1);
       });
 
+    },
+
+    crearProjecte(){
+      Utilitat.redirecionar('/api/backend/#/crear/projecte');
     }
   },
 

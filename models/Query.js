@@ -38,7 +38,7 @@ class Query extends ConnexioDB {
     })
   }
 
-  static querySeleccioLimit(nom_colleccio , condicio , quantitat , excloureCamps)
+  static querySeleccioLimit(nom_colleccio , condicio , quantitat , filtrar , excloureCamps)
   {
     return new Promise((resolve , reject) =>{
 
@@ -46,7 +46,7 @@ class Query extends ConnexioDB {
       .then((db)=> {
 
           let colleccio = db.collection(nom_colleccio);
-          colleccio.find(condicio , excloureCamps).limit(quantitat).toArray((err, docs) => {
+          colleccio.find(condicio , excloureCamps).sort(filtrar).limit(quantitat).toArray((err, docs) => {
             Query.resoldrePeticio(db , resolve , reject , err , docs);
           });
         }).catch((err)=> console.log(err));
@@ -120,15 +120,14 @@ class Query extends ConnexioDB {
     })
   }
 
-  static queryActualitzacioPush(nom_colleccio , condicio , push)
+  static queryActualitzacioArray(nom_colleccio , condicio , operacioArray)
   {
     return new Promise((resolve , reject) =>{
 
       super.obtenirConnexio()
       .then((db)=> {
-
           let colleccio = db.collection(nom_colleccio);
-          colleccio.update(condicio , push , (err, resultat) => {
+          colleccio.update(condicio , operacioArray , (err, resultat) => {
             Query.resoldrePeticio(db , resolve , reject , err , resultat);
           });
         })

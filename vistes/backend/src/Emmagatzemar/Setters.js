@@ -18,5 +18,9 @@ export default {
 
   setProjecteTemporal(state , dades){
     state.flux.projecteTemporal = dades;
+  },
+
+  setImatgeTemporal(state , imatge){
+    state.flux.imatgeTemporal = imatge;
   }
 }

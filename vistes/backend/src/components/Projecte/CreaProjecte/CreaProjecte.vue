@@ -3,7 +3,7 @@
 
   <div class="contenidor">
     <div class="capcelera">
-      <h1 id="titul">Pujar Projecte</h1>
+      <h1 id="titul">PROJECTE</h1>
     </div>
 
 
@@ -21,7 +21,7 @@
           <textarea name="desc" rows="8" cols="80" placeholder="Descripció" v-model="descripcio" required></textarea>
 
           <p>Categoría</p>
-          <select v-model="categoria">
+          <select  v-model="categoria">
             <option :value="categoria" v-for="categoria in categories">{{categoria}}</option>
           </select>
           <input type="text" placeholder="tags separats per comes" v-model="tags" id="tags">
@@ -36,14 +36,22 @@
     <h1 id="titulR">Requisits Projecte</h1>
     <p>Sabem que és molt llarg, però amb tot això estara mes segur!</p>
 
-    <ol>
-      <ul>
-        <li>Imatges</li>
-        <li>Imatges</li>
-        <li>Imatges</li>
-        <li>Imatges</li>
-      </ul>
-    </ol>
+    <ul>
+      <li>Format <p>Tipus de format acceptat per Flux</p></li>
+      <ol>
+        <ul>
+          <li>.jpg</li>
+          <li>.png</li>
+          <li>.gif</li>
+        </ul>
+      </ol>
+      <li>Mides <p>la mida de cada imatge no ha de superar els 2MB</p></li>
+      <ol>
+        <ul>
+          <li>2MB per imatge</li>
+        </ul>
+      </ol>
+    </ul>
 
     <p id="msg">Tots els projectes que comparteixis en Flux es de caracter Creative Commons més informació <a href="http://es.creativecommons.org/blog/licencias/"><i class="fa fa-cc" aria-hidden="true"></i></a></p>
   </div>

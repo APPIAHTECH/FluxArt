@@ -5,19 +5,22 @@ import FluxCompte from './components/Perfils/PerfilConfigurar/PerfilConfigurar.v
 import CrearProjecte from './components/Projecte/CreaProjecte/CreaProjecte.vue';
 import PerfilComplet from './components/Perfils/PerfilComplet/Perfil.vue';
 import VisualitzarProjecte from './components/Projecte/VisualitzarProjecte/VisualitzarProjecte.vue';
+import ElsMenusProjectes from './components/Projecte/ElsMenusProjectes/ElsMenusProjectes.vue';
+import MesGran from './components/Projecte/MesGran/MesGran.vue';
 import BuscarDissenyador from './components/BuscarDissenyador/BuscarDissenyador.vue';
 
 Vue.use(VueRouter);
 
 const rutaNoDefinit = { template: '<div>Soc backend i No he trobat la ruta ...</div>' };
-
 const rutas = new VueRouter({
   routes:[
     {path:"/", component: FluxBackend},
     {path:"/compte", component: FluxCompte},
     {path:"/crear/projecte", component: CrearProjecte},
     {path:"/perfil/:nomUsuari", component: PerfilComplet},
+    {path:"/visualitzar/projecte", component: ElsMenusProjectes},
     {path:"/visualitzar/projecte/:IDProjecte", component: VisualitzarProjecte},
+    {path:"/visualitzar/mesgran", component: MesGran},
     {path:"/buscar/artistes", component: BuscarDissenyador},
     {path:"*" , component: rutaNoDefinit}
   ]

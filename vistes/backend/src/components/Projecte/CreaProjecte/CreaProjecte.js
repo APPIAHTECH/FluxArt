@@ -1,4 +1,5 @@
 import FluxPujar from "./../Pujar/Pujar.vue";
+import Utilitat from "./../../global/Utilitat.js";
 
 export default {
 
@@ -12,7 +13,7 @@ export default {
       nomProjecte : "",
       descripcio :"",
       tags : "",
-      categoria:"Illustració",
+      categoria:"Illustracio",
       poderDonar : false,
       mostrarPujar : false
     }
@@ -24,14 +25,13 @@ export default {
     validar(){
     if(this.nomProjecte === "")
       {
-        alert("Defineix un nom per el teu projecte :D");
+        Utilitat.notificar("Camp nom projecte" , "Definexi un nom per el teu projecte");
         this.mostrarPujar = false;
-      }else if(this.descripcio === "")
-      {
-        alert("Defineix una descripcio per el teu projecte :D");
+      }else if(this.descripcio === ""){
+        Utilitat.notificar("Camp descripció" , "Definexi una descripció per el teu projecte");
         this.mostrarPujar = false;
       }else {
-          this.mostrarPujar = true;
+        this.mostrarPujar = true;
       }
     }
   },

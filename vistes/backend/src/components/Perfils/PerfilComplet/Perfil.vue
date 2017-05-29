@@ -1,6 +1,11 @@
 <template>
-  <div id="Hey">
-    <PerfilLateral></PerfilLateral>
+  <div id="perfilComplet">
+    <div class="perfilLateral">
+      <PerfilLateral></PerfilLateral>
+    </div>
+    <div class="projectes">
+      <FluxVisualitzar :quantitatProjectes="quantitatProjectes" :quantitatPermes="quantitatPermes" :visualitzarNormal="visualitzarNormal" :esAltres="esAltres"></FluxVisualitzar>
+    </div>
   </div>
 </template>
 

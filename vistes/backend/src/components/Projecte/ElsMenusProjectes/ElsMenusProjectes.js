@@ -1,13 +1,11 @@
-import PerfilLateral from "./../PerfilLateral/PerfilLateral.vue";
-import FluxVisualitzar from "./../../Visualitzacio/Visualitzacio.vue";
-
+import FluxVisualitzar from './../../Visualitzacio/Visualitzacio.vue';
 export default {
+
   components: {
-    PerfilLateral,
     FluxVisualitzar
   },
 
-  data(){
+  data() {
     return {
       quantitatProjectes: 1,
       quantitatPermes:1000,
@@ -15,4 +13,6 @@ export default {
       visualitzarNormal : false
     }
   },
+
+  created(){}
 }

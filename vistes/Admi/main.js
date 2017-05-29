@@ -31,3 +31,14 @@ function denegar() {
   let projecte = {projecteDenegat : dades};
   enviarPeticio(urlDenegar , projecte);
 }
+
+function cambiar(event){
+
+  let imatgeGran = document.getElementById('imatgeGran');
+  let imatge = event.target.currentSrc;
+  imatgeGran.src = imatge;
+}
+
+function mesGran(event){
+  let finestra = window.open(event.target.currentSrc, "imatgeGran", "height=800,width=800");
+}

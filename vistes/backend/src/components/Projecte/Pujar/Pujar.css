@@ -48,17 +48,18 @@ div.vistaPrevia{
   margin: auto;
   position: absolute;
   left: 55%;
-  /*transition: all ease-in 1s;*/
+  transition: all ease-in 1s;
 }
 h2{
   text-align:center;
   font-family: 'Roboto', sans-serif;
-  font-size: 25pt;
+  font-size: 12pt;
   opacity: .4;
   font-weight: lighter;
   color: #9E9E9E;
 }
 
+h2#incrementar{font-size: 8pt;}
 div.loader {
 
   border-radius: 50%;

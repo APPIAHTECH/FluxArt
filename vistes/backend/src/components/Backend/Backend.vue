@@ -1,7 +1,7 @@
 <template>
   <div class="backend">
     <div class="contenidor">
-      <FluxVisualitzar :quantitatProjectes="quantitatProjectes" :quantitatPermes="quantitatPermes"></FluxVisualitzar>
+      <FluxVisualitzar :quantitatProjectes="quantitatProjectes" :quantitatPermes="quantitatPermes" :visualitzarNormal="visualitzarNormal" :esAltres="esAltres"></FluxVisualitzar>
     </div>
     </div>
   </div>

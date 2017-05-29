@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="contenidor">
-      <button type="button" name="button" class="btn"><a href="/api/backend/#/crear/projecte" id="crear">Crear Projecte</a></button>
+      <button type="button" name="button" class="btn" @click="crearProjecte">Crear Projecte</button>
 
       <div class="contenidorDeixar">
         <div class="img perfilUrl" :style="{ 'background-image': 'url(' + imatgePerfil + ')' }"><i class="fa fa-angle-down" aria-hidden="true"></i></div>

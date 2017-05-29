@@ -36,7 +36,7 @@ export default {
       event.preventDefault();
 
       Utilitat.esperar(()=> {
-        
+
         this.descripcio = this.$store.getters.getDescripcioFlux;
         this.imatgePerfilNou = this.$store.getters.getNouImatge;
 
@@ -50,12 +50,12 @@ export default {
               let url = Utilitat.rutaUrl() + "frontend/peticio/dades";
               Utilitat.peticioGet(url).then(dades => {
                 this.$store.dispatch('carregarDades' , dades);
-                alert('Dades actualitzat');
+                Utilitat.notificar('Actualizat' , "Les dades s'han actualitzats");
               });
 
             }
             else
-              alert('dades no actualitzat');
+              Utilitat.notificar('Error' , "Les dades no han set actualitzats");
           });
 
         }
@@ -70,7 +70,7 @@ export default {
         if(resultat){
           let id  = this.id;
           Utilitat.peticioPost(this.utlDel , {IDUsuari : id}).then(resultat => {
-            alert("Ens abandones D: , espero veuret per aquií molt aviat :D");
+            alert("Ens abandones D: , espero veuret per aquí molt aviat :D");
             Utilitat.redirecionar(this.redireccionar);
           });
         }

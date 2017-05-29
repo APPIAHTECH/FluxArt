@@ -15,12 +15,20 @@ let controladorUsuari = new Usuari();
 let controladorSeguir = new Seguir();
 let controladorNotificacio = new Notificacio();
 
-/* peticio dades /peticio . */
+/* peticio dades /peticio . dades representa int o date*/
 router.get('/peticio/projecte/:categoria/:quantitat/:filtrar/:ordenacio', controladorProjecte.obtenirProjectesSpecifiques);
 
-router.get('/peticio/projecte/:categoria/:quantitat/:filtrar/:ordenacio/:data', controladorProjecte.obtenirMesProjectes);
+router.get('/peticio/projecte/:categoria/:quantitat/:filtrar/:ordenacio/:dades', controladorProjecte.obtenirMesProjectes);
+
+router.get('/peticio/seguidor/projecte/:quantitat/:filtrar/:ordenacio/:id', Autenticacio.esAutentificat , controladorProjecte.obtenirProjectesSeguidors);
+
+router.get('/peticio/seguidor/projecte/:quantitat/:filtrar/:ordenacio/:id/:dades', Autenticacio.esAutentificat , controladorProjecte.obtenirMesProjectesSeguidors);
 
 router.get('/peticio/projecte/amb/:id', controladorProjecte.obtenidrProjecteID);
+
+router.get('/peticio/projecte/usuari/:categoria/:quantitat/:filtrar/:ordenacio/:id', controladorProjecte.recuperarProjecteUsuari);
+
+router.get('/peticio/projecte/usuari/:categoria/:quantitat/:filtrar/:ordenacio/:id/:dades', controladorProjecte.recuperarMesProjectesUsuari);
 
 router.get('/peticio/buscar', controladorProjecte.buscarPerTitul);
 
@@ -31,6 +39,8 @@ router.get('/peticio/dissenyadors/:quantitat/:filtrar/:ordenacio/:id' , controla
 router.get('/peticio/perfil/:nomUsuari' , controladorUsuari.obtenirUsuariNomUsuari);
 
 router.get('/peticio/dades', Autenticacio.esAutentificat , controladorUsuari.recuperarTotDades);
+
+router.get('/peticio/usuari/seguint/:id', Autenticacio.esAutentificat , controladorSeguir.recuperarSeguidors);
 
 router.get('/peticio/tancarSessio', (req , res)=>{
 
@@ -61,6 +71,8 @@ router.post('/peticio/projecte/actualitzar/visitas', Autenticacio.esAutentificat
 router.post('/peticio/projecte/inserir/comentaris', Autenticacio.esAutentificat , controladorProjecte.inserirComentari);
 
 router.post('/peticio/projecte/actualitzar/likes', Autenticacio.esAutentificat , controladorProjecte.actualitzarLikes);
+
+router.post('/peticio/projecte/actualitzar/nolike', Autenticacio.esAutentificat , controladorProjecte.noAgrada);
 
 router.post('/peticio/eliminar', Autenticacio.esAutentificat , controladorUsuari.eliminarDades);
 

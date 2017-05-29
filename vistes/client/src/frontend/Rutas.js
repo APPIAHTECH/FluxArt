@@ -7,7 +7,7 @@ import Confirmar from "./components/Confirmar/Confirmar.vue";
 import Felicitat from "./components/Felicitat/Felicitat.vue";
 import Sobre from "./components/Sobre/sobre.vue";
 import Suport from "./components/Suport/Suport.vue";
-import Perfil from './../../../backend/src/components/Perfils/PerfilLateral/PerfilLateral.vue';
+import Perfil from './../../../backend/src/components/Perfils/PerfilComplet/Perfil.vue';
 
 Vue.use(VueRouter);
 

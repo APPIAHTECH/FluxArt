@@ -1,5 +1,5 @@
-<template><!--v-infinite-scroll="carregarMes" infinite-scroll-disabled="ocupat" :infinite-scroll-distance="distancia"-->
-  <section class="visualitzar" id="visual">
+<template>
+  <section class="visualitzar" id="visual" >
     <nav class="nav">
       <div class="pos">
         <ul>
@@ -25,6 +25,8 @@
             </div>
           </li>
 
+          <li id="segui" v-if="mostrarProjectesSeguidors" @click="projectesSeguidors"><a><h1 id="titul">Seguint</h1></a></li>
+
         </ul>
       </div>
     </nav>
@@ -42,6 +44,8 @@
           </div>
         </div>
       </div>
+      <mugen-scroll :handler="carregarMes" :should-handle="!ocupat"></mugen-scroll>
+
     </div>
   </section>
 </template>

@@ -72,10 +72,10 @@ class ModelProjecte extends ModelBase{
     });
   }
 
-  obtenirProjectesLimit(id , quantitat){
+  obtenirProjectesLimit(id , quantitat , filtrar){
 
     return new Promise((resolve , reject) =>{
-      Query.querySeleccioLimit(this.getColleccio(), {"projecte.usuari_id" : `${id}`}  , quantitat)
+      Query.querySeleccioLimit(this.getColleccio(), {"projecte.usuari_id" : `${id}`}  , quantitat , filtrar)
       .then((res)=>  resolve(res))
       .catch((err)=> {
         console.error(err);
@@ -171,7 +171,19 @@ class ModelProjecte extends ModelBase{
   actualitzarProjectPushArray(id , push){
 
     return new Promise((resolve , reject) =>{
-      Query.queryActualitzacioPush(this.getColleccio() ,{"_id": Query.convertirAObjecteID(id)} , push)
+      Query.queryActualitzacioArray(this.getColleccio() ,{"_id": Query.convertirAObjecteID(id)} , push)
+      .then((res)=> resolve(res))
+      .catch((err)=> {
+        console.log(err);
+        reject(err);
+      });
+    });
+  }
+
+  actualitzarProjectPullArray(id , pull){
+
+    return new Promise((resolve , reject) =>{
+      Query.queryActualitzacioArray(this.getColleccio() , {"_id": Query.convertirAObjecteID(id)} , pull)
       .then((res)=> resolve(res))
       .catch((err)=> {
         console.log(err);
@@ -183,7 +195,7 @@ class ModelProjecte extends ModelBase{
   actualitzacioIncremental(id , camp){
 
     return new Promise((resolve , reject) =>{
-      Query.queryActualitzacioPush(this.getColleccio() , {"_id": Query.convertirAObjecteID(id)} , {$inc : camp} )
+      Query.queryActualitzacioArray(this.getColleccio() , {"_id": Query.convertirAObjecteID(id)} , {$inc : camp} )
       .then((res)=> resolve(res))
       .catch((err)=> {
         console.log(err);

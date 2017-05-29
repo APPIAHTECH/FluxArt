@@ -82,7 +82,7 @@ class Usuari{
 
     let seguint = modelSeguir.quantitatSeguidors(IDusuari);
     let perfil = model.obtenirPerfil(IDusuari , excloureCamps);
-    let projectes = modelProject.obtenirProjectesLimit(IDusuari , 50); //50 projectes
+    let projectes = modelProject.obtenirProjectesLimit(IDusuari , 50 , {"projecte.data_creacio" : -1}); //50 projectes
     let quantitatProjectes = modelProject.quantitatProjectes(IDusuari);
     let notificacions = modelNotificacio.obtenirNotificacionsNoLegit(IDusuari);
 
@@ -111,7 +111,7 @@ class Usuari{
     comptes.push(dades.compteFacebook);
 
     if(dades.imatgePerfilNou && dades.contrasenyaNova){
-      console.log("cambiar contrasenya i imatgePerfil");
+
       Utilitat.encriptarContrasenya(dades.contrasenyaNova).then((contrasenya)=>{
         model.actualitzarPerfil(dades.id , {
           "usuari.nom" : dades.nom,
@@ -190,8 +190,6 @@ class Usuari{
     let filtrar = req.params.filtrar.toString();
     let ordenacio = parseInt(req.params.ordenacio);
     let idUsuari = req.params.id.toString();
-
-    console.log("id entrada -> " , idUsuari);
 
     model.obtenirUsuarisLimitat({$and : [{"usuari.nom_usuari" : {$ne : "admin"}} , {"_id" : {$ne : Query.convertirAObjecteID(idUsuari)}} ] }, quantitat , {filtrar : ordenacio} , {"_id" : 1 , "usuari.nom_usuari" : 1 , "usuari.url_img" : 1})
     .then((resultat)=> res.send(resultat))

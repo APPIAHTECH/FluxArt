@@ -327,6 +327,9 @@ div.imatges{
   margin-top: 8px;
 }
 
+div.imatge:hover{cursor: pointer;}
+div.imatges:hover{cursor: pointer;}
+
 hr.special{
 
   border: 0;

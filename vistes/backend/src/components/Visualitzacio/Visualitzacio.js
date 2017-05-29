@@ -1,5 +1,7 @@
-import Utilitat from './../global/Utilitat.js'
-//NOTE : INIFINITE SCROLL NO TIRA ACABAR
+import Utilitat from './../global/Utilitat.js';
+import MugenScroll from 'vue-mugen-scroll';
+import Mixin from './../Mixin/Mixin.js';
+
 export default {
   props:{
 
@@ -11,8 +13,20 @@ export default {
     quantitatPermes:{
       type:Number,
       required:true
+    },
+
+    visualitzarNormal:{
+      type:Boolean,
+      required : true
+    },
+
+    esAltres:{ //Si es els meus projectes o perfil true en cas contrari true
+      type:Boolean,
+      required:true
     }
   },
+
+  components: {MugenScroll},
 
   data(){
     return{
@@ -23,160 +37,88 @@ export default {
       filtrar : "data_creacio", //filtrar per visitas
       ordenacio : -1, //1 DEC -1 ASC
       llistatProjectes : [],
+      llistatSeguint : [],
       ocupat: false,
-      distancia : 20,
-      projecteRecent : "",
+      projecteRecent : "", //Representa el ultim projecte mes recent
       urlVisitas : Utilitat.rutaUrl() + 'frontend/peticio/projecte/actualitzar/visitas',
       url : "",
       urlUsuari: "",
       urlBusqueda:"",
-      urlMesProjectes:""
+      urlMesProjectes:"",
+      urlProjecteSeguidors :"",
+      urlSeguir : "",
+      mostrarProjectesSeguidors : false,
+      esVisitas : false,
+      esComentaris : false,
+      esSeguidors : false
     }
   },
 
-  methods:{
-
-    carregarMes(){
-      this.ocupat = true;
-      if(this.llistatProjectes.length > 0)
-      {
-        let resultat;
-        if(this.llistatProjectes.length === this.quantitatPermes)
-        {
-          alert("registret per poder veure mes :D");
-          return;
-        }
-        resultat = this.llistatProjectes[this.llistatProjectes.length - 1];
-        this.projecteRecent = new Date(resultat.projecte.data_creacio);
-        this.urlMesProjectes = `${this.url}${this.categoria}/${this.quantitatProjectes}/${this.filtrar}/${this.ordenacio}/${this.projecteRecent}`;
-        this.resoldrePeticio(this.urlMesProjectes);
-      }
-    },
-
-    obtenirProjectesLimitat()
-    {
-      let url = this.url;
-      url += `${this.categoria}/${this.quantitatProjectes}/${this.filtrar}/${this.ordenacio}`;
-      this.resoldrePeticio(url);
-    },
-
-    resoldrePeticio(url)
-    {
-      Utilitat.peticioGet(url) //Demanat projectes
-      .then((projectes)=> {
-
-        if(projectes.length === 0)
-        {
-          this.ocupat = true;
-          // this.notificar();
-          return;
-
-        }else {
-
-          projectes.forEach((projecte)=> { //Per cada projecte obtenc el seu propietari
-
-            let idUsuari = projecte.projecte.usuari_id;
-            let peticio = `${this.urlUsuari}${idUsuari}`;
-
-            Utilitat.peticioGet(peticio).then((usuari) => {
-
-              if(usuari.length !== 0){
-                projecte['info'] = usuari[0]; //Afegint les dades del propietari del projecte.
-                this.llistatProjectes.push(projecte);
-              }
-
-              this.ocupat = false;
-            }).catch((err) => console.error(err));
-
-          });
-        }
-
-      }).catch((err) => console.error(err));
-    },
-
-    buidarProjectes(){
-      this.llistatProjectes = [];
-    },
-
-    buscar(event)
-    {
-      this.ocupat = true;
-      this.buidarProjectes();
-      let valorBusqueda = event.target.value;
-      if(valorBusqueda.length >= 3)
-      {
-        let url = `${this.urlBusqueda}?projecte=${valorBusqueda}`;
-        this.resoldrePeticio(url);
-      }
-    },
-
-    populars(event)
-    {
-      //popular:['Més Vist' , 'Més Comentades'],
-      let butto = event.target.innerHTML;
-      this.buidarProjectes();
-      switch(butto) {
-          case this.popular[0]: //Més Vist
-              this.mesVist();
-              break;
-          case this.popular[1]: //Més Comentades
-              this.mesComentades();
-              break;
-          default:
-              console.log("Opcio no escollida :O");
-      }
-    },
-
-    categoriesProjecte(event)
-    {
-      //categories : ['Illustracio' , 'Logotips' , "UX Experiencia de usuari" , "UI Interfície d'usuari" , 'Icones' , 'Disseny Web' , 'Aplicacions mobils'],
-      let opcioEscollida = event.target.innerHTML;
-      this.buidarProjectes();
-      this.recuperarProjectes(opcioEscollida);
-    },
-
-    //resoldre(buidar , filtrar , ordenacio)
-    //Buidant array de projectes (llistatProjectes) , ja que s'ha pogut filtrar i recoperar els projectes
-    mesVist()
-    {this.resoldre("visitas" , -1);},
-
-    mesComentades()
-    {this.resoldre("comentaris_total" , -1);},
-
-    recuperarProjectes(categoria)
-    {
-      this.categoria = categoria;
-      this.resoldre(this.filtrar , this.ordenacio);
-    },
-
-    resoldre(filtrar , ordenacio)
-    {
-        this.filtrar = filtrar;
-        this.ordenacio = ordenacio;
-        this.obtenirProjectesLimitat();
-    },
-
-    notificar()
-    {
-      //TODO CAMBIAR PER UNA NOTIFICAIO MILLOR :D
-      alert("No hi ha resultat de busqueda ...");
-    },
-
-    detail(event){
-      let id = event.target.dataset.idprojecte;
-      Utilitat.peticioPost(this.urlVisitas , {idProjecte : id, visitas : 1});
-      Utilitat.redirecionar(Utilitat.rutaUrl() + 'api/backend/#/visualitzar/projecte/'+id);
-    },
-  },
-
 created(){
-    Utilitat.esperar(()=>{
-      this.url = this.host + "frontend/peticio/projecte/";
-      this.urlBusqueda = this.host + "frontend/peticio/buscar";
-      this.urlUsuari = this.host + "frontend/peticio/usuari/";
+
+    if(typeof(this.$store) !== "undefined"){
+
       this.categories = this.$store.getters.getCategories;
       this.popular = this.$store.getters.getPopular;
-      this.obtenirProjectesLimitat() ; // Carregant els projectes ...
-    })
-  }
+    }
+
+    if(this.visualitzarNormal){
+
+      this.setejarUrls(
+        Utilitat.rutaUrl() + "frontend/peticio/projecte/" ,
+        Utilitat.rutaUrl() + "frontend/peticio/buscar" ,
+        Utilitat.rutaUrl() + "frontend/peticio/usuari/",
+        Utilitat.rutaUrl() + "frontend/peticio/seguidor/projecte/",
+        Utilitat.rutaUrl() + "frontend/peticio/usuari/seguint/"
+      );
+
+     this.obtenirProjectesLimitat();
+
+     if(!this.esAltres){
+       Utilitat.esperar(()=>{
+         if(this.$store.getters.getUsuari)
+           this.mostrarProjectesSeguidors = true;
+         else
+           this.mostrarProjectesSeguidors = false;
+       });
+     }
+
+   }else if(typeof(this.$store) !== "undefined"){
+
+      let projectes = [] , usuari;
+      this.setejarUrls(
+        Utilitat.rutaUrl() + "frontend/peticio/projecte/usuari/" ,
+        Utilitat.rutaUrl() + "frontend/peticio/buscar",
+        Utilitat.rutaUrl() + "frontend/peticio/usuari/",
+        Utilitat.rutaUrl() + "frontend/peticio/seguidor/projecte/",
+        Utilitat.rutaUrl() + "frontend/peticio/usuari/seguint/"
+      );
+
+      Utilitat.esperar(() => {
+
+        projectes = this.$store.getters.getTreballs;
+        usuari = this.$store.getters.getUsuari;
+
+        projectes.forEach((projecte)=> {
+          projecte['info'] = usuari;
+          this.llistatProjectes.push(projecte);
+        })
+
+      });
+
+    }else{
+
+      this.setejarUrls(
+        Utilitat.rutaUrl() + "frontend/peticio/projecte/usuari/" ,
+        Utilitat.rutaUrl() + "frontend/peticio/buscar",
+        Utilitat.rutaUrl() + "frontend/peticio/usuari/",
+        Utilitat.rutaUrl() + "frontend/peticio/seguidor/projecte/",
+        Utilitat.rutaUrl() + "frontend/peticio/usuari/seguint/"
+      );
+
+      this.obtenirProjectesLimitat(false);
+    }
+  },
+
+  mixins:[Mixin]
 }

@@ -1,9 +1,8 @@
 <template>
-  <!--FALTA ACABAR DE IMPLEMENTAR-->
   <div class="pujar">
     <form  :method="metode" :enctype="encriptacio" @submit="pujar">
         <div class="contenidorPujar">
-          <h2>Col·loqui arxius aquí</h2>
+          <h2>Col·loqui imatges aquí</h2>
 
           <div class="loader" ></div>
           <div v-bind:class="{loader_animar : animar}" id="semi_loader"></div>
@@ -13,7 +12,7 @@
           </div>
 
           <div v-else id="increment">
-            <div><h2>{{increment}}</h2></div>
+            <div><h2 id="incrementar">{{increment}}</h2></div>
           </div>
 
           <div class="selecionar">

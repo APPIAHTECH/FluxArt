@@ -51,7 +51,7 @@ methods: {
        });
      }
      else
-       alert("L'imatge "+imatge.name+" no es valid");
+      Utilitat.notificar('Error' , "L'imatge "+imatge.name+" no es valid");
   },
 
   validarImatge(imatge)
@@ -70,8 +70,6 @@ methods: {
     reader.onload = (event)=> callback(reader.result);
     reader.readAsDataURL(imagte); //codifica el imatge en string per convertilo en un url valid
   },
-
-  notificar(){alert("Ups , alguna cosa no ha nat be");},
 
   obtenirParams(){
 
@@ -157,8 +155,6 @@ created(){
             this.imatgePerfil = perfil.url_img;
             this.compteFace = perfil.compte_soccials[0];
             this.compteGoogle = perfil.compte_soccials[1];
-
-            console.log("resultat -> " , resultat);
           });
         }
       }

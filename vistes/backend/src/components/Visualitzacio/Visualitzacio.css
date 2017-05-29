@@ -43,6 +43,8 @@
 
 .imatge:hover{
   cursor: pointer;
+  opacity: .5;
+  transition:all ease .5s;
 }
 
 .capcalera
@@ -89,7 +91,7 @@
   height: auto;
   margin-top: 10px;
   position: relative;
-  left: 112px;
+  left: 170px;
 }
 .rand > i
 {
@@ -178,6 +180,12 @@ li#popu
   left: 6%;
 }
 
+li#segui
+{
+  position: relative;
+  left: 10%;
+}
+li#segui:hover{cursor: pointer;}
 div.pos
 {
   width: auto;

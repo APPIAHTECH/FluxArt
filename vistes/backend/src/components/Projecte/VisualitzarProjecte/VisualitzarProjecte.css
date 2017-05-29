@@ -5,19 +5,18 @@ div.contenidor{
 }
 div.visualitzarProjecte {
   width: 80%;
-  height: 100%;
+  height: auto;
   display: flex;
   flex-flow: row wrap;
   margin: 20px auto;
-  margin-bottom: 20px;
-  background: #FFFFFF;
   border-radius: 10px;
-  box-shadow: 5px 10px 5px #E7E7E7;
 }
 
 div.cont{
-  width: 100%;
+  width: 25%;
   height: auto;
+  display:flex;
+  flex-flow: row nowrap;
 }
 
 #like:hover{
@@ -25,23 +24,36 @@ cursor: pointer;
 }
 div.contenidorPrimer{
 
-  width: 50%;
+  width: 60%;
   height: 100%;
   display: flex;
   flex-flow: column nowrap;
   box-sizing: border-box;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
+  background: #F5F5F5;
+  border-radius: 10px;
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
 }
 
+h4{text-transform: capitalize;}
+p{text-transform: capitalize;}
 div.contenidorSegon{
-  width: 50%;
+  width: 40%;
   height: 100%;
   display: flex;
   flex-flow: column nowrap;
   box-sizing: border-box;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
+  border-radius: 20px;
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
+  background: #FFFFFF;
+  box-shadow: 5px 5px 5px #888888;
+}
+
+p#nomUsuari{
+  color: white;
+  font-size: 10pt;
+  text-transform: capitalize;
 }
 
 div.capcelera{
@@ -51,7 +63,7 @@ div.capcelera{
   display: flex;
   flex-flow: row nowrap;
   margin-bottom: 15px;
-
+  background: #2E3E53;
 }
 
 div.capcelera > p {
@@ -61,17 +73,11 @@ div.capcelera > p {
   opacity: .8;
 }
 
-div.donar{
-  width: auto;
-  height: auto;
-  margin-left: 50%;
-  position: relative;
-  top: 10px;
-}
+
 
 img#pay{
-  width: 20px;
-  height: 20px;
+  width: 32px;
+  height: 32px;
   display: inline-block;
 }
 
@@ -94,20 +100,20 @@ div.contenidorImatge:hover{
 }
 
 div.llistatImatges{
-  width: 98.6%;
+  width: auto;
   height: auto;
   display: flex;
   flex-flow: row wrap;
-  padding: 5px;
   padding-top: 10px;
   padding-bottom: 10px;
 
 }
 
 div.imatges{
-  width: 25%;
+  width: 100%;
   height: 100px;
   margin: 5px;
+  transition: all ease 1s;
 }
 
 div.imatges:hover{
@@ -139,20 +145,24 @@ div.info > h2{
   font-size: 12pt;
   opacity: .8;
   margin-bottom: 10px;
-  text-transform: capitalize;
+  text-transform: uppercase;
+  text-align: center;
 }
 
-div.info > p{
-  width: auto;
-  font-size: 12pt;
+input[type=text]#textDesc{
+  width: 80%;
+  background: white;
+  font-size: 9pt;
   opacity: .8;
   text-align: justify;
   text-transform: capitalize;
+  border: none;
+  word-break: break-all;
+  margin: 0;
 }
-
 div.tipusCat{
   padding: 20px;
-  padding-right: 0px;
+  padding-right: 10px;
   display: flex;
   flex-flow: row nowrap;
 }
@@ -176,15 +186,20 @@ div.cate > h4{
   padding: 10px;
   margin: 5px;
   padding-left: 0px;
+  font-size: 8pt;
+  text-transform: capitalize;
 }
 
 div.puntuacio{
-  width: 97%;
-  padding: 20px;
+  width:auto;
+  padding: 10px;
+  height: 10.5em;
   padding-right: 0px;
+  padding-top: 0;
   display: flex;
   flex-flow: column nowrap;
   margin-bottom: 3px;
+  margin-top: 0;
 }
 
 div.tags{
@@ -193,58 +208,58 @@ div.tags{
   padding-right: 0px;
   display: flex;
   flex-flow: row wrap;
+  font-size: 8pt;
+  word-wrap: break-word;
 }
+
+div.tags > h4{color: #4FA5D1; text-transform: capitalize;}
 
 .rand > i
 {
-  color: black;
   font-size: 12pt;
-  margin: 20px;
-  margin-right: 0;
   opacity: .5;
+  text-align: center;
+  padding: 10px;
+  padding-left: 0;
+  padding-bottom: 0;
 }
+i >p{margin-top: 10px;}
 
-i  + p{
-  display: inline-block;
-  font-size: 10pt;
-  margin-left: 50%;
-  text-align: justify;
-  padding: 0;
-}
-p#pos{
-  margin-left: 51%;
-}
-p#poss{margin-left: 43.5%;}
+i#visitas{color: blue;}
+i#cor{color: orangered;}
+i#commen{color: red;}
+
 hr{
   border: 0;
   height: 1px;
-  background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
-  background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
-  background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
-  background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  width: 100%;
+  margin: auto;
+  background-image: -webkit-linear-gradient(left, #4FC4D1, #4FC4D1, #F1F1F1);
 }
 
 div.comentaris{
-  width: 97%;
+  width: 100%;
+  height: 15em;;
   padding: 20px;
   padding-right: 0px;
   display: flex;
   flex-flow: column nowrap;
   margin-bottom: 3px;
   overflow: auto;
+  border-radius: 0;
+  border: none;
+  padding: 0;
 }
 
 div.coments{
-  width: 100%;
+  width: 50%;
   height: auto;
-  padding-bottom: 10px;
+  padding: 20px;
+  margin-left: 35px;
 }
 h2#nom{
   display: inline-block;
-  margin-left: 10px;
-  margin-right: 20px;
-  margin-top: 12px;
-  font-size: 12pt;
+  font-size: 8pt;
 }
 
 div#in{
@@ -252,10 +267,12 @@ div#in{
   flex-flow: row wrap;
 }
 h6{
-  margin: 10px;
-  margin-top: 15px;
-  margin-left: 0px;
+  margin-top: 10px;
   opacity: .7;
+  font-size: 7pt;
+  position: relative;
+  left: -12%;
+  top: 2px;
 }
 
 #com{
@@ -267,7 +284,11 @@ h6{
 
 div.ferComentari{
   width: 100%;
-  height: auto;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 input[type="text"]
@@ -275,22 +296,13 @@ input[type="text"]
   width: 80%;
   box-sizing: border-box;
   border: none;
-  border-bottom: 5px solid #FF5855;
+  border-bottom: 4px solid #FF5855;
   padding: 20px 20px 12px 10px;
   background: #FFFF;
   opacity: .8;
-  font-size: 12pt;
+  font-size: 8pt;
   outline: none;
-}
-
-button.perso{
-  width: 20%;
-  box-sizing: border-box;
-  border: 1px solid #C4C4C4;
-  font-size: 12pt;
-  text-align: center;
-  position: relative;
-  background: #4AC9EC;
+  margin: auto;
 }
 
 hr#special{
@@ -300,4 +312,19 @@ hr#special{
   background-image: linear-gradient(to right, #ccc, #333, #ccc);
   width: 40%;
   margin-left: 20px;
+}
+
+div.donar{
+  width: auto;
+  height: auto;
+  position: relative;
+  top: -10px;
+}
+
+button.perso{
+  background: orangered;
+  border: none;
+  width: auto;
+  position: relative;
+  top: -10px;
 }

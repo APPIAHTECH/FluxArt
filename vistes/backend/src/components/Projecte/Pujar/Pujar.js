@@ -30,10 +30,8 @@ export default{
         let imatges = event.target.files || event.dataTransfer.files; //L'element que llença l'event en aquet cas input[file] , recuperem els fitxers (dataTransfer per drag i drop)
 
         if (imatges.length === 0 || imatges.length > this.maximaQuantitatImatges)
-        {
-          this.notificar();
-          return;
-        }
+            return;
+
         Array.from(imatges).forEach((imatge) => {
 
           if(this.validarImatge(imatge))
@@ -44,7 +42,7 @@ export default{
              });
            }
            else
-             alert("L'imatge "+imatge.name+" no es valid");
+            Utilitats.notificar('imatge' , "L'imatge "+imatge.name+" no es valid");
         }); //El files retorna un FileList per tal de iterrar , el paso a array i recupero cada element
 
       },
@@ -81,7 +79,6 @@ export default{
           progress(e) {
             if (e.lengthComputable){
               this.increment = ((e.loaded / e.total ) * 100);
-              console.log("valor " , this.increment);
             }
           }
         }).then((response)=>{
@@ -90,11 +87,11 @@ export default{
           this.resetejarValors();
 
           let res = response.body;
-          console.log(res);
+
           if(res.faltaPerConfirmar)
-            alert("El projecte a sent enviat. El teu projecte esta sent revisat per el departament de Flux  , de aqui una setmana aprox es confirmara el teu projecte");
+            Utilitats.notificar('Confirmació' ,"Hey , el projecte esta sent revisat pel departament de Flux, una vegada confirmat el projecte se't notificarà en el correu electrònic que has facilitat a Flux. Sort!");
           else
-            alert("Alguna cosa no anat be , tornau a intentar si seguiex aixi contacta amb nosaltres.");
+            alert("Alguna cosa no anat be , tornau a intentar si seguiex així contacta amb nosaltres.");
 
         }).catch((err)=> console.log(err));
 
@@ -104,8 +101,6 @@ export default{
         let reader = new FileReader(); //Method asyn
         reader.onload = (event)=> callback(reader.result);
         reader.readAsDataURL(imagte); //codifica el imatge en string per convertilo en un url valid
-      },
-
-      notificar(){alert("Ups , alguna cosa no ha nat be");}
+      }
     }
 }

@@ -59,7 +59,7 @@ class Utilitats {
         host: req.get('host')
     });
   }
-  
+
 }
 
 module.exports = Utilitats;

@@ -45,8 +45,8 @@
 
         <div class="contenidor">
           <div class="descripcio">
-            <i class="fa fa-google-plus" aria-hidden="true"></i><p>{{compteFace}}</p>
-            <i class="fa fa-facebook" aria-hidden="true"></i><p>{{compteGoogle}}</p>
+            <i class="fa fa-google-plus" aria-hidden="true" v-show="compteFace"></i><p>{{compteFace}}</p>
+            <i class="fa fa-facebook" aria-hidden="true" v-show="compteGoogle"></i><p>{{compteGoogle}}</p>
           </div>
         </div>
 

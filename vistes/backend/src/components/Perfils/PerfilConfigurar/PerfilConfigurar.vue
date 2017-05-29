@@ -66,11 +66,11 @@
               <label>Google</label>
               <input type="email" name="" v-model="compteGoogle">
               <label>Facebook</label>
-              <input type="email" name="" v-model="compteFacebook">
+              <input type="text" name="" v-model="compteFacebook">
               <label>Compte Paypal</label>
-              <input type="email" name="" v-model="comptePaypal">
+              <input type="text" name="" v-model="comptePaypal" placeholder="Escriu aquí el nom del teu Paypal.Me (paypal.me/euni*)"/>
               <label>Lloc Web Personal</label>
-              <input type="text" name="" v-model="llocWeb">
+              <input type="text" name="" v-model="llocWeb" placeholder="Tens un lloc web ? , escriu aquí la direcció url">
             </div>
           </div>
 

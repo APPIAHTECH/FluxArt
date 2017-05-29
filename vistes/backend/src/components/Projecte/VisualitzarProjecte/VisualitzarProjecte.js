@@ -7,6 +7,8 @@ export default {
       urlUsuari :  Utilitat.rutaUrl() + 'frontend/peticio/usuari/',
       urlComentaris : Utilitat.rutaUrl() + 'frontend/peticio/projecte/inserir/comentaris',
       urlLike : Utilitat.rutaUrl() + 'frontend/peticio/projecte/actualitzar/likes',
+      urlNOLike : Utilitat.rutaUrl() + 'frontend/peticio/projecte/actualitzar/nolike',
+      urlMesGran : "/api/backend/#/visualitzar/mesgran",
       nomUsuari : "",
       imgPerfil : "",
       teDonacio : false,
@@ -21,7 +23,8 @@ export default {
       comentarisTotal : "",
       comentaris : [] ,
       missatgeComentar : "",
-      liAgrada : false
+      liAgrada : false,
+      redirecionarAPaypal : "https://www.paypal.me/"
     }
   },
 
@@ -55,29 +58,30 @@ export default {
   methods: {
     inserirComentari(event){
 
-      let idProjecte = this.$store.getters.getProjecteTemporal.projecteObtingut.projecte._id;
-      let url_img = this.$store.getters.obtenirImatgePerfil;
-      let IDUsuari = this.$store.getters.obtenirID;
-      let missatge = this.missatgeComentar;
-      let nomUsuari = this.$store.getters.getNomUsuari;
+      if(event.keyCode == 13){
+        let idProjecte = this.$store.getters.getProjecteTemporal.projecteObtingut.projecte._id;
+        let url_img = this.$store.getters.obtenirImatgePerfil;
+        let IDUsuari = this.$store.getters.obtenirID;
+        let missatge = this.missatgeComentar;
+        let nomUsuari = this.$store.getters.getNomUsuari;
 
-      let comentar = {
-        idProjecte,
-        url_img,
-        IDUsuari,
-        missatge,
-        nomUsuari,
-        data : new Date(),
-        comentari : this.comentaris.length
+        let comentar = {
+          idProjecte,
+          url_img,
+          IDUsuari,
+          missatge,
+          nomUsuari,
+          data : new Date(),
+          comentari : this.comentaris.length
+        }
+
+        Utilitat.peticioPost(this.urlComentaris , comentar)
+        .then((resultat)=>{
+
+          if(resultat.inserit)
+            this.comentaris.push(comentar);
+        }).catch(err => console.error(err));
       }
-
-      Utilitat.peticioPost(this.urlComentaris , comentar)
-      .then((resultat)=>{
-
-        if(resultat.inserit)
-          this.comentaris.push(comentar);
-      })
-      .catch(err => console.error(err));
     },
 
     actualitzarLikes(event){
@@ -91,9 +95,60 @@ export default {
       Utilitat.peticioPost(this.urlLike , likes)
       .then((resultat)=>{
         if(resultat.inserit)
-          liAgrada = true;
+          this.liAgrada = true;
       });
+    },
+
+    noAgrada(){
+      let idProjecte = this.$store.getters.getProjecteTemporal.projecteObtingut.projecte._id;
+      let IDUsuari = this.$store.getters.obtenirID;
+
+      let noAgradalike = {
+        idProjecte,
+        IDUsuari
+      }
+      Utilitat.peticioPost(this.urlNOLike , noAgradalike)
+      .then((resultat)=>{
+        if(resultat.inserit)
+          this.liAgrada = false;
+      });
+
+    },
+
+    mesGran(){
+      this.$store.commit('setImatgeTemporal' , this.imatgeGran);
+      Utilitat.redirecionar(this.urlMesGran);
+    },
+
+    cambiar(event){
+      let imatge = event.target.dataset.imatge;
+      this.imatgeGran = imatge;
+    },
+
+    //NOTE : NO TIRA BE , ARREGLAR!
+    calcularTemps(data){
+
+      let dataActual = new Date();
+      let dataEntrada = new Date(data);
+
+      if(dataActual.getMinutes() > dataEntrada.getMinutes())
+        return dataActual.getMinutes() - dataEntrada.getMinutes() + " min";
+      else
+        return dataEntrada.getMinutes() - dataActual.getMinutes() + " min";
+    },
+
+    donarDiners(event){
+
+      if(this.$store.getters.getEnllasPaypal)
+        Utilitat.redirecionar(this.redirecionarAPaypal + this.$store.getters.getEnllasPaypal + '/1')
+      else{
+
+        if(confirm("Denfinir Compte Paypal , Vols configurar l'enllaç paypal ? "))
+          Utilitat.redirecionar(Utilitat.rutaUrl() + 'api/backend/#/compte');
+      }
+
     }
+
   },
 
   mounted(){
@@ -111,6 +166,18 @@ export default {
       this.like = this.$store.getters.getProjecteTemporal.projecteObtingut.projecte.projecte.like.length;
       this.comentarisTotal = this.$store.getters.getProjecteTemporal.projecteObtingut.projecte.projecte.comentaris_total;
       this.comentaris = this.$store.getters.getProjecteTemporal.projecteObtingut.projecte.projecte.comentaris;
+
+      let IDUsuari = this.$store.getters.obtenirID;
+      let arrayLike = this.$store.getters.getProjecteTemporal.projecteObtingut.projecte.projecte.like;
+
+      for (var i = 0; i < arrayLike.length; i++) {
+
+        if(arrayLike[i].IDUsuari == IDUsuari )
+          this.liAgrada = true;
+        else
+          this.liAgrada = false;
+      }
+
     });
   }
 }

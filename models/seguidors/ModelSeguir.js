@@ -60,6 +60,21 @@ quantitatSeguidors(idUsuari){
 
 }
 
+obtenirSeguidors(id , excloureCamps){
+
+  return new Promise((resolve , reject) =>{
+    Query.querySeleccio(this.getColleccio() , {"seguir.usuari_id": id} , excloureCamps)
+    .then((res)=> {
+      resolve(res);
+    })
+    .catch((err)=> {
+      console.log(err);
+      reject(err);
+    });
+
+  });
+}
+
 
 
 }
