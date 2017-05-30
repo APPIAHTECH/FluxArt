@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="sobre">
     <MenuFrontal></MenuFrontal>
     <div class="contenidor">
       <div class="presentacio">
@@ -23,6 +23,7 @@
           </div>
           <h4 id="expandeix">Stephen Appiah Frimpong</h4>
         </div>
+        <googleMap :center="center" :zoom="12" id="mapa"></googleMap>
     </div>
     <FluxFooter></FluxFooter>
   </div>

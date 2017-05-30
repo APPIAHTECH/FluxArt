@@ -27,6 +27,7 @@ export default {
     confirmar(methods , url)
     {
       let urlSortida = this.peticio + url;
+      console.log(urlSortida);
       this.metode = methods;
       window.location.href = urlSortida;
     },

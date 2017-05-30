@@ -20,8 +20,7 @@ const document = {
 class UsuarisTemporal extends ModelUsuari{
 
   constructor(){
-    super(colleccio);
-    this.setModel(document);
+    super(colleccio , document);
   }
 
 

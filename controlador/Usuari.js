@@ -199,8 +199,11 @@ class Usuari{
   eliminarDades(req , res , next){
     let id = req.body.IDUsuari;
     if(req.user){
-      req.session.destroy(()=>{ res.send({tancatSessio : true}) });
-      if (id) model.borarUsuari(id).then(resultat => res.send({borrat : true})).catch(err => res.send({borrat : false , error : err}));
+      if (id){
+        model.borarUsuari(id)
+        .then(resultat => res.send({borrat : true}))
+        .catch(err => res.send({borrat : false , error : err}));
+      }
     }
 
   }

@@ -40,7 +40,7 @@ export default {
       obtenirProjectesLimitat(altres, id)
       {
         let url = "";
-        
+
         if(!altres)
           url = `${this.url}${this.categoria}/${this.quantitatProjectes}/${this.filtrar}/${this.ordenacio}`;
         else

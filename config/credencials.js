@@ -9,7 +9,7 @@ module.exports = {
     "client_id":"311850462584739",
     "client_secret":"935739058cacf9a5986f61bfc8720be4",
     "redirect_uris":["http://localhost:3000/autenticacio/facebook/callback"],
-    "profileFields":['email' , 'id' , 'name' , 'profileUrl'],
+    "profileFields":['email' , 'id' , 'name' , 'profileUrl']
   },
 
   "drive":{

@@ -294,6 +294,7 @@ div.perfilUrl{
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  background-image: url('http://blog.ramboll.com/fehmarnbelt/wp-content/themes/ramboll2/images/profile-img.jpg');
 }
 
 a#tancar:hover{cursor: pointer;}

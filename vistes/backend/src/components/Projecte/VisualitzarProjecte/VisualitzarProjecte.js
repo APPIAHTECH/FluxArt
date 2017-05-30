@@ -125,28 +125,20 @@ export default {
       this.imatgeGran = imatge;
     },
 
-    //NOTE : NO TIRA BE , ARREGLAR!
-    calcularTemps(data){
-
-      let dataActual = new Date();
-      let dataEntrada = new Date(data);
-
-      if(dataActual.getMinutes() > dataEntrada.getMinutes())
-        return dataActual.getMinutes() - dataEntrada.getMinutes() + " min";
-      else
-        return dataEntrada.getMinutes() - dataActual.getMinutes() + " min";
-    },
-
     donarDiners(event){
 
       if(this.$store.getters.getEnllasPaypal)
         Utilitat.redirecionar(this.redirecionarAPaypal + this.$store.getters.getEnllasPaypal + '/1')
       else{
 
-        if(confirm("Denfinir Compte Paypal , Vols configurar l'enllaç paypal ? "))
+        if(confirm("Configura el teu enllaç paypal.me per tal de donar  , Vols configurar l'enllaç paypal ? "))
           Utilitat.redirecionar(Utilitat.rutaUrl() + 'api/backend/#/compte');
       }
 
+    },
+
+    scrollABaix(event){
+      console.log(event);
     }
 
   },

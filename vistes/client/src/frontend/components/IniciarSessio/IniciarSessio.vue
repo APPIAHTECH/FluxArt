@@ -13,7 +13,8 @@
             <input type="text" required min="3" maxlength="150" autofocus v-model="nomUsuari" name="nomUsuari">
             <label>Contrasenya <a href="#" v-if="error" id="oblidat">Oblidat?</a></label>
             <input type="password" required min="6" class="password" v-model="contrasenya" required name="contrasenya">
-            <input type="submit" value="Iniciar Sessió"><div class="crearCompte">
+            <input type="submit" value="Iniciar Sessió">
+            <div class="crearCompte">
                <a href="/#/registrar">Crear Compte <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
             </div>
           </div>

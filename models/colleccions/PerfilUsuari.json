@@ -14,8 +14,8 @@
     "compte_paypal":"",
     "estat_activacio": false,
     "data_validacio":"30/04/2017",
-    "primerCop":false,
-    "rebreNotificacions":false,
+    "primerCop":true,
+    "rebreNotificacions":true,
     "pais":"españa",
     "provincia":"barcelona"
   }

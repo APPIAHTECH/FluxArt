@@ -22,7 +22,7 @@ data(){
     iniciatSessio : false,
     mostrarEditar : false,
     descripcio : "",
-    imatgePerfil :"http://orig01.deviantart.net/d243/f/2013/126/4/0/profile_picture_by_goku_hd-d64dk5d.png",
+    imatgePerfil :"",
     url : Utilitat.rutaUrl() + 'frontend/peticio/perfil/',
     urlSessio : Utilitat.rutaUrl() + 'frontend/peticio/teSessio',
     redirecionar : "#/iniciarSessio"
@@ -128,6 +128,9 @@ created(){
         this.compteGoogle = this.$store.getters.getEnllasGoogle;
         this.imatgePerfil = this.$store.getters.obtenirImatgePerfil;
 
+        if(!this.imatgePerfil)
+          this.imatgePerfil = 'http://blog.ramboll.com/fehmarnbelt/wp-content/themes/ramboll2/images/profile-img.jpg';
+
       }else{
 
         this.iniciatSessio = false;
@@ -153,6 +156,10 @@ created(){
             this.nom = perfil.nom;
             this.nomUsuari = perfil.nom_usuari;
             this.imatgePerfil = perfil.url_img;
+
+            if(!this.imatgePerfil)
+              this.imatgePerfil = 'http://blog.ramboll.com/fehmarnbelt/wp-content/themes/ramboll2/images/profile-img.jpg';
+
             this.compteFace = perfil.compte_soccials[0];
             this.compteGoogle = perfil.compte_soccials[1];
           });

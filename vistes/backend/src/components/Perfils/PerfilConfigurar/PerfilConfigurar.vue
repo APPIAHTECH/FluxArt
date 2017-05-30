@@ -16,7 +16,7 @@
             </div>
 
             <div class="apartats">
-              <label>Nom</label>
+              <label>Ofici</label>
               <input type="text" name="" autofocus v-model="nom">
               <label>Nom Usuari</label>
               <input type="text" v-model="nomUsuari" required disabled>
@@ -64,9 +64,9 @@
 
             <div class="apartats">
               <label>Google</label>
-              <input type="email" name="" v-model="compteGoogle">
+              <input type="email" name="" v-model="compteGoogle" placeholder="Escriu aquí el teu compte google">
               <label>Facebook</label>
-              <input type="text" name="" v-model="compteFacebook">
+              <input type="text" name="" v-model="compteFacebook" placeholder="Escriu aquí el perfil facebook">
               <label>Compte Paypal</label>
               <input type="text" name="" v-model="comptePaypal" placeholder="Escriu aquí el nom del teu Paypal.Me (paypal.me/euni*)"/>
               <label>Lloc Web Personal</label>

@@ -78,6 +78,8 @@ export default {
   created(){
     Utilitat.esperar(()=> {
       this.imatgePerfil = this.$store.getters.obtenirImatgePerfil;
+      if(!this.imatgePerfil) //Si per defecte el imate no esta definit asigo una per defecte
+        this.imatgePerfil = 'http://blog.ramboll.com/fehmarnbelt/wp-content/themes/ramboll2/images/profile-img.jpg';
       this.nomPeril += this.$store.getters.getNomUsuari;
       this.notificacions = this.$store.getters.getNotificacionNoLegit;
       this.notificacionNoLegit = this.notificacions.length;

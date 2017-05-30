@@ -1,4 +1,3 @@
-//NOTE : EST FALTA FER OLBLIDAT PASSS i PODER DEMANAR UN ALTRE TOKEN PER VLIDAR COMPTE
 const express = require('express');
 const passport = require('passport');
 const router = express.Router();
@@ -16,10 +15,11 @@ router.get('/google', passport.authenticate('google', { scope: ['email' , 'profi
 router.get('/google/callback',  passport.authenticate('google', { successRedirect: '/api/backend', failureRedirect: '/'}));
 router.get('/facebook', passport.authenticate('facebook'));
 router.get('/facebook/callback', passport.authenticate('facebook', { successRedirect: '/api/backend', failureRedirect: '/' }));
+router.get('/intern/registrar/verificar/:encriptacio', Autenticacio.verificar);
 
 router.post('/intern', passport.authenticate('local'),(req , res)=> res.send({intern:true})); //Si tot va be enviar al client status 200 en cas contrari 401
 router.post('/intern/registrar', Autenticacio.registrar);
-router.get('/intern/registrar/verificar/:encriptacio', Autenticacio.verificar);
+
 
 
 module.exports = router;

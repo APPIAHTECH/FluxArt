@@ -1,10 +1,11 @@
 <template>
   <div class="menuLateral amagar" id="idMenuLateral">
+
     <div class="seccions">
       <div class="contenidor">
         <h2 id="noms">Projectes</h2><i class="fa fa-cog" aria-hidden="true"></i>
         <ul id="llistat">
-          <li><a href="#/visualitzar/projecte">Visualització</a></li>
+          <li><a href="#/visualitzar/projecte">Els Meus Projectes</a></li>
         </ul>
       </div>
     </div>
@@ -31,8 +32,8 @@
       <div class="contenidor">
         <h2 id="noms">Configuració</h2><i class="fa fa-cog" aria-hidden="true"></i>
         <ul id="llistat">
+          <li><a href="#/compte">Compte</a></li>
           <li><a :href="nomPeril">Perfil</a></li>
-          <li><a @click="tancarSessio" id="tancarSessio">Tancar sessió</a></li>
         </ul>
       </div>
     </div>

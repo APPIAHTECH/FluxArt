@@ -1,5 +1,8 @@
 const Query = require('./../Query');
 const ModelBase = require('./../ModelBase');
+const ModelProjecte = require('./../projectes/ModelProjecte');
+const Notificacions = require('./../Notificacions/ModelNotificacio');
+const Seguidors = require('./../seguidors/ModelSeguir');
 
 const colleccio = "PerfilUsuari";
 const document = {
@@ -7,7 +10,7 @@ const document = {
     "nom":"",
     "nom_usuari":"",
     "correu":"",
-    "url_img":"",
+    "url_img":"http://blog.ramboll.com/fehmarnbelt/wp-content/themes/ramboll2/images/profile-img.jpg",
     "contrasenya":"",
     "lloc_web":"",
     "descripcio":"",
@@ -26,8 +29,12 @@ const document = {
 
 class ModelUsuari extends ModelBase{
 
-  constructor(){
-    super(colleccio , document);
+  constructor(colleccioEntrad , documentEntrada){
+
+    if(colleccioEntrad && documentEntrada)
+      super(colleccioEntrad , documentEntrada);
+    else
+      super(colleccio , document);
   }
 
   //Obtencio de dades
@@ -112,23 +119,25 @@ class ModelUsuari extends ModelBase{
 
   }
 
-  //Borar
+  //Borar  //Danger! //Eliminara tot les dades
   borarUsuari(id){
+
+    let modelProject = new ModelProjecte();
+    let modelNotificacions = new Notificacions();
+    let modelSeguidors  = new Seguidors();
+
+    let elimnarProjectes = Query.queryEliminacio(modelProject.getColleccio(), {"projecte.usuari_id": id});
+    let elimnarNotificacions = Query.queryEliminacio(modelNotificacions.getColleccio(), {"notificacio.usuari_id": id});
+    let elimnarSeguidors = Query.queryEliminacio(modelSeguidors.getColleccio(), {"seguir.usuari_id": id});
+    let eliminarUsuari = Query.queryEliminacio(this.getColleccio() , {"_id": Query.convertirAObjecteID(id)});
+
+
     return new Promise((resolve , reject) =>{
-
-      Query.queryEliminacio(this.getColleccio() , {"_id": Query.convertirAObjecteID(id)})
-      .then((res)=> {
-        resolve(res);
-      })
-      .catch((err)=> {
-        reject(err);
-        console.log(err);
-      });
-
+      Promise.All(eliminarUsuari , elimnarProjectes , elimnarNotificacions , elimnarSeguidors , eliminarUsuari)
+      .then((resultat)=> resolve(resultat))
+      .catch(err => reject(err))
     });
-
-
-  } //Danger! //Eliminara tot les dades
+  }
 
 }
 

@@ -245,7 +245,7 @@ div.comentaris{
   display: flex;
   flex-flow: column nowrap;
   margin-bottom: 3px;
-  overflow: auto;
+  overflow-y: auto;
   border-radius: 0;
   border: none;
   padding: 0;

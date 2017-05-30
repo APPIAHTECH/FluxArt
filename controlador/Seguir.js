@@ -40,7 +40,7 @@ class Seguir{
                   "data" : new Date(),
                   "llegit" : false
                 }
-
+                estructuraNotificacio._id =Query.generarID();
                 estructuraNotificacio.notificacio = notificacioEstandarSeguiment;
 
                 modelNotificacio.inserirNotificacio(estructuraNotificacio)

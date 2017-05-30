@@ -66,9 +66,9 @@
           <div class="coments" v-for="comentari in comentaris">
             <div id="in">
               <div class="img perfilUrl" :style="{ 'background-image': 'url(' + comentari.url_img + ')' }"></div>
-              <h2 id="nom">{{comentari.nomUsuari}}</h2><h6>{{calcularTemps(comentari.data)}}</h6>
+              <h2 id="nom">{{comentari.nomUsuari}}</h2>
             </div>
-            <div id="com">
+            <div id="com" @change="scrollABaix">
               <p>{{comentari.missatge}}</p>
             </div>
           </div>

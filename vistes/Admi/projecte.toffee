@@ -25,7 +25,7 @@
             </div>
 
             <div class="perEfecte">
-              <li><i class="fa fa-product-hunt" aria-hidden="true" id="creix"></i><a href="/admin/administracio">Projectes</a></li>
+              <li><i class="fa fa-product-hunt" aria-hidden="true" id="creix"></i><a href="/admin/administracio/projectes">Projectes</a></li>
             </div>
 
             <div class="perEfecte">
@@ -33,7 +33,7 @@
             </div>
 
             <div class="perEfecte">
-              <li><i class="fa fa-sign-out" aria-hidden="true" id="creix"></i><a href="/admin/administracio">Tancar Sessió</a></li>
+              <li><i class="fa fa-sign-out" aria-hidden="true" id="creix"></i><a href="/admin/administracio/tancarSessio">Tancar Sessió</a></li>
             </div>
           </ul>
         </div>

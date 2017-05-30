@@ -5,9 +5,11 @@ const LocalStrategy = require('passport-local').Strategy;
 
 const Utilitats = require('./Utilitats.js');
 const credencials = require('./../config/credencials.js');
+const Query = require('./../models/Query.js');
 
 const ModelUsuari = require('./../models/usuaris/ModelUsuari.js');
 const UsuarisTemporal = require('./../models/usuaris/UsuarisTemporal.js');
+const imatgeDefecte = 'http://blog.ramboll.com/fehmarnbelt/wp-content/themes/ramboll2/images/profile-img.jpg';
 
 
 const correAdmin = '"eunisae" <eunisaesea@gmail.com>';
@@ -29,7 +31,7 @@ class Autenticacio{
       clientSecret: credencials.google.client_secret,
       callbackURL: credencials.google.redirect_uris[0]
     }, (token, tokenSecret, profile, done)=>{
-      Autenticacio.resol(token, tokenSecret, profile, done , 'google' , {"usuari.nom_usuari" : profile.displayName}); //Busca els usuaris per seudo nom
+      Autenticacio.resol(token, tokenSecret, profile, done , 'google' , {"usuari.nom_usuari" : profile.displayName}); //Busca els usuaris per nom usuari
     }));
 
   }
@@ -42,7 +44,7 @@ class Autenticacio{
       callbackURL: credencials.facebook.redirect_uris[0],
       profileFields: credencials.facebook.profileFields, //Les dades ha recuperar
     }, (token, tokenSecret, profile, done)=>{
-      Autenticacio.resol(token, tokenSecret, profile, done , 'facebook' ,{"usuari.nom_usuari" : profile.displayName}); //Busca els usuaris per seudo nom
+      Autenticacio.resol(token, tokenSecret, profile, done , 'facebook' ,{"usuari.nom_usuari" : profile.displayName}); //Busca els usuaris per nom usuari
     }));
 
   }
@@ -87,24 +89,21 @@ class Autenticacio{
   static resol(token, tokenSecret, profile, done , proveidor , condicio)
   {
     Autenticacio.generarSessio();
-    model.obtenirUsuaris(condicio)
-    .then((usuari)=> {
+    model.obtenirUsuaris(condicio).then((usuari)=> {
 
       if(usuari.length == 0) //Si l'usauri no esta definit
       {
         perfil = Autenticacio.estructurar(estructura , profile , proveidor);
-        model.inserirUsuari(perfil)
-        .catch((err) => {
-          console.log(err);
+        perfil._id = Query.generarID();
+        model.inserirUsuari(perfil).catch((err) => {
           done(err);
         });
 
-        done(null , perfil);//done(err , user , info) iniquem el modul passport que ja em operat amb el usuari.
+       done(null , perfil);//done(err , user , info) iniquem el modul passport que ja em operat amb el usuari.
       }else
-        done(null, profile , { message: 'iniciant sessio' });
+        done(null, profile);
 
     }).catch((err)=> {
-      console.log(err);
       done(err);
     });
 
@@ -118,24 +117,36 @@ class Autenticacio{
         perfil.usuari.nom = profile.name.givenName;
         perfil.usuari.nom_usuari = profile.displayName;
         perfil.usuari.correu = profile.emails[0].value;
-        perfil.usuari.url_img = profile.photos[0].value;
-        perfil.usuari.compte_soccials = [profile.provider];
+
+        if(profile.photos[0].value)
+            perfil.usuari.url_img = profile.photos[0].value;
+        else
+          perfil.usuari.url_img = imatgeDefecte;
+
+        perfil.usuari.compte_soccials = [profile.emails[0].value];
         perfil.usuari.tipus_registracio = profile.provider;
         perfil.usuari.estat_activacio = true;
+        perfil.usuari.primerCop = true;
         perfil.usuari.data_validacio = new Date();
 
     }else if(proveidor === 'facebook'){
 
+
       perfil.usuari.usuari_proveidor_id = profile.id;
-      perfil.usuari.nom_usuari = profile.displayName;
+      perfil.usuari.nom_usuari = profile.name.givenName;
 
-      if(typeof(profile.emails) != 'undefined')//DE MONENBT NOTE L'API DE facebook NO VOL DONAR EMIAL :()
-        profile.emails[0].value;
+      if(typeof(profile.emails) != 'undefined')
+        perfil.usuari.correu = profile.emails[0].value;
 
-      perfil.usuari.url_img = profile.profileUrl;
+      if(profile.profileUrl)
+         perfil.usuari.url_img = profile.profileUrl;
+      else
+        perfil.usuari.url_img = imatgeDefecte;
+
       perfil.usuari.compte_soccials = [profile.provider];
       perfil.usuari.tipus_registracio = profile.provider;
       perfil.usuari.estat_activacio = true;
+      perfil.usuari.primerCop = true;
       perfil.usuari.data_validacio = new Date();
     }
 
@@ -145,7 +156,6 @@ class Autenticacio{
   static generarSessio()
   {
     passport.serializeUser((perfil, done) =>{ //Serialitza el nom del usuari a sessio
-      console.log();
       if(!perfil.hasOwnProperty('displayName'))
           return done(null , perfil.usuari.nom_usuari);
         else
@@ -192,8 +202,8 @@ class Autenticacio{
               estructura.usuari.estat_activacio = "pendent";
               estructura.per_validar.encriptacio = Utilitats.generarStringEncriptat(dadesUsuari.correu);
               estructura.per_validar.dataCaducitat = Utilitats.generarDataCaducitat();
-
-              //NOTE: opcionsCorreu Canviar html pasar plantilla crear const from eunisae...
+              estructura._id = Query.generarID();
+              
               model.inserirUsuari(estructura).then((resultat)=>{
 
                 let link = Utilitats.location(req) + "/autenticacio/intern/registrar/verificar/"+estructura.per_validar.encriptacio;
@@ -239,6 +249,7 @@ class Autenticacio{
         perfil.usuari.estat_activacio = usuariTemporal[0].usuari.estat_activacio;
         perfil.usuari.primerCop = true;
         perfil.usuari.data_validacio = new Date();
+        perfil._id = Query.generarID();
 
         modelUsuari.inserirUsuari(perfil)
         .then((resultat)=> {
