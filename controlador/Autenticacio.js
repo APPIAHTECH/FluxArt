@@ -2,6 +2,7 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const LocalStrategy = require('passport-local').Strategy;
+const path = require('path');
 
 const Utilitats = require('./Utilitats.js');
 const credencials = require('./../config/credencials.js');
@@ -13,11 +14,14 @@ const imatgeDefecte = 'http://blog.ramboll.com/fehmarnbelt/wp-content/themes/ram
 
 
 const correAdmin = '"eunisae" <eunisaesea@gmail.com>';
-
+let plantillaCorreu = "" , plantillaCorreu2 ="" , plantillaCorreuAcabat;
 let model = new ModelUsuari();
 let estructura = model.getModel(); //Retorna l'estructura del model usuari
 let perfil = {};
 
+Utilitats.llegirFitxer(path.resolve('./Plantillas/correu.html') , (html)=> plantillaCorreu = html);
+Utilitats.llegirFitxer(path.resolve('./Plantillas/correu2.html') , (html)=> plantillaCorreu2 = html);
+Utilitats.llegirFitxer(path.resolve('./Plantillas/correu3.html') , (html)=> plantillaCorreuAcabat = html);
 
 class Autenticacio{
 
@@ -203,15 +207,17 @@ class Autenticacio{
               estructura.per_validar.encriptacio = Utilitats.generarStringEncriptat(dadesUsuari.correu);
               estructura.per_validar.dataCaducitat = Utilitats.generarDataCaducitat();
               estructura._id = Query.generarID();
-              
+
               model.inserirUsuari(estructura).then((resultat)=>{
 
                 let link = Utilitats.location(req) + "/autenticacio/intern/registrar/verificar/"+estructura.per_validar.encriptacio;
+                let plantilla =`${plantillaCorreu}${estructura.usuari.nom_usuari}${plantillaCorreu2}<a>Confirmar Compte ${link}</a>${plantillaCorreuAcabat}`;
+                
                 let opcionsCorreu = {
-                    from: correAdmin, // sender address
-                    to: dadesUsuari.correu, // list of receivers
-                    subject: 'Confirmacio Correu Flux', // Subject line
-                    html: '<b>Hola confirma la teva validacio a Flux amb el seguint link , </b>'+link // html body
+                    from: correAdmin,
+                    to: dadesUsuari.correu,
+                    subject: 'Confirmació Flux',
+                    html: plantilla
                 };
 
                 Utilitats.enviarCorreu(opcionsCorreu);
@@ -309,37 +315,5 @@ class Autenticacio{
   }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 module.exports = Autenticacio;

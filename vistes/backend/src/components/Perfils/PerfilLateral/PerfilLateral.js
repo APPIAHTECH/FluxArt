@@ -23,8 +23,10 @@ data(){
     mostrarEditar : false,
     descripcio : "",
     imatgePerfil :"",
+    usuariID : "",
     url : Utilitat.rutaUrl() + 'frontend/peticio/perfil/',
     urlSessio : Utilitat.rutaUrl() + 'frontend/peticio/teSessio',
+    urlSeguir : Utilitat.rutaUrl() + "frontend/peticio/seguir",
     redirecionar : "#/iniciarSessio"
   }
 },
@@ -86,22 +88,57 @@ methods: {
 
   },
 
-  //NOTE desarollar
+  demanarDades(url){
+    Utilitat.peticioGet(url).then((resultat) =>{
+
+      let perfil = resultat.perfil.perfil;
+      this.usuariID = resultat.perfil._id;
+      this.nomUsuari = perfil.nomUsuari;
+      this.seguidors = resultat.quantitatSeguidors;
+      this.projectes = resultat.quantitatProjectes;
+      this.descripcio = perfil.descripcio;
+      this.nom = perfil.nom;
+      this.nomUsuari = perfil.nom_usuari;
+      this.imatgePerfil = perfil.url_img;
+
+      if(!this.imatgePerfil)
+        this.imatgePerfil = 'http://blog.ramboll.com/fehmarnbelt/wp-content/themes/ramboll2/images/profile-img.jpg';
+
+      this.compteFace = perfil.compte_soccials[0];
+      this.compteGoogle = perfil.compte_soccials[1];
+    });
+  },
+
   seguirUsuari(event){
 
-    console.log("id usuari -> " , event);
-    // Utilitat.peticioGet(this.urlSessio).then((resultat)=>{
-    //
-    //   if(resultat.sessio){
-    //
-    //     let dades = {
-    //       idUsuari : this.$store.getters.obtenirID,
-    //       idUsuariASeguir : ''
-    //     }
-    //   }else
-    //     Utilitat.redirecionar(this.redirecionar);
-    //
-    // });
+    event.target.disabled = true;
+    event.target.className = 'btn jaSeguint';
+
+    Utilitat.peticioGet(this.urlSessio).then((resultat)=>{
+
+      if(resultat.sessio){
+
+        let dades = {
+          idUsuari : this.$store.getters.obtenirID,
+          idUsuariASeguir : this.usuariID,
+          nomUsuari : this.$store.getters.getNomUsuari
+        }
+
+        Utilitat.peticioPost(this.urlSeguir , dades).then((resultat)=>{
+
+          if(resultat.seguint)
+            Utilitat.notificar('Seguint' , "Ehnorabona estas seguin al usuari");
+          else if(resultat.jaEstaSeguint){
+            Utilitat.notificar('Estas Seguint' , "Ja estas seguint el usuari");
+          }
+
+
+        }).catch(err => console.error(err));
+
+      }else
+        Utilitat.redirecionar(this.redirecionar);
+
+    });
   }
 
 },
@@ -119,14 +156,21 @@ created(){
         else
           this.mostrarEditar = false;
 
-        this.nomUsuari = this.$store.getters.getNomUsuari;
-        this.seguidors = this.$store.getters.getQuantitatSeguidors;
-        this.projectes = this.$store.getters.getQuantitatProjectes;
-        this.descripcio = this.$store.getters.getDescripcio;
-        this.nom = this.$store.getters.getNom;
-        this.compteFace = this.$store.getters.getEnllasFacebook;
-        this.compteGoogle = this.$store.getters.getEnllasGoogle;
-        this.imatgePerfil = this.$store.getters.obtenirImatgePerfil;
+        if(this.$route.params.nomUsuari == this.$store.getters.getNomUsuari || this.mostrarEditar){
+          this.nomUsuari = this.$store.getters.getNomUsuari;
+          this.seguidors = this.$store.getters.getQuantitatSeguidors;
+          this.projectes = this.$store.getters.getQuantitatProjectes;
+          this.descripcio = this.$store.getters.getDescripcio;
+          this.nom = this.$store.getters.getNom;
+          this.compteFace = this.$store.getters.getEnllasFacebook;
+          this.compteGoogle = this.$store.getters.getEnllasGoogle;
+          this.imatgePerfil = this.$store.getters.obtenirImatgePerfil;
+        }else{
+          this.iniciatSessio = false;
+          let url =`${ this.url}${this.$route.params.nomUsuari}`;
+          this.demanarDades(url);
+        }
+
 
         if(!this.imatgePerfil)
           this.imatgePerfil = 'http://blog.ramboll.com/fehmarnbelt/wp-content/themes/ramboll2/images/profile-img.jpg';
@@ -141,29 +185,10 @@ created(){
           this.mostrarEditar = false;
 
         this.nomUsuari = this.obtenirParams();
-        this.url += this.nomUsuari;
+        let url =`${ this.url}${this.nomUsuari}`;
 
-        if(this.nomUsuari){
-
-
-          Utilitat.peticioGet(this.url).then(resultat =>{
-
-            let perfil = resultat.perfil;
-            this.nomUsuari = perfil.nomUsuari;
-            this.seguidors = resultat.quantitatSeguidors;
-            this.projectes = resultat.quantitatProjectes;
-            this.descripcio = perfil.descripcio;
-            this.nom = perfil.nom;
-            this.nomUsuari = perfil.nom_usuari;
-            this.imatgePerfil = perfil.url_img;
-
-            if(!this.imatgePerfil)
-              this.imatgePerfil = 'http://blog.ramboll.com/fehmarnbelt/wp-content/themes/ramboll2/images/profile-img.jpg';
-
-            this.compteFace = perfil.compte_soccials[0];
-            this.compteGoogle = perfil.compte_soccials[1];
-          });
-        }
+        if(this.nomUsuari)
+          this.demanarDades(url);
       }
 
     });

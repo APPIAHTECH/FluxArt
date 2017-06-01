@@ -59,6 +59,9 @@ export default {
     inserirComentari(event){
 
       if(event.keyCode == 13){
+
+        event.target.value = "";
+
         let idProjecte = this.$store.getters.getProjecteTemporal.projecteObtingut.projecte._id;
         let url_img = this.$store.getters.obtenirImatgePerfil;
         let IDUsuari = this.$store.getters.obtenirID;
@@ -127,8 +130,13 @@ export default {
 
     donarDiners(event){
 
-      if(this.$store.getters.getEnllasPaypal)
-        Utilitat.redirecionar(this.redirecionarAPaypal + this.$store.getters.getEnllasPaypal + '/1')
+      if(this.$store.getters.getEnllasPaypal){
+
+        if(this.$store.getters.getEnllasPaypal == this.$store.getters.getProjecteTemporal.propietari.usuari.compte_paypal)
+          Utilitat.notificar("Donar" , "No es pot realitzar una donacio a voste mateix.");
+        else
+          Utilitat.redirecionar(this.redirecionarAPaypal + this.$store.getters.getProjecteTemporal.propietari.usuari.compte_paypal + '/1');
+      }
       else{
 
         if(confirm("Configura el teu enllaç paypal.me per tal de donar  , Vols configurar l'enllaç paypal ? "))
@@ -137,9 +145,9 @@ export default {
 
     },
 
-    scrollABaix(event){
-      console.log(event);
-    }
+    scrollABaix(event){},
+
+    veurePerfil(event){Utilitat.redirecionar('#/perfil/'+event.target.dataset.nomusuari);}
 
   },
 

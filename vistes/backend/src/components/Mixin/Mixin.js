@@ -27,8 +27,24 @@ export default {
               });
 
             }else if(this.esAltres){
-              this.urlMesProjectes = `${this.url}${this.categoria}/${this.quantitatProjectes}/${this.filtrar}/${this.ordenacio}/${this.$store.getters.obtenirID}/${this.projecteRecent}`;
-              this.resoldrePeticio(this.urlMesProjectes);
+
+              if(!this.esFora) { //Si la peticio no ve del frontend 'http://localhost:3000/#/perfil/Stephen'
+
+                if(this.$route.params.nomUsuari){
+
+                  if(this.$route.params.nomUsuari == this.$store.getters.getUsuari.usuari.nom_usuari)
+                    this.urlMesProjectes = `${this.url}${this.categoria}/${this.quantitatProjectes}/${this.filtrar}/${this.ordenacio}/${this.$store.getters.getUsuari.usuari.nom_usuari}/${this.projecteRecent}`;
+                  else
+                    this.urlMesProjectes = `${this.url}${this.categoria}/${this.quantitatProjectes}/${this.filtrar}/${this.ordenacio}/${this.$route.params.nomUsuari}/${this.projecteRecent}`;
+
+                }else
+                  this.urlMesProjectes = `${this.url}${this.categoria}/${this.quantitatProjectes}/${this.filtrar}/${this.ordenacio}/${this.$store.getters.getUsuari.usuari.nom_usuari}/${this.projecteRecent}`;
+                  this.resoldrePeticio(this.urlMesProjectes);
+              }else {
+                this.urlMesProjectes = `${this.url}${this.categoria}/${this.quantitatProjectes}/${this.filtrar}/${this.ordenacio}/${this.dadesFora.nomUsuari}/${this.projecteRecent}`;
+                this.resoldrePeticio(this.urlMesProjectes);
+              }
+
             }else{
               this.urlMesProjectes = `${this.url}${this.categoria}/${this.quantitatProjectes}/${this.filtrar}/${this.ordenacio}/${this.projecteRecent}`;
               this.resoldrePeticio(this.urlMesProjectes);
@@ -37,15 +53,17 @@ export default {
         this.ocupat = false;
       },
 
-      obtenirProjectesLimitat(altres, id)
+      obtenirProjectesLimitat(altres, nomUsuari)
       {
         let url = "";
 
         if(!altres)
           url = `${this.url}${this.categoria}/${this.quantitatProjectes}/${this.filtrar}/${this.ordenacio}`;
         else
-          url = `${this.url}${this.categoria}/${this.quantitatProjectes}/${this.filtrar}/${this.ordenacio}/${id}`;
+          url = `${this.url}${this.categoria}/${this.quantitatProjectes}/${this.filtrar}/${this.ordenacio}/${nomUsuari}`;
 
+        console.log(url);
+        console.log("altrs -> " , altres);
         this.resoldrePeticio(url);
       },
 
@@ -178,10 +196,28 @@ export default {
           this.filtrar = filtrar;
           this.ordenacio = ordenacio;
 
-          if(this.esAltres)
-            this.obtenirProjectesLimitat(true , this.$store.getters.obtenirID);
-          else
+          if(this.esAltres){
+
+
+            if(!this.esFora){
+              if(this.$route.params.nomUsuari){
+
+                if(this.$route.params.nomUsuari == this.$store.getters.getUsuari.usuari.nom_usuari)
+                  this.obtenirProjectesLimitat(true , this.$store.getters.getUsuari.usuari.nom_usuari);
+                else
+                    this.obtenirProjectesLimitat(true , this.$route.params.nomUsuari);
+
+              }else
+                this.obtenirProjectesLimitat(true , this.$store.getters.getUsuari.usuari.nom_usuari);
+            }else{
+              console.log(this.esFora);
+              this.obtenirProjectesLimitat(true , this.dadesFora.nomUsuari);
+            }
+
+          }else{
             this.obtenirProjectesLimitat(false);
+          }
+
       },
 
       detail(event){
@@ -198,6 +234,10 @@ export default {
         this.urlProjecteSeguidors = urlProjecteSeguidors;
         this.urlSeguir = urlSeguir;
 
+      },
+
+      veurePerfil(event){
+        Utilitat.redirecionar('#/perfil/'+event.target.dataset.nomusuari);
       }
     }
 }

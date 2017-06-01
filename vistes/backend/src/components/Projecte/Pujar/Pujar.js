@@ -29,6 +29,7 @@ export default{
       obtenirImatges(event){
         let imatges = event.target.files || event.dataTransfer.files; //L'element que llença l'event en aquet cas input[file] , recuperem els fitxers (dataTransfer per drag i drop)
 
+        console.log(imatges);
         if (imatges.length === 0 || imatges.length > this.maximaQuantitatImatges)
             return;
 
@@ -88,8 +89,10 @@ export default{
 
           let res = response.body;
 
-          if(res.faltaPerConfirmar)
+          if(res.faltaPerConfirmar){
             Utilitats.notificar('Confirmació' ,"Hey , el projecte esta sent revisat pel departament de Flux, una vegada confirmat el projecte se't notificarà en el correu electrònic que has facilitat a Flux. Sort!");
+            Utilitats.redirecionar(Utilitats.rutaUrl() + 'api/backend/#/visualitzar/projecte');
+          }
           else
             alert("Alguna cosa no anat be , tornau a intentar si seguiex així contacta amb nosaltres.");
 

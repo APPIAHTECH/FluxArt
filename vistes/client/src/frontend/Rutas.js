@@ -7,12 +7,10 @@ import Confirmar from "./components/Confirmar/Confirmar.vue";
 import Felicitat from "./components/Felicitat/Felicitat.vue";
 import Sobre from "./components/Sobre/sobre.vue";
 import Suport from "./components/Suport/Suport.vue";
-import Perfil from './../../../backend/src/components/Perfils/PerfilComplet/Perfil.vue';
+import Perfil from "./components/Perfil/Perfil.vue";
+import rutaNoDefinit from "./components/Error/Error404.vue";
 
 Vue.use(VueRouter);
-
-const rutaNoDefinit = { template: '<div>No he trobat la ruta ...</div>' };
-
 const router = new VueRouter({
   routes:[
     {path:"/", component: Flux},

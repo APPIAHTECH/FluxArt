@@ -21,18 +21,27 @@ export default {
 
   methods: {
 
-    //Comprovar caracters raros...
     validar(){
-    if(this.nomProjecte === "")
-      {
+    if(this.nomProjecte === ""){
         Utilitat.notificar("Camp nom projecte" , "Definexi un nom per el teu projecte");
         this.mostrarPujar = false;
       }else if(this.descripcio === ""){
         Utilitat.notificar("Camp descripció" , "Definexi una descripció per el teu projecte");
         this.mostrarPujar = false;
-      }else {
+      }else if(this.poderDonar){
+
+        if(this.$store.getters.getEnllasPaypal)
+          this.mostrarPujar = true;
+        else {
+          this.mostrarPujar = false;
+          if(confirm("Configura el teu enllaç paypal.me per tal de donar  , Vols configurar l'enllaç paypal ? "))
+            Utilitat.redirecionar(Utilitat.rutaUrl() + 'api/backend/#/compte');
+          else
+            this.poderDonar = false;
+        }
+      }else
         this.mostrarPujar = true;
-      }
+
     }
   },
 

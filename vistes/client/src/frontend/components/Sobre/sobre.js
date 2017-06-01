@@ -1,27 +1,29 @@
 import MenuFrontal from "./../Menu/Menu.vue";
 import FluxFooter from "./../Footer/Footer.vue";
-const VueGoogleMap = require('vue-google-maps');
-
-VueGoogleMap.load({
-    'key': 'AIzaSyCNZXAHTqxz4YaVA2sZKK6yf8jYbga-2FU'
-});
-
 
 export default {
   components: {
     MenuFrontal,
-    FluxFooter,
-    googleMap : VueGoogleMap.Map
+    FluxFooter
+  },
+  methods: {
+   initMap(){
+
+     let uluru = {lat: 41.9240805, lng: 2.2563659};
+     let qMap = this.$el.querySelector('.mapa');
+     let map = new google.maps.Map(qMap, {
+       zoom: 15,
+       center: uluru
+     });
+
+     let marker = new google.maps.Marker({
+       position: uluru,
+       map: map
+     });
+    }
   },
 
-  data () {
-    return {
-      center: {lat: 10.0, lng: 10.0},
-      markers: [{
-        position: {lat: 10.0, lng: 10.0}
-      }, {
-        position: {lat: 11.0, lng: 11.0}
-      }]
-    }
+  mounted() {
+    this.initMap();
   }
 }

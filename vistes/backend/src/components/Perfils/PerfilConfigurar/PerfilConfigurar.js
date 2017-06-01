@@ -65,7 +65,7 @@ export default {
     },
 
     eliminar(){
-      let resultat = confirm("Estas segur que vols eliminar el compte ? , (NO EL PODRAS RECUPERAR!)");
+      let resultat = confirm("Estas segur que vols eliminar el compte ? , (NO EL PODRAS RECUPERAR)");
 
         if(resultat){
           let id  = this.id;

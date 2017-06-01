@@ -29,39 +29,42 @@ class Usuari{
   obtenirUsuariNomUsuari(req , res)
   {
 
-    if(req.user)
-      res.send({iniciatSessio : true});
-    else {
+    let modelProject = new ModelProjecte();
+    let modelSeguir = new ModelSeguiment();
+    let IDusuari = "" , iniciatSessio = false;
+    let nomUsuari = req.params.nomUsuari.toString();
 
-      let modelProject = new ModelProjecte();
-      let modelSeguir = new ModelSeguiment();
-      let IDusuari = "";
+    if(req.user){
+      if(req.user[0].usuari.nom_usuari == nomUsuari)
+        iniciatSessio = true;
+    }
 
-      model.obtenirUsuaris({"usuari.nom_usuari" : req.params.nomUsuari} , excloureCamps)
-      .then((perfil)=> {
+    model.obtenirUsuaris({"usuari.nom_usuari" : nomUsuari} , excloureCamps)
+    .then((perfil)=> {
 
-        IDusuari = perfil[0]._id.toString();
-        let seguint = modelSeguir.quantitatSeguidors(IDusuari);
-        let quantitatProjectes = modelProject.quantitatProjectes(IDusuari);
+      IDusuari = perfil[0]._id.toString();
+      let seguint = modelSeguir.quantitatSeguidors(IDusuari);
+      let quantitatProjectes = modelProject.quantitatProjectes(IDusuari);
+      let perfilUsuari = {
+        _id : IDusuari,
+        perfil : {}
+      }
 
-        Promise.all([seguint , quantitatProjectes]).then((valors)=>{
-
-          res.send({
-            iniciatSessio : false,
-            perfil : perfil[0].usuari,
-            quantitatSeguidors : valors[0],
-            quantitatProjectes : valors[1]
-          });
-
+      Promise.all([seguint , quantitatProjectes]).then((valors)=>{
+        perfilUsuari.perfil = perfil[0].usuari;
+        res.send({
+          iniciatSessio : iniciatSessio,
+          perfil : perfilUsuari,
+          quantitatSeguidors : valors[0],
+          quantitatProjectes : valors[1]
         });
 
-
-
-      }).catch((err)=> {
-        console.error(err);
-        res.status(500).send("Alguna cosa no anat be");
       });
-    }
+
+    }).catch((err)=> {
+      console.error(err);
+      res.status(500).send("Alguna cosa no anat be");
+    });
 
   }
 
@@ -103,7 +106,6 @@ class Usuari{
 
   actualitzarDades(req , res , next){
 
-    //NOTE: BUSCAR UNA MILLOR MANERA DE FER AIXO!
     let dades = req.body;
     let comptes = [];;
 

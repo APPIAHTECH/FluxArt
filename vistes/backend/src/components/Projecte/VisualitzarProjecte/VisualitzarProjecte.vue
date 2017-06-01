@@ -5,26 +5,19 @@
       <div class="contenidorPrimer">
 
         <div class="capcelera">
-          <div class="img perfilUrl" :style="{ 'background-image': 'url(' + imgPerfil + ')' }"></div> <p id="nomUsuari">{{nomUsuari}}</p>
+          <div class="img perfilUrl" :style="{ 'background-image': 'url(' + imgPerfil + ')' }" :data-nomusuari="nomUsuari" @click="veurePerfil"></div>
           <div class="donar">
             <a href="https://plus.google.com/share?url={http://localhost:3000/#/visualitzar/projecte}" onclick="javascript:window.open(this.href,
             '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img
-            src="https://www.gstatic.com/images/icons/gplus-32.png" alt="Share on Google+"/></a>
-
-            <a v-if="teDonacio" @click="donarDiners"><img src="https://www.joomlashack.com/images/showcase/osdonate.png" alt="" id="pay"></a>
-
-
-
-            <button type="button" class="btn perso" @click="actualitzarLikes" v-if="!liAgrada"><i class="fa fa-thumbs-up" aria-hidden="true"></i>Like</button>
-
-            <button type="button" class="btn perso" v-else @click="noAgrada"><i class="fa fa-heart" aria-hidden="true"></i>M'agrada</button>
-
-
+            src="https://www.gstatic.com/images/icons/gplus-16.png" alt="Share on Google+"/></a>
+            <a v-if="teDonacio" @click="donarDiners"><img src="http://bryanjacobsonfoundation.org/wp-content/uploads/2013/10/donate-icon@2x.png" alt="" id="pay"></a>
+            <button type="button" class="btn perso" @click="actualitzarLikes" v-if="!liAgrada"><i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
+            <button type="button" class="btn perso" v-else @click="noAgrada"><i class="fa fa-heart" aria-hidden="true"></i></button>
           </div>
         </div>
 
-
         <div class="contenidorImatge perfilUrl" :style="{ 'background-image': 'url(' + imatgeGran + ')' }" @click="mesGran"></div>
+
         <div class="llistatImatges">
 
           <div v-for="imatge in llistatImatges" class="cont">
@@ -33,31 +26,39 @@
 
         </div>
       </div>
+
+
       <div class="contenidorSegon">
         <div class="info">
           <h2>{{titul}}</h2>
-          <input type="text" name="" :value="descripcio" disabled="true" id="textDesc">
+          <div id="descripcio">
+            <p id="descrip">{{descripcio}}</p>
+          </div>
         </div>
 
-        <div class="tipusCat">
-          <div class="cate">
-            <p>Categoría</p>
-            <h4>{{categoria}}</h4>
-          </div>
+        <div class="contenidroInfor">
+          <div class="tipusCat">
+            <div class="cate">
+              <p>Categoría</p>
+              <h4>{{categoria}}</h4>
+            </div>
 
-          <div class="cate">
-            <p>Tags</p>
-            <div class="tags">
-              <h4>{{tags}}</h4>
+            <div class="cate" v-show="tags">
+              <p>Tags</p>
+              <div class="tags">
+                <h4>{{tags}}</h4>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="puntuacio">
-          <div class="rand">
-            <i class="fa fa-eye" aria-hidden="true" id="visitas">Visitas <p>{{visitas}}</p></i>
-            <i class="fa fa-heart" aria-hidden="true" id="cor">Like? <p id="pos">{{like}}</p></i>
-            <i class="fa fa-comment" aria-hidden="true" id="commen">Comentaris <p id="poss">{{comentarisTotal}}</p></i>
+          <div class="puntuacio">
+            <div class="rand">
+              <i class="fa fa-eye" aria-hidden="true" id="visitas">Visitas</i><p class="especial">{{visitas}}</p>
+              <hr>
+              <i class="fa fa-heart" aria-hidden="true" id="cor">Like</i> <p class="especial">{{like}}</p>
+              <hr>
+              <i class="fa fa-comment" aria-hidden="true" id="commen">Comentaris</i><p class="especial">{{comentarisTotal}}</p>
+            </div>
           </div>
         </div>
 

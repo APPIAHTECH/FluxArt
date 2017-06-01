@@ -17,15 +17,15 @@
 
         <div v-else id="else">
           <p>Informació</p>
-          <input type="text" placeholder="Nom del teu projecte" v-model="nomProjecte" required>
-          <textarea name="desc" rows="8" cols="80" placeholder="Descripció" v-model="descripcio" required></textarea>
+          <input type="text" placeholder="Nom del teu projecte" v-model="nomProjecte" required maxlength="50">
+          <textarea name="desc" rows="8" cols="80" placeholder="Descripció , max 20 líneas" v-model="descripcio" required maxlength="500"></textarea>
 
           <p>Categoría</p>
           <select  v-model="categoria">
             <option :value="categoria" v-for="categoria in categories">{{categoria}}</option>
           </select>
-          <input type="text" placeholder="tags separats per comes" v-model="tags" id="tags">
-          <p id="poderDonar">Poder Donar ?  <input type="checkbox" id="checkbox" v-model="poderDonar"></p>
+          <input type="text" placeholder="tags separats per comes" v-model="tags" id="tags" maxlength="50">
+          <p id="poderDonar">Permetre Donacions ?  <input type="checkbox" id="checkbox" v-model="poderDonar"></p>
 
           <button type="button" name="button" class="btn" @click="validar">Seguent <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
         </div>

@@ -8,10 +8,9 @@ import VisualitzarProjecte from './components/Projecte/VisualitzarProjecte/Visua
 import ElsMenusProjectes from './components/Projecte/ElsMenusProjectes/ElsMenusProjectes.vue';
 import MesGran from './components/Projecte/MesGran/MesGran.vue';
 import BuscarDissenyador from './components/BuscarDissenyador/BuscarDissenyador.vue';
+import rutaNoDefinit from './../../../../../client/src/Error/Error404.vue';
 
 Vue.use(VueRouter);
-
-const rutaNoDefinit = { template: '<div>Soc backend i No he trobat la ruta ...</div>' };
 const rutas = new VueRouter({
   routes:[
     {path:"/", component: FluxBackend},

@@ -4,6 +4,7 @@ const document = {
 
     "projecteTemporal":{
       "usuari_id":"",
+      "nom_usuari":"",
       "titul":"",
       "descripcio":"",
       "imatges":[],

@@ -41,13 +41,6 @@ class Administracio{
       let estructura = modelProjecte.getModel();
       let nouProjecte = req.body.projecConfirmat;
 
-      let opcionsCorreu = {
-          from: correAdmin,
-          to: nouProjecte.projecteTemporal.correu,
-          subject: 'Confirmacio del projecte ',
-          html: '<b>Hola , el teu projecte a sigut confirmat , per veure el projecte iniciarSessio i busca en el buscador de projectes el teu projecte per el seu nom , Sort! </b>' // html body
-      };
-
       estructura._id = Query.generarID();
       estructura.projecte = nouProjecte.projecteTemporal;
       estructura.projecte.data_creacio = new Date();
@@ -61,7 +54,13 @@ class Administracio{
       modelProjecte.inserirProjecte(estructura).then(resultat => {
         if(resultat)
         {
-          console.log("ide que  -> " , nouProjecte._id.toString());
+          let opcionsCorreu = {
+              from: correAdmin,
+              to: nouProjecte.projecteTemporal.correu,
+              subject: 'Confirmació Projecte Flux',
+              html: `<b>Hola ${estructura.projecte.nom_usuari}, el teu projecte ${estructura.projecte.titul} a sigut confirmat</b>`
+          };
+
           model.borrarProjecte(nouProjecte._id).then((resultat)=>{ //Borrant projecte temporal
             if(resultat){
               Utilitat.enviarCorreu(opcionsCorreu);
@@ -86,7 +85,7 @@ class Administracio{
         from: correAdmin,
         to: projecte.projecteTemporal.correu,
         subject: 'Denegat Projecte Flux ',
-        html: '<b> Em denegat el teu projecte ja que no compleix amb els requiriment ... :( </b>' // html body
+        html: `<b>Hola ${projecte.projecteTemporal.nom_usuari} ,et comuniquem que el projecte ${projecte.projecteTemporal.titul} a sigut denegat, ja que no compleix amb el requeriment. Per a més informació referents els requeriments de projectes vés a Flux/suport.</b>` // html body
     };
 
     model.borrarProjecte(projecte._id).then((resultat)=>{ //Borrant projecte temporal

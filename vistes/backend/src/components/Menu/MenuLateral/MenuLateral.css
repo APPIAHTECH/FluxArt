@@ -8,6 +8,7 @@ div.menuLateral{
   right: 0;
   left: 0;
   top: 73px;
+  z-index: 9999;
 }
 
 div.amagar{

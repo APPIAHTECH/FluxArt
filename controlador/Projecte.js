@@ -114,7 +114,7 @@ class Projecte{
 
       let filtratge = {} ,  dades = peticio.dades , categoria = peticio.categoria , condicio = {};
       filtratge[`projecte.${peticio.camp}`] = peticio.campOrdenacio;
-      condicio['projecte.usuari_id'] = req.params.id;
+      condicio['projecte.nom_usuari'] = req.params.nomUsuari;
 
       model.obtenirVariusProjectes({$and : [{"projecte.categoria" :categoria } , condicio]} , peticio.quantitat , filtratge)
      .then((projecte)=> {
@@ -131,7 +131,7 @@ class Projecte{
       let filtratge = {} ,  dades = peticio.dades , categoria = peticio.categoria , condicio = {};
       filtratge[`projecte.${peticio.camp}`] = peticio.campOrdenacio;
       condicio[`projecte.${peticio.camp}`] = {$lt:dades};
-      condicio['projecte.usuari_id'] = req.params.id;
+      condicio['projecte.nom_usuari'] = req.params.nomUsuari;
 
       model.obtenirVariusProjectes({$and : [{"projecte.categoria" :categoria } , condicio]} , peticio.quantitat , filtratge)
      .then((projecte)=> {

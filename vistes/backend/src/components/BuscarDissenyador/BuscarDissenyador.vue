@@ -11,7 +11,7 @@
 
 
         <div class="marc" v-for="dissenyador in llistatUsuaris">
-          <div class="imatge" :style="{ 'background-image': 'url(' + dissenyador.usuari.url_img + ')' }"></div>
+          <div class="imatge" :style="{ 'background-image': 'url(' + dissenyador.usuari.url_img + ')' }" :data-nomusuari="dissenyador.usuari.nom_usuari" @click="veurePerfil"></div>
           <div class="capceleraBaix">
             <h4><i class="fa fa-paper-plane" aria-hidden="true"></i> {{dissenyador.usuari.nom_usuari}}</h4>
             <button type="button" class="btn seguir" @click="seguirUsuari" :data-usuari="dissenyador._id" :data-nom="dissenyador.usuari.nom_usuari">Seguir</button>

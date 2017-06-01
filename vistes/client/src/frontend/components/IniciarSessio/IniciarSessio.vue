@@ -4,12 +4,12 @@
       <form :action="peticio" :method="metode" enctype="multipart/form-data" accept-charset="UTF-8" @submit="iniciarSessio">
         <div class="capcelera">
           <h4 id="titul" v-if="error">{{missatge}} <i class="fa fa-frown-o" aria-hidden="true"></i></h4>
-          <h4 id="titul" v-else> hey <i class="fa fa-smile-o" aria-hidden="true"></i></h4>
+          <h4 id="titul" v-else> Benvolgut <i class="fa fa-smile-o" aria-hidden="true"></i></h4>
         </div>
 
         <div class="letGo">
           <div class="formulari">
-            <label>Sobrenom</label>
+            <label>Nom Usuari</label>
             <input type="text" required min="3" maxlength="150" autofocus v-model="nomUsuari" name="nomUsuari">
             <label>Contrasenya <a href="#" v-if="error" id="oblidat">Oblidat?</a></label>
             <input type="password" required min="6" class="password" v-model="contrasenya" required name="contrasenya">

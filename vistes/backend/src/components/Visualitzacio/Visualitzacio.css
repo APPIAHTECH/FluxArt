@@ -1,7 +1,7 @@
 .visualitzar
 {
   width: 100%;
-  height: auto;
+  height: 100%;
   min-height: 350px;
   background: #F5F5F5;
   margin-bottom: 250px;
@@ -70,6 +70,8 @@
   background-size: cover;
 
 }
+
+.pefil:hover{cursor: pointer;}
 .nom
 {
   width: auto;

@@ -6,6 +6,7 @@
          <li><a href="/#/sobre">SOBRE FLUX</a></li>
          <li><a href="/#/suport">SUPORT</a></li>
          <li><a href="/#/iniciarSessio">INICIAR SESSIÓ</a></li>
+         <li><a href="/#/registrar">REGISTRAR-SE</a></li>
        </ul>
     </ul>
   </nav>

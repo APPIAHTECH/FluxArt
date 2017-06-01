@@ -13,9 +13,10 @@ class ProjecteTemporal{
 
     let estructura = {};
     estructura = model.getModel();
-
+    
     estructura._id = Query.generarID();
     estructura.projecteTemporal.usuari_id = req.body.dadesUsuari._id;
+    estructura.projecteTemporal.nom_usuari = req.body.dadesUsuari.usuari.nom_usuari
     estructura.projecteTemporal.titul = req.body.dadesProjecte.nomProjecte
     estructura.projecteTemporal.descripcio = req.body.dadesProjecte.descripcio;
     estructura.projecteTemporal.categoria = req.body.dadesProjecte.categoria;

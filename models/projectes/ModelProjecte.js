@@ -6,6 +6,7 @@ const document = {
 
   "projecte":{
     "usuari_id":"",
+    "nom_usuari":"",
     "titul":"",
     "descripcio":"",
     "imatges":[],

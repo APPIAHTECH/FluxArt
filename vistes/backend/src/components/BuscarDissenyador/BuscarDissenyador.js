@@ -50,7 +50,9 @@ export default {
           Utilitat.redirecionar(this.redirecionar);
 
       });
-    }
+    },
+
+    veurePerfil(event){Utilitat.redirecionar('#/perfil/'+event.target.dataset.nomusuari);}
   },
 
   created(){

@@ -17,7 +17,7 @@ div.contenidor{
   border-bottom: solid 2px #F0F0F1;
 }
 
-
+#seleccio{cursor: pointer;}
 div.centrar{
   display: flex;
   justify-content: center;
@@ -54,7 +54,7 @@ input[type="text"]{
   margin-bottom: 20px;
   padding: 10px;
   box-sizing: border-box;
-  border: solid 1px #EAECEF;
+  border: solid 2px #EAECEF;
   outline: none;
   text-align: justify;
   display: block;
@@ -137,4 +137,9 @@ div.imatge{
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+}
+
+button.jaSeguint{
+  background: gray;
+  opacity: .5;
 }

@@ -23,6 +23,20 @@ export default {
     esAltres:{ //Si es els meus projectes o perfil true en cas contrari true
       type:Boolean,
       required:true
+    },
+
+    dadesFora:{
+      type:Object,
+      required:false
+    },
+
+    opcions:{
+      type:Object,
+      required:false
+    },
+    esFora:{
+      type:Boolean,
+      required : false
     }
   },
 
@@ -57,10 +71,13 @@ export default {
 created(){
 
     if(typeof(this.$store) !== "undefined"){
-
       this.categories = this.$store.getters.getCategories;
       this.popular = this.$store.getters.getPopular;
+    }else{
+      this.categories = this.opcions.categories;
+      this.popular = this.opcions.popular;
     }
+
 
     if(this.visualitzarNormal){
 
@@ -83,7 +100,7 @@ created(){
        });
      }
 
-   }else if(typeof(this.$store) !== "undefined"){
+   }else if(this.esAltres){
 
       let projectes = [] , usuari;
       this.setejarUrls(
@@ -94,19 +111,44 @@ created(){
         Utilitat.rutaUrl() + "frontend/peticio/usuari/seguint/"
       );
 
-      Utilitat.esperar(() => {
+      if(this.$route.params.nomUsuari == this.$store.getters.getUsuari.usuari.nom_usuari){
+        Utilitat.esperar(() => {
+          projectes = this.$store.getters.getTreballs;
+          usuari = this.$store.getters.getUsuari;
 
-        projectes = this.$store.getters.getTreballs;
-        usuari = this.$store.getters.getUsuari;
+          projectes.forEach((projecte)=> {
+            projecte['info'] = usuari;
+            this.llistatProjectes.push(projecte);
+          });
 
-        projectes.forEach((projecte)=> {
-          projecte['info'] = usuari;
-          this.llistatProjectes.push(projecte);
-        })
+        });
 
-      });
+      }else {
 
-    }else{
+        if(this.$route.params.nomUsuari){
+          let nomUsuari = this.$route.params.nomUsuari;
+          this.obtenirProjectesLimitat(true , nomUsuari);
+        }else {
+
+          Utilitat.esperar(() => {
+            projectes = this.$store.getters.getTreballs;
+            usuari = this.$store.getters.getUsuari;
+
+            projectes.forEach((projecte)=> {
+              projecte['info'] = usuari;
+              this.llistatProjectes.push(projecte);
+            });
+
+          });
+        }
+
+      }
+    }
+  },
+
+  mounted(){
+
+    if(this.esFora){
 
       this.setejarUrls(
         Utilitat.rutaUrl() + "frontend/peticio/projecte/usuari/" ,
@@ -116,8 +158,11 @@ created(){
         Utilitat.rutaUrl() + "frontend/peticio/usuari/seguint/"
       );
 
-      this.obtenirProjectesLimitat(false);
+      this.categories = this.opcions.categories;
+      this.popular = this.opcions.popular;
+      this.obtenirProjectesLimitat(true , this.dadesFora.nomUsuari);
     }
+
   },
 
   mixins:[Mixin]

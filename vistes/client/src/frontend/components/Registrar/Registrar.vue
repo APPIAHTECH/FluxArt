@@ -6,8 +6,8 @@
       <div class="icone"></div>
 
       <div class="text">
-        <h1 id="titul">FLux</h1>
-        <h4 id="expandeix">El Disseny que mes ...</h4>
+        <h1 id="titul" style="margin-top:100px; font-size:15pt;">FLUX L'ART DE COMPARTIR</h1>
+        <h4 id="expandeix"></h4>
       </div>
     </div>
 
@@ -32,7 +32,7 @@
 
           <label>Contrasenya</label>
           <input type="password" required min="6" class="password" v-model="contrasenya" required name="contrasenya">
-          <input type="submit" value="Crear Compte"><p id="inici">Ja tens un compte ? </p> <a href="/#/iniciarSessio">Iniciar Sessió</a>
+          <input type="submit" value="Crear Compte"><p id="inici">Ja tens compte ? </p> <a href="/#/iniciarSessio">Iniciar Sessió</a>
         </div>
 
         <div class="xarxaSocials">
@@ -41,7 +41,7 @@
           </div>
 
           <div class="facebook" @click="RegistrarFacebook">
-            <div class="imgFacebook"></div><p id="xarxa">Registrar amb Google</p>
+            <div class="imgFacebook"></div><p id="xarxa">Registrar amb Facebook</p>
           </div>
         </div>
 

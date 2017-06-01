@@ -28,8 +28,6 @@
                 <input id="inputFixer" type="file" name="imatges" :accept="fitxersAcceptats" @change="obtenirImatges" multiple hidden>
               </p>
             </div>
-
-
           </div>
         </div>
     </form>
@@ -39,9 +37,6 @@
         <img :src="imatge" alt="" v-for="imatge in llistat_imatges">
       </div>
     </div>
-
-
-
   </div>
 </template>
 

@@ -18,12 +18,15 @@
           <p id="dis">DISSENYADOR / FUNDADOR / DESENVOLUPADOR </p>
           <div class="xarxa">
             <a href="#/perfil/Stephen"><i class="fa fa-paper-plane" aria-hidden="true"></i></a>
-            <a href=""><i class="fa fa-google-plus-square" aria-hidden="true"></i></a>
-            <a href=""><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
+            <a href="https://plus.google.com/u/0/"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a>
+            <a href="https://www.facebook.com/eunisaesea"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
           </div>
           <h4 id="expandeix">Stephen Appiah Frimpong</h4>
         </div>
-        <googleMap :center="center" :zoom="12" id="mapa"></googleMap>
+
+        <div class="mapa">
+
+        </div>
     </div>
     <FluxFooter></FluxFooter>
   </div>

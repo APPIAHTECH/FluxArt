@@ -22,7 +22,7 @@ class Utilitat {
     }, temps);
   }
 
-  static notificar(titul , msg , tempsTancament = 5000){
+  static notificar(titul , msg , tempsTancament = 6000){
 
     let opcions = {
         body: msg,

@@ -53,7 +53,7 @@
         <div class="contenidor" id="noBorder">
           <div v-if="!iniciatSessio && !mostrarEditar">
             <div class="centrar">
-              <button type="button" class="btn" @click="seguirUsuari">Seguir</button>
+              <button type="button" class="btn" @click="seguirUsuari" :data-usuari="usuariID" :data-nom="nomUsuari">Seguir</button>
             </div>
           </div>
 

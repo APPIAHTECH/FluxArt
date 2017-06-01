@@ -2,6 +2,7 @@ const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const bcrypt  = require('bcrypt');
 const url = require('url');
+const fs = require('fs');
 
 class Utilitats {
   constructor() {}
@@ -58,6 +59,15 @@ class Utilitats {
         protocol: req.protocol,
         host: req.get('host')
     });
+  }
+
+  static llegirFitxer(ruta , callback){
+    fs.readFile(ruta, 'utf8', (err,data) =>{
+      if (err)
+        return console.log(err);
+      callback(data);
+    });
+
   }
 
 }

@@ -76,3 +76,8 @@ a{
   text-decoration: none;
   color: white;
 }
+
+p.especial{
+  display: inline-block;
+  font-size: 10pt;
+}

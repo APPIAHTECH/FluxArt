@@ -26,9 +26,9 @@ router.get('/peticio/seguidor/projecte/:quantitat/:filtrar/:ordenacio/:id/:dades
 
 router.get('/peticio/projecte/amb/:id', controladorProjecte.obtenidrProjecteID);
 
-router.get('/peticio/projecte/usuari/:categoria/:quantitat/:filtrar/:ordenacio/:id', controladorProjecte.recuperarProjecteUsuari);
+router.get('/peticio/projecte/usuari/:categoria/:quantitat/:filtrar/:ordenacio/:nomUsuari', controladorProjecte.recuperarProjecteUsuari);
 
-router.get('/peticio/projecte/usuari/:categoria/:quantitat/:filtrar/:ordenacio/:id/:dades', controladorProjecte.recuperarMesProjectesUsuari);
+router.get('/peticio/projecte/usuari/:categoria/:quantitat/:filtrar/:ordenacio/:nomUsuari/:dades', controladorProjecte.recuperarMesProjectesUsuari);
 
 router.get('/peticio/buscar', controladorProjecte.buscarPerTitul);
 

@@ -2,7 +2,7 @@
   <footer class="footer">
     <div class="contenidor">
       <div class="cap">
-        <h1 id="titul">En que estas treballta?</h1>
+        <h1 id="titul">En què estàs treballant?</h1>
         <h4 id="expandeix">Mostrar i explicar per als dissenyadors <br></h4>
       </div>
 

@@ -22,8 +22,8 @@ const document = {
     "usuari_proveidor_id":"",
     "primerCop":false,
     "rebreNotificacions":false,
-    "pais":"españa",
-    "provincia":"barcelona"
+    "pais":"España",
+    "provincia":"Barcelona"
   }
 }
 
@@ -133,7 +133,7 @@ class ModelUsuari extends ModelBase{
 
 
     return new Promise((resolve , reject) =>{
-      Promise.All(eliminarUsuari , elimnarProjectes , elimnarNotificacions , elimnarSeguidors , eliminarUsuari)
+      Promise.all(eliminarUsuari , elimnarProjectes , elimnarNotificacions , elimnarSeguidors , eliminarUsuari)
       .then((resultat)=> resolve(resultat))
       .catch(err => reject(err))
     });
