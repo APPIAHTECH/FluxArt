@@ -15,7 +15,7 @@ export default {
       tags : "",
       categoria:"Illustracio",
       poderDonar : false,
-      mostrarPujar : false
+      mostrarPujar : true
     }
   },
 

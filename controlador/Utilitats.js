@@ -15,12 +15,12 @@ class Utilitats {
   }
 
   static generarDataCaducitat(){
-    var caduca = new Date();
+    let caduca = new Date();
     caduca.setHours(caduca.getHours() + 6); //6Horas
     return caduca;
   }
 
-  static enviarCorreu(opcions)
+  static enviarCorreu(opcions , callback)
   {
     let transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -34,8 +34,13 @@ class Utilitats {
 
     transporter.sendMail(mailOptions, (error, info) => {
         if (error)
-            return console.log(error);
-      console.log('Message %s sent: %s', info.messageId, info.response);
+            {
+              console.error(error);
+              callback(false , error);
+            }
+      console.log('Missatge %s enviar amb exit a : %s', info.messageId, info.response);
+
+      callback(true);
     });
 
   }

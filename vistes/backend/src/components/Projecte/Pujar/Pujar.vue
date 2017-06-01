@@ -5,7 +5,7 @@
           <h2>Col·loqui imatges aquí</h2>
 
           <div class="loader" ></div>
-          <div v-bind:class="{loader_animar : animar}" id="semi_loader"></div>
+          <div v-bind:class="{loader_animar : animar}" id="semi_loader" @drop="obtenirImatges" @dragover="permetreDropable"></div>
 
           <div v-if="!animar" id="imgConte">
             <div class="imatge-pujada"></div>

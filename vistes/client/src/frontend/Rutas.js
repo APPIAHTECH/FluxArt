@@ -8,6 +8,7 @@ import Felicitat from "./components/Felicitat/Felicitat.vue";
 import Sobre from "./components/Sobre/sobre.vue";
 import Suport from "./components/Suport/Suport.vue";
 import Perfil from "./components/Perfil/Perfil.vue";
+import CorreuEnviat from "./components/CorreuEnviat/CorreuEnviat.vue";
 import rutaNoDefinit from "./components/Error/Error404.vue";
 
 Vue.use(VueRouter);
@@ -17,6 +18,7 @@ const router = new VueRouter({
     {path:"/iniciarSessio", component: IniciarSessio},
     {path:"/sobre", component: Sobre},
     {path:"/suport", component: Suport},
+    {path:"/correu/enviat", component: CorreuEnviat},
     {path:"/registrar" , component : Registrar},
     {path:"/autenticacio/confirmar/:correu" , component : Confirmar},
     {path:"/autenticacio/felicitar" , component : Felicitat},

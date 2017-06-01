@@ -2,8 +2,7 @@ import Vue from 'vue';
 import VueResource from 'vue-resource';
 Vue.use(VueResource);
 
-const temps = 1000;//1ms
-const icone = "https://codeanywhere.com/images/plane.svg";
+const temps = 550;//550ms
 class Utilitat {
   constructor() {}
 
@@ -26,7 +25,7 @@ class Utilitat {
 
     let opcions = {
         body: msg,
-        icon: icone
+        icon: './fluxFavIcon.png'
     }
     let notificacio = new Notification(titul,opcions);
     setTimeout(notificacio.close.bind(notificacio), tempsTancament);

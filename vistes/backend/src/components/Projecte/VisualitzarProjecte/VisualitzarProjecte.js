@@ -24,7 +24,8 @@ export default {
       comentaris : [] ,
       missatgeComentar : "",
       liAgrada : false,
-      redirecionarAPaypal : "https://www.paypal.me/"
+      redirecionarAPaypal : "https://www.paypal.me/",
+      compartirGoogleImatge : ""
     }
   },
 
@@ -58,9 +59,8 @@ export default {
   methods: {
     inserirComentari(event){
 
+      this.$el.querySelector('.comentaris').scrollTop = this.$el.querySelector('.comentaris').scrollHeight;
       if(event.keyCode == 13){
-
-        event.target.value = "";
 
         let idProjecte = this.$store.getters.getProjecteTemporal.projecteObtingut.projecte._id;
         let url_img = this.$store.getters.obtenirImatgePerfil;
@@ -84,7 +84,11 @@ export default {
           if(resultat.inserit)
             this.comentaris.push(comentar);
         }).catch(err => console.error(err));
+        event.target.value = "";
+        this.missatgeComentar ="";
       }
+
+
     },
 
     actualitzarLikes(event){
@@ -166,6 +170,9 @@ export default {
       this.like = this.$store.getters.getProjecteTemporal.projecteObtingut.projecte.projecte.like.length;
       this.comentarisTotal = this.$store.getters.getProjecteTemporal.projecteObtingut.projecte.projecte.comentaris_total;
       this.comentaris = this.$store.getters.getProjecteTemporal.projecteObtingut.projecte.projecte.comentaris;
+
+      this.compartirGoogleImatge =  `https://plus.google.com/share?url={http://localhost:3000/#/visualitzar/projecte/${this.$store.getters.getProjecteTemporal.projecteObtingut.projecte._id}}" onclick="javascript:window.open(this.href,
+      '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;`;
 
       let IDUsuari = this.$store.getters.obtenirID;
       let arrayLike = this.$store.getters.getProjecteTemporal.projecteObtingut.projecte.projecte.like;

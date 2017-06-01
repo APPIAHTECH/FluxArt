@@ -61,7 +61,7 @@ export default {
       this.urlPeticio = Utilitat.rutaUrl() + `frontend/peticio/dissenyadors/${this.quantitat}/${this.filtrar}/${this.ordenat}/${this.IDUsuari}`;
       Utilitat.peticioGet(this.urlPeticio)
       .then(usuaris => this.llistatUsuaris = usuaris)
-      .catch(err => console.log(err));
+      .catch(err => console.error(err));
     });
   }
 }

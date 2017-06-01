@@ -8,6 +8,7 @@ const Usuari = require('./../controlador/Usuari.js');
 const Autenticacio = require('./../controlador/Autenticacio.js');
 const Seguir =  require('./../controlador/Seguir.js');
 const Notificacio = require('./../controlador/Notificacio.js');
+const Utilitat = require('./../controlador/Utilitats.js');
 
 let controladorProjecte = new Projecte();
 let controladorProjecteTemporal = new ProjecteTemporal()
@@ -77,5 +78,23 @@ router.post('/peticio/projecte/actualitzar/nolike', Autenticacio.esAutentificat 
 router.post('/peticio/eliminar', Autenticacio.esAutentificat , controladorUsuari.eliminarDades);
 
 router.post('/peticio/pujar', Autenticacio.esAutentificat  , controladorProjecteTemporal.afegirProjecteTemporal);
+
+router.post('/peticio/sobre/enviarCorreu', (req , res , next)=>{
+
+  let opcionsCorreu = {
+      from: req.body.email,
+      to: "eunisaesea@gmail.com",
+      subject: req.body.sub,
+      html: req.body.missatge
+  };
+
+  Utilitat.enviarCorreu(opcionsCorreu , (enviat , err)=>{
+    if(err)
+      res.send("No he pogut enviar el correu , comprovar la connexió a internet sort! :)");
+
+      res.redirect('/#/correu/enviat');
+  });
+
+});
 
 module.exports = router;

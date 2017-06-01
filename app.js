@@ -16,9 +16,7 @@ let autenticacio = require(path.resolve('./rutes/Autenticacio.js'));
 let api = require(path.resolve('./rutes/API.js'));
 let admin = require(path.resolve('./rutes/Admin.js'));
 
-
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'vistes', 'fluxFavIcon.io')));
 app.use(logger('dev'));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({ extended: false  , limit: '50mb'}));
@@ -26,7 +24,7 @@ app.use(cookieParser());
 
 //Sessions
 app.use(session({
-  secret: 'FluxSession', //Aquest codi secret per la sessio
+  secret: 'FluxSession', //Codi secret per la sessio
   resave: false, //
   saveUninitialized: false //
 }));

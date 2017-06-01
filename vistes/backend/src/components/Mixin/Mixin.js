@@ -62,8 +62,6 @@ export default {
         else
           url = `${this.url}${this.categoria}/${this.quantitatProjectes}/${this.filtrar}/${this.ordenacio}/${nomUsuari}`;
 
-        console.log(url);
-        console.log("altrs -> " , altres);
         this.resoldrePeticio(url);
       },
 
@@ -210,7 +208,6 @@ export default {
               }else
                 this.obtenirProjectesLimitat(true , this.$store.getters.getUsuari.usuari.nom_usuari);
             }else{
-              console.log(this.esFora);
               this.obtenirProjectesLimitat(true , this.dadesFora.nomUsuari);
             }
 

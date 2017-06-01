@@ -99,7 +99,6 @@ class Usuari{
       dades.notificacions = valors[4];
 
       res.send(dades);
-      next();
     });
 
   }

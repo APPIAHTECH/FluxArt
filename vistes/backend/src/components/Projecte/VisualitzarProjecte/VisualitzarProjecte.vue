@@ -7,8 +7,7 @@
         <div class="capcelera">
           <div class="img perfilUrl" :style="{ 'background-image': 'url(' + imgPerfil + ')' }" :data-nomusuari="nomUsuari" @click="veurePerfil"></div>
           <div class="donar">
-            <a href="https://plus.google.com/share?url={http://localhost:3000/#/visualitzar/projecte}" onclick="javascript:window.open(this.href,
-            '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img
+            <a :href="compartirGoogleImatge"><img
             src="https://www.gstatic.com/images/icons/gplus-16.png" alt="Share on Google+"/></a>
             <a v-if="teDonacio" @click="donarDiners"><img src="http://bryanjacobsonfoundation.org/wp-content/uploads/2013/10/donate-icon@2x.png" alt="" id="pay"></a>
             <button type="button" class="btn perso" @click="actualitzarLikes" v-if="!liAgrada"><i class="fa fa-thumbs-up" aria-hidden="true"></i></button>

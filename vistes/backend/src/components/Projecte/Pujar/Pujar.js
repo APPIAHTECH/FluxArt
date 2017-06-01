@@ -26,10 +26,15 @@ export default{
     },
 
     methods:{
+
+      permetreDropable(){
+        ev.preventDefault();
+      },
+
       obtenirImatges(event){
+
         let imatges = event.target.files || event.dataTransfer.files; //L'element que llença l'event en aquet cas input[file] , recuperem els fitxers (dataTransfer per drag i drop)
 
-        console.log(imatges);
         if (imatges.length === 0 || imatges.length > this.maximaQuantitatImatges)
             return;
 
@@ -96,7 +101,7 @@ export default{
           else
             alert("Alguna cosa no anat be , tornau a intentar si seguiex així contacta amb nosaltres.");
 
-        }).catch((err)=> console.log(err));
+        }).catch((err)=> console.error(err));
 
       },
 
