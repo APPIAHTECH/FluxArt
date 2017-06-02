@@ -98,6 +98,11 @@ div.imatge-pujada
   margin: auto;
 }
 
+div.cambiar{
+  border: 2px dashed white;
+  background: #E7E7E7;
+}
+
 div.selecionar
 {
   margin: auto;
@@ -106,7 +111,7 @@ div.selecionar
   flex-flow: row wrap;
   justify-content: center;
   position: relative;
-  top: -240px;
+  top: -250px;
 }
 
 #select

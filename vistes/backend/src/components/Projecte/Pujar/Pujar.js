@@ -21,18 +21,17 @@ export default{
         llistat_imatges : [],
         animar : false,
         increment : 0,
-        estatSeleccio : false //indica si el usuari ha seleccionat arxius
+        estatSeleccio : false, //indica si el usuari ha seleccionat arxius,
+        estaSobre : false
       }
     },
 
     methods:{
 
-      permetreDropable(){
-        ev.preventDefault();
-      },
-
       obtenirImatges(event){
 
+        event.preventDefault();
+        this.estaSobre = false;
         let imatges = event.target.files || event.dataTransfer.files; //L'element que llença l'event en aquet cas input[file] , recuperem els fitxers (dataTransfer per drag i drop)
 
         if (imatges.length === 0 || imatges.length > this.maximaQuantitatImatges)
