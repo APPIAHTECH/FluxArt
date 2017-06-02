@@ -2,6 +2,10 @@
 
 > Setup de la pagina
 
+
+## Requeriment
+   MongoDB
+
 ## Build Setup
 
 ``` bash

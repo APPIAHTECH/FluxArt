@@ -4,52 +4,55 @@ export default {
     carregarMes(){
 
         this.ocupat = true;
-        if(this.llistatProjectes.length > 0)
-        {
-          let resultat , url = "";
-          if(this.llistatProjectes.length === this.quantitatPermes)
-            return;
+        if(this.esBuscant  !== true){
+          if(this.llistatProjectes.length > 0)
+          {
+            let resultat , url = "";
+            if(this.llistatProjectes.length === this.quantitatPermes)
+              return;
 
-          resultat = this.llistatProjectes[this.llistatProjectes.length - 1];
+            resultat = this.llistatProjectes[this.llistatProjectes.length - 1];
 
-          if(this.esVisitas)
-            this.projecteRecent = resultat.projecte.visitas;
-          else if(this.esComentaris)
-            this.projecteRecent = resultat.projecte.comentaris_total;
-          else
-            this.projecteRecent = new Date(resultat.projecte.data_creacio);
+            if(this.esVisitas)
+              this.projecteRecent = resultat.projecte.visitas;
+            else if(this.esComentaris)
+              this.projecteRecent = resultat.projecte.comentaris_total;
+            else
+              this.projecteRecent = new Date(resultat.projecte.data_creacio);
 
-            if(this.esSeguidors){
-              this.projecteRecent = resultat.projecte.data_creacio;
-              this.llistatSeguint.forEach((objecte)=>{
-                url = `${this.urlProjecteSeguidors}${this.quantitatProjectes}/${this.filtrar}/${this.ordenacio}/${objecte.seguir.dades.id_usuaris_seguint}/${this.projecteRecent}`;
-                this.resoldrePeticio(url);
-              });
+              if(this.esSeguidors){
+                this.projecteRecent = resultat.projecte.data_creacio;
+                this.llistatSeguint.forEach((objecte)=>{
+                  url = `${this.urlProjecteSeguidors}${this.quantitatProjectes}/${this.filtrar}/${this.ordenacio}/${objecte.seguir.dades.id_usuaris_seguint}/${this.projecteRecent}`;
+                  this.resoldrePeticio(url);
+                });
 
-            }else if(this.esAltres){
+              }else if(this.esAltres){
 
-              if(!this.esFora) { //Si la peticio no ve del frontend 'http://localhost:3000/#/perfil/Stephen'
+                if(!this.esFora) { //Si la peticio no ve del frontend 'http://localhost:3000/#/perfil/Stephen'
 
-                if(this.$route.params.nomUsuari){
+                  if(this.$route.params.nomUsuari){
 
-                  if(this.$route.params.nomUsuari == this.$store.getters.getUsuari.usuari.nom_usuari)
+                    if(this.$route.params.nomUsuari == this.$store.getters.getUsuari.usuari.nom_usuari)
+                      this.urlMesProjectes = `${this.url}${this.categoria}/${this.quantitatProjectes}/${this.filtrar}/${this.ordenacio}/${this.$store.getters.getUsuari.usuari.nom_usuari}/${this.projecteRecent}`;
+                    else
+                      this.urlMesProjectes = `${this.url}${this.categoria}/${this.quantitatProjectes}/${this.filtrar}/${this.ordenacio}/${this.$route.params.nomUsuari}/${this.projecteRecent}`;
+
+                  }else
                     this.urlMesProjectes = `${this.url}${this.categoria}/${this.quantitatProjectes}/${this.filtrar}/${this.ordenacio}/${this.$store.getters.getUsuari.usuari.nom_usuari}/${this.projecteRecent}`;
-                  else
-                    this.urlMesProjectes = `${this.url}${this.categoria}/${this.quantitatProjectes}/${this.filtrar}/${this.ordenacio}/${this.$route.params.nomUsuari}/${this.projecteRecent}`;
-
-                }else
-                  this.urlMesProjectes = `${this.url}${this.categoria}/${this.quantitatProjectes}/${this.filtrar}/${this.ordenacio}/${this.$store.getters.getUsuari.usuari.nom_usuari}/${this.projecteRecent}`;
+                    this.resoldrePeticio(this.urlMesProjectes);
+                }else {
+                  this.urlMesProjectes = `${this.url}${this.categoria}/${this.quantitatProjectes}/${this.filtrar}/${this.ordenacio}/${this.dadesFora.nomUsuari}/${this.projecteRecent}`;
                   this.resoldrePeticio(this.urlMesProjectes);
-              }else {
-                this.urlMesProjectes = `${this.url}${this.categoria}/${this.quantitatProjectes}/${this.filtrar}/${this.ordenacio}/${this.dadesFora.nomUsuari}/${this.projecteRecent}`;
+                }
+
+              }else{
+                this.urlMesProjectes = `${this.url}${this.categoria}/${this.quantitatProjectes}/${this.filtrar}/${this.ordenacio}/${this.projecteRecent}`;
                 this.resoldrePeticio(this.urlMesProjectes);
               }
-
-            }else{
-              this.urlMesProjectes = `${this.url}${this.categoria}/${this.quantitatProjectes}/${this.filtrar}/${this.ordenacio}/${this.projecteRecent}`;
-              this.resoldrePeticio(this.urlMesProjectes);
-            }
+          }
         }
+
         this.ocupat = false;
       },
 
@@ -126,6 +129,7 @@ export default {
       buscar(event)
       {
         event.preventDefault();
+        this.esBuscant = true;
         let valorBusqueda = event.target.value;
         if(event.keyCode !== 8){//tecla return
           if(valorBusqueda.length >= 3)
@@ -138,6 +142,7 @@ export default {
         }else if (valorBusqueda.length === 0){
           this.buidarProjectes();
           this.obtenirProjectesLimitat(false);
+          this.esBuscant = false;
         }
 
       },

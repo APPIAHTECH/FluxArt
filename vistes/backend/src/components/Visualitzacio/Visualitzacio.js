@@ -64,12 +64,13 @@ export default {
       mostrarProjectesSeguidors : false,
       esVisitas : false,
       esComentaris : false,
-      esSeguidors : false
+      esSeguidors : false,
+      esBuscant : false
     }
   },
 
 created(){
-  
+
     if(typeof(this.$store) !== "undefined"){
       this.categories = this.$store.getters.getCategories;
       this.popular = this.$store.getters.getPopular;

@@ -132,8 +132,9 @@ div.perfil{
   background: #02475F;
   border-radius: 50%;
   margin: auto;
+  background-image: url('http://cecophilv3.s3-ap-southeast-1.amazonaws.com/production/assets/profile-default-0a961b4a1548225f46e93fafe90d6ff69a73bc914731c688a83cf7d84d8a6aad.gif');
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: top;
   background-size: cover;
 }
 

@@ -15,7 +15,7 @@
         <ul>
           <li><a id="titul">L'ús d'Flux</a></li>
           <li><a>Que és flux?</a></li>
-          <li><a>A qui va dirigit?</a></li>
+          <li id="camp"><a>A qui va dirigit?</a></li>
         </ul>
 
         <ul>
