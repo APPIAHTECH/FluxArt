@@ -13,7 +13,7 @@
             </div>
           </li>
 
-          <li><a><input type="text" name="search" placeholder="Buscar ... " @input="buscar"></a></li>
+          <li><a><input type="text" name="search" placeholder="Buscar ... " @keyup="buscar"></a></li>
           <!-- <li><a><input type="submit" name="" value="Buscar"></a></li> -->
 
           <li class="categorias" id="popu">

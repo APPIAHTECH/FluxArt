@@ -16,6 +16,13 @@ let autenticacio = require(path.resolve('./rutes/Autenticacio.js'));
 let api = require(path.resolve('./rutes/API.js'));
 let admin = require(path.resolve('./rutes/Admin.js'));
 
+app.use(helmet());
+app.use(helmet.noCache());
+app.use(helmet({
+  frameguard: false
+}));
+app.disable('x-powered-by');
+
 app.use(favicon(path.join(__dirname, 'vistes', 'fluxFavIcon.io')));
 app.use(logger('dev'));
 app.use(bodyParser.json({limit: '50mb'}));

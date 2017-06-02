@@ -1,6 +1,6 @@
-# backend
+# flux
 
-> backend del clien flux
+> Setup de la pagina
 
 ## Build Setup
 
@@ -19,6 +19,8 @@ npm run lint
 
 # run unit tests
 npm test
-```
 
-For more information see the [docs for vueify](https://github.com/vuejs/vueify).
+#Link presentació
+#https://prezi.com/view/fCRG7BV4kcAW813nDIy4/
+
+#El UML el pot trobar a https://www.gliffy.com/go/publish/12052633 o en la carpeta UML

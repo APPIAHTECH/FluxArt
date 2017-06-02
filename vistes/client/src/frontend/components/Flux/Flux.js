@@ -12,7 +12,7 @@ export default {
   data()
   {
     return{
-      quantitatProjectes: 1,
+      quantitatProjectes: 2,
       quantitatPermes:1000,
       esAltres : false,
       visualitzarNormal : true,

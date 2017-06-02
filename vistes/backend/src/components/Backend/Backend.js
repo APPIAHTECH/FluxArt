@@ -7,8 +7,8 @@ export default {
 
   data(){
     return {
-      quantitatProjectes: 1, //Canviar per inlimitats
-      quantitatPermes:1000,
+      quantitatProjectes: 1,
+      quantitatPermes:1000,//Canviar per inlimitats
       esAltres : false,
       visualitzarNormal : true
     }

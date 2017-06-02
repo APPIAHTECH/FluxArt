@@ -81,7 +81,6 @@ export default {
             this.resoldrePeticio(url);
           });
         });
-
       },
 
       llistarSeguidors(idUsuari , callback){
@@ -126,14 +125,21 @@ export default {
 
       buscar(event)
       {
-        // this.ocupat = true;
-        this.buidarProjectes();
+        event.preventDefault();
         let valorBusqueda = event.target.value;
-        if(valorBusqueda.length >= 3)
-        {
-          let url = `${this.urlBusqueda}?projecte=${valorBusqueda}`;
-          this.resoldrePeticio(url);
+        if(event.keyCode !== 8){//tecla return
+          if(valorBusqueda.length >= 3)
+          {
+            this.buidarProjectes();
+            let url = `${this.urlBusqueda}?projecte=${valorBusqueda}`;
+            this.resoldrePeticio(url);
+          }
+
+        }else if (valorBusqueda.length === 0){
+          this.buidarProjectes();
+          this.obtenirProjectesLimitat(false);
         }
+
       },
 
       populars(event)

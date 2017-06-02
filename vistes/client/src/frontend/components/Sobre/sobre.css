@@ -129,11 +129,9 @@ div.equip > h1{
 div.perfil{
   width: 120px;
   height: 120px;
-  background: blue;
+  background: #02475F;
   border-radius: 50%;
   margin: auto;
-
-  background-image: url('https://s-media-cache-ak0.pinimg.com/originals/d6/02/68/d60268547250b7c6c9a30a7c568a8686.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

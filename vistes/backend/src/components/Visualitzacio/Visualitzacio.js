@@ -69,7 +69,7 @@ export default {
   },
 
 created(){
-
+  
     if(typeof(this.$store) !== "undefined"){
       this.categories = this.$store.getters.getCategories;
       this.popular = this.$store.getters.getPopular;
