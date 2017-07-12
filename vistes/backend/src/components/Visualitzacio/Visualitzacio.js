@@ -130,17 +130,14 @@ created(){
           let nomUsuari = this.$route.params.nomUsuari;
           this.obtenirProjectesLimitat(true , nomUsuari);
         }else {
-
-          Utilitat.esperar(() => {
-            projectes = this.$store.getters.getTreballs;
+        
+          projectes = this.$store.getters.getTreballs;
             usuari = this.$store.getters.getUsuari;
 
             projectes.forEach((projecte)=> {
               projecte['info'] = usuari;
               this.llistatProjectes.push(projecte);
             });
-
-          });
         }
 
       }

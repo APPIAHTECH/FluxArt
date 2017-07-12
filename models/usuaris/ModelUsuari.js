@@ -135,7 +135,7 @@ class ModelUsuari extends ModelBase{
     return new Promise((resolve , reject) =>{
       Promise.all(eliminarUsuari , elimnarProjectes , elimnarNotificacions , elimnarSeguidors , eliminarUsuari)
       .then((resultat)=> resolve(resultat))
-      .catch(err => reject(err))
+      .catch(err => reject(err));
     });
   }
 
